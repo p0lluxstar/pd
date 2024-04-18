@@ -1,11 +1,11 @@
 import puppeteer from 'puppeteer-extra';
 import { ProductInfo } from '../types/interfaces';
-import fs from 'fs';
-import path from 'path';
+import * as fs from 'fs';
+import * as path from 'path';
 
 export const scraper = async (
   productInfo: ProductInfo[],
-  pathToFile: string
+  pathToFile: string,
 ): Promise<string[] | void> => {
   const browser = await puppeteer.launch({
     /* headless: false, */
@@ -16,7 +16,11 @@ export const scraper = async (
   try {
     for (const info of productInfo) {
       await page.goto(info.url);
-      const price: string | null = await page.$eval(info.element, (span) => span.textContent);
+
+      const price: string | null = await page.$eval(
+        info.element,
+        (span) => span.textContent,
+      );
       /* console.log(price, info.shop); */
 
       if (price) {
@@ -28,16 +32,16 @@ export const scraper = async (
           `${formattedDate}; ${price.replace(/[^\d,]/g, '')}; ${info.shop}\n`,
           (err) => {
             if (err) {
-              console.error('Ошибка при записи в файл:', err);
+              console.error('Error writing to the file:', err);
               return;
             }
-            console.log('Данные успешно записаны в файл');
-          }
+            console.log('The data has been successfully written to the file.');
+          },
         );
       }
     }
   } catch (err) {
-    console.error('Ошибка при попытке парсинга страницы');
+    console.error('Error when trying to parse a page or write a file:', err);
   } finally {
     await browser.close();
   }
