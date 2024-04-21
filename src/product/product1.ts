@@ -1,4 +1,4 @@
-import { scraper } from 'src/util/scraper';
+/* import { scraper } from 'src/util/scraper';
 import { ProductInfo } from '../types/interfaces';
 
 const productInfo: ProductInfo[] = [
@@ -12,3 +12,4 @@ const productInfo: ProductInfo[] = [
 export const product1 = async () => {
   await scraper(productInfo, 'dataProduct1.txt');
 };
+ */
