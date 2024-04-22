@@ -6,7 +6,13 @@ export class Product {
   id: number;
 
   @Column()
-  shop: string;
+  id_product: string
+
+  @Column()
+  name_product: string
+
+  @Column()
+  name_shop: string;
 
   @Column()
   price: string;

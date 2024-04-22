@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import puppeteer from 'puppeteer-extra';
 import { Product } from '../product/entity/product.entity';
-import { ProductInfo } from '../types/interfaces';
+import { IDataProduct } from 'src/types/interfaces';
 
 @Injectable()
 export class ScraperService {
@@ -12,29 +12,31 @@ export class ScraperService {
     private readonly productRepository: Repository<Product>,
   ) {}
 
-  async scrape(productInfo: ProductInfo[]): Promise<void> {
+  async scrape(productInfo: IDataProduct): Promise<void> {
     const browser = await puppeteer.launch({
       headless: false,
     });
     const page = await browser.newPage();
 
     try {
-      for (const info of productInfo) {
+      for (const info of productInfo.dataShop) {
         await page.goto(info.url);
-        await page.waitForSelector(info.element, { timeout: 5000 });
+        await page.waitForSelector(info.elementOnPage, { timeout: 10000 });
         const price: string | null = await page.$eval(
-          info.element,
-          (span) => span.textContent,
+          info.elementOnPage,
+          (element) => element.textContent,
         );
 
         if (price) {
           const product = new Product();
-          product.shop = info.shop;
+          product.id_product = productInfo.idProduct
+          product.name_product = productInfo.nameProduct
+          product.name_shop = info.nameShop
           product.price = price.replace(/[^\d,]/g, '');
           await this.productRepository.save(product);
 
           console.log(
-            ` The data for the store ${info.shop} has been successfully written to the database.`,
+            ` The data for the store ${info.nameShop} has been successfully written to the database.`,
           );
         }
       }
