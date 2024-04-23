@@ -6,7 +6,8 @@ import { CronService } from './services/crons/cron.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ScraperService } from './services/scraper.service';
-import { Product } from './product/entity/product.entity';
+import { Product } from './product/product.entity';
+import { typeOrmConfig } from 'src/configs/typeorm.config';
 
 @Module({
   imports: [
@@ -15,16 +16,8 @@ import { Product } from './product/entity/product.entity';
     TypeOrmModule.forFeature([Product]),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
-      useFactory: (configService: ConfigService) => ({
-        type: 'postgres',
-        host: configService.get('DB_HOST'),
-        port: +configService.get('DB_PORT'),
-        username: configService.get('DB_USERNAME'),
-        password: configService.get('DB_PASSWORD'),
-        database: configService.get('DB_NAME'),
-        entities: [__dirname + '/**/*.entity{.js, ts}'],
-        synchronize: true,
-      }),
+      useFactory: () =>
+        typeOrmConfig(),
       inject: [ConfigService],
     }),
   ],

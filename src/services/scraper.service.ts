@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import puppeteer from 'puppeteer-extra';
-import { Product } from '../product/entity/product.entity';
+import { Product } from '../product/product.entity';
 import { IDataProduct } from 'src/types/interfaces';
 
 @Injectable()
