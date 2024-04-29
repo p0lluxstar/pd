@@ -1,22 +1,14 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany, PrimaryColumn } from 'typeorm';
+import { PricesShop0001 } from 'src/prices/prices-shop-0001.entity';
 
-@Entity()
+@Entity({ name: 'products' })
 export class Product {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryColumn({ type: 'varchar' })
+  id: string;
 
   @Column()
-  id_product: string
+  name: string;
 
-  @Column()
-  name_product: string
-
-  @Column()
-  name_shop: string;
-
-  @Column()
-  price: string;
-
-  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  timestamp: Date;
+  @OneToMany(() => PricesShop0001, (product_id) => product_id.product_id)
+  product_id: PricesShop0001[];
 }

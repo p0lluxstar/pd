@@ -1,11 +1,10 @@
-export interface IDataProduct {
-  idProduct: string;
-  nameProduct: string;
-  dataShop: IDataShop[];
+export interface IDataForCron {
+  shop_id: string;
+  dataForScraper: IDataForScraper[];
 }
 
-export interface IDataShop {
-  nameShop: string;
+export interface IDataForScraper {
+  product_id: string;
   url: string;
   elementOnPage: string;
 }
