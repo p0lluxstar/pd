@@ -8,7 +8,7 @@ export class CronShop0002 {
   constructor(private readonly ScraperShop0002: ScraperShop0002) {}
 
   //@Cron('0 1-23/2 * * *')
-  @Cron('38 * * * *')
+  @Cron('15 * * * *')
   async handleCron() {
     const dataForCron: IDataForCron = {
       shop_id: 'shop-0002',

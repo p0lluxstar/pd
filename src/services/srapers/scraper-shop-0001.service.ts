@@ -4,17 +4,21 @@ import { Repository } from 'typeorm';
 import puppeteer from 'puppeteer-extra';
 import { PricesShop0001 } from 'src/prices/prices-shop-0001.entity';
 import { IDataForCron } from 'src/types/interfaces';
-import { Product } from 'src/product/product.entity';
+import { ScraperUtilsService } from './scraperUtilsService';
 
 @Injectable()
 export class ScraperShop0001 {
   constructor(
-    @InjectRepository(PricesShop0001)
-    private readonly shopRepository: Repository<PricesShop0001>,
 
-    @InjectRepository(Product)
-    private readonly productRepository: Repository<Product>,
+    private readonly scraperUtilsService: ScraperUtilsService,
+
+    @InjectRepository(PricesShop0001)
+    private readonly prisesShopRepository: Repository<PricesShop0001>,
   ) {}
+
+  private parsePrice(priceString: string): number {
+    return Number(priceString.replace(/[^\d,]/g, '').replace(',', '.'));
+  }
 
   async scrape(dataForCron: IDataForCron): Promise<void> {
     const browser = await puppeteer.launch({
@@ -24,30 +28,25 @@ export class ScraperShop0001 {
 
     try {
       for (const info of dataForCron.dataForScraper) {
-        await page.goto(info.url);
-        await page.waitForSelector(info.elementOnPage, { timeout: 10000 });
-        const price: string | null = await page.$eval(
-          info.elementOnPage,
-          (element) => element.textContent,
-        );
 
+        const price = await this.scraperUtilsService.getPrice(page, info);
         if (price) {
-          const product = await this.productRepository.findOne({
-            where: { id: info.product_id },
-          });
-          if (!product) {
-            console.error(`Product with id '${info.product_id}' not found`);
+          const shop = await this.scraperUtilsService.getShop(
+            dataForCron.shop_id,
+          );
+          const product = await this.scraperUtilsService.getProduct(
+            info.product_id,
+          );
+
+          if (!shop || !product) {
             continue;
           }
 
           const newEntry = new PricesShop0001();
-
-          newEntry.shop_id = dataForCron.shop_id;
+          newEntry.shop_id = shop;
           newEntry.product_id = product;
-          newEntry.price = Number(
-            price.replace(/[^\d,]/g, '').replace(',', '.'),
-          );
-          await this.shopRepository.save(newEntry);
+          newEntry.price = this.parsePrice(price);
+          await this.prisesShopRepository.save(newEntry);
 
           console.log(
             `Shop id: '${dataForCron.shop_id}', product id: '${info.product_id}', successfully written to the database.`,

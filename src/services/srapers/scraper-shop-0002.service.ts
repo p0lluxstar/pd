@@ -5,15 +5,19 @@ import puppeteer from 'puppeteer-extra';
 import { PricesShop0002 } from '../../prices/prices-shop-0002.entity';
 import { IDataForCron } from 'src/types/interfaces';
 import { Product } from 'src/product/product.entity';
+import { Shop } from 'src/shop/shop.entity';
 
 @Injectable()
 export class ScraperShop0002 {
   constructor(
     @InjectRepository(PricesShop0002)
-    private readonly shopRepository: Repository<PricesShop0002>,
+    private readonly pricesShopRepository: Repository<PricesShop0002>,
 
-    @InjectRepository(PricesShop0002)
+    @InjectRepository(Product)
     private readonly productRepository: Repository<Product>,
+
+    @InjectRepository(Shop)
+    private readonly shopRepository: Repository<Shop>,
   ) {}
 
   async scrape(dataForCron: IDataForCron): Promise<void> {
@@ -24,7 +28,6 @@ export class ScraperShop0002 {
 
     try {
       for (const info of dataForCron.dataForScraper) {
-        let a:number = 0;
         await page.goto(info.url);
         await page.waitForSelector(info.elementOnPage, { timeout: 10000 });
         const price: string | null = await page.$eval(
@@ -33,6 +36,14 @@ export class ScraperShop0002 {
         );
 
         if (price) {
+          const shop = await this.shopRepository.findOne({
+            where: { id: dataForCron.shop_id },
+          });
+          if (!shop) {
+            console.error(`Shop with id '${dataForCron.shop_id}' not found`);
+            continue;
+          }
+
           const product = await this.productRepository.findOne({
             where: { id: info.product_id },
           });
@@ -43,10 +54,10 @@ export class ScraperShop0002 {
 
           const newEntry = new PricesShop0002();
 
-          newEntry.shop_id = dataForCron.shop_id;
+          newEntry.shop_id = shop;
           newEntry.product_id = product;
           newEntry.price = Number(price.replace(/[^\d,]/g, '').replace(',', '.'));
-          await this.shopRepository.save(newEntry);
+          await this.pricesShopRepository.save(newEntry);
 
           console.log(
             `Shop id: '${dataForCron.shop_id}', product id: '${info.product_id}', successfully written to the database.`,
