@@ -1,15 +1,27 @@
 import { Injectable } from '@nestjs/common';
 import { Cron } from '@nestjs/schedule';
-import { ScraperShop0001 } from '../srapers/scraper-shop-0001.service';
 import { IDataForCron } from 'src/types/interfaces';
+import { InjectRepository } from '@nestjs/typeorm';
+import { PricesShop0001 } from 'src/prices/prices-shop-0001.entity';
+import { Repository } from 'typeorm';
+import { ScraperUtilsService } from '../scraper.service';
 
 @Injectable()
 export class CronShop0001 {
-  constructor(private readonly ScraperShop0001: ScraperShop0001) {}
+  constructor(
+    private readonly scraperUtilsService: ScraperUtilsService,
+
+    @InjectRepository(PricesShop0001)
+    private readonly prisesShopRepository: Repository<PricesShop0001>,
+  ) {}
+
+  parsePrice(price: string): number {
+    return Number(price.replace(/[^\d,]/g, '').replace(',', '.'));
+  }
 
   //@Cron('0 1-23/2 * * *')
   //@Cron('14 * * * *')
-  @Cron('*/30 * * * * *')
+  //@Cron('*/15 * * * * *')
   async handleCronMilk() {
     const dataForCron: IDataForCron = {
       shop_id: 'shop-0001',
@@ -41,6 +53,11 @@ export class CronShop0001 {
         },
       ],
     };
-    await this.ScraperShop0001.scrape(dataForCron);
+    await this.scraperUtilsService.scrape(
+      dataForCron,
+      PricesShop0001,
+      this.prisesShopRepository,
+      this.parsePrice,
+    );
   }
 }

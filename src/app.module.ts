@@ -10,13 +10,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { typeOrmConfig } from 'src/configs/typeorm.config';
 import { Product } from './product/product.entity';
 import { Shop } from './shop/shop.entity';
-import { ScraperShop0001 } from './services/srapers/scraper-shop-0001.service';
-import { ScraperShop0002 } from './services/srapers/scraper-shop-0002.service';
-import { ScraperShop0003 } from './services/srapers/scraper-shop-0003.service';
 import { PricesShop0001 } from './prices/prices-shop-0001.entity';
 import { PricesShop0002 } from './prices/prices-shop-0002.entity';
 import { PricesShop0003 } from './prices/prices-shop-0003.entity';
-import { ScraperUtilsService } from './services/srapers/scraperUtilsService';
+import { ScraperUtilsService } from './services/scraper.service';
 
 @Module({
   imports: [
@@ -41,10 +38,7 @@ import { ScraperUtilsService } from './services/srapers/scraperUtilsService';
     CronShop0001,
     CronShop0002,
     CronShop0003,
-    ScraperShop0001,
-    ScraperShop0002,
-    ScraperShop0003,
-    ScraperUtilsService
+    ScraperUtilsService,
   ],
 })
 export class AppModule {}
