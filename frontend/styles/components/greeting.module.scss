@@ -1,0 +1,14 @@
+@import '../abstracts/colors';
+
+.greeting {
+  background: $color-primary;
+  max-width: 1280px;
+  margin: 0 auto;
+
+  .logo {
+    color: $color-white;
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+  }
+}

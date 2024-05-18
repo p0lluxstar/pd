@@ -1,4 +1,4 @@
-import './sass/styles.scss';
+import '../styles/_normalize.scss';
 import { Inter } from 'next/font/google';
 import type { Metadata } from 'next';
 
