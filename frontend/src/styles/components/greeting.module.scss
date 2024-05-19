@@ -1,14 +1,54 @@
 @import '../abstracts/colors';
 
-.greeting {
+.main {
+  display: flex;
   background: $color-primary;
-  max-width: 1280px;
-  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  .wrapper {
+    max-width: 1280px;
+  }
 
   .logo {
-    color: $color-white;
     display: flex;
+    color: $color-white;
     align-items: center;
-    font-size: 24px;
+    font-size: 30px;
+    font-weight: 700;
+    img {
+      margin-right: 20px;
+    }
+  }
+
+  .welcomeMessage {
+    color: $color-white;
+    font-size: 48px;
+    font-weight: 700;
+
+    .trancText {
+      opacity: 0.6;
+    }
+  }
+
+  .btnToApp {
+    display: flex;
+    justify-content: center;
+
+    .btn {
+      background: $color-btn-blue;
+      border: none;
+      border-radius: 100px;
+      padding: 28px 56px;
+      font-size: 24px;
+      font-weight: 700;
+      color: white;
+      text-decoration: underline;
+      text-transform: uppercase;
+      &:hover {
+        background: $color-btn-blue-hover;
+      }
+    }
   }
 }
