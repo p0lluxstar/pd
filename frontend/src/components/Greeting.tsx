@@ -1,13 +1,12 @@
-import Image from 'next/image';
 import styles from '../styles/components/greeting.module.scss';
+import Logo from './Logo';
 
 const Greeting = (): JSX.Element => (
   <>
     <div className={styles.main}>
       <div className={styles.wrapper}>
         <div className={styles.logo}>
-          <Image src="/img/logo.png" width="60" height="80" alt="logo" />
-          <span>Price Dynamic</span>
+          <Logo width={60} height={80} />
         </div>
         <div className={styles.welcomeMessage}>
           <p>

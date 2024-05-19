@@ -2,7 +2,7 @@
 
 .main {
   display: flex;
-  background: $color-primary;
+  background-color: $color-primary;
   justify-content: center;
   align-items: center;
   height: 100vh;
@@ -37,13 +37,13 @@
     justify-content: center;
 
     .btn {
-      background: $color-btn-blue;
+      background-color: $color-btn-blue;
       border: none;
       border-radius: 100px;
       padding: 28px 56px;
-      font-size: 24px;
+      font-size: 20px;
       font-weight: 700;
-      color: white;
+      color: $color-white;
       text-decoration: underline;
       text-transform: uppercase;
       &:hover {
