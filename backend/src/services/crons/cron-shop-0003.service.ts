@@ -12,12 +12,11 @@ export class CronShop0003 {
     private readonly scraperUtilsService: ScraperUtilsService,
 
     @InjectRepository(PricesShop0003)
-    private readonly prisesShopRepository: Repository<PricesShop0003>,
+    private readonly prisesShopRepository: Repository<PricesShop0003>
   ) {}
 
   parsePrice(price: string): number {
     return parseFloat(price.replace(/[^\d.,]/g, '').replace(',', '.'));
-    
   }
 
   //@Cron('0 1-23/2 * * *')
@@ -58,7 +57,7 @@ export class CronShop0003 {
       dataForCron,
       PricesShop0003,
       this.prisesShopRepository,
-      this.parsePrice,
+      this.parsePrice
     );
   }
 }

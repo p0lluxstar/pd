@@ -1,6 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
 import { Product } from 'src/product/product.entity';
-import { Shop } from 'src/shop/shop.entity';
+import { ShopEntity } from 'src/shop/shop.entity';
 
 @Entity({ name: 'prices-shop-0003' })
 export class PricesShop0003 {
@@ -13,9 +13,9 @@ export class PricesShop0003 {
   })
   date: Date;
 
-  @ManyToOne(() => Shop, shop => shop.PricesShop0003)
-  @JoinColumn({name: 'shop_id'})
-  shop_id: Shop;
+  @ManyToOne(() => ShopEntity, (shop) => shop.PricesShop0003)
+  @JoinColumn({ name: 'shop_id' })
+  shop_id: ShopEntity;
 
   @ManyToOne(() => Product, (product) => product.pricesShop0003)
   @JoinColumn({ name: 'product_id' })

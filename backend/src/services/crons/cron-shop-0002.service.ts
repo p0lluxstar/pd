@@ -12,7 +12,7 @@ export class CronShop0002 {
     private readonly scraperUtilsService: ScraperUtilsService,
 
     @InjectRepository(PricesShop0002)
-    private readonly prisesShopRepository: Repository<PricesShop0002>,
+    private readonly prisesShopRepository: Repository<PricesShop0002>
   ) {}
 
   parsePrice(price: string): number {
@@ -61,7 +61,7 @@ export class CronShop0002 {
       dataForCron,
       PricesShop0002,
       this.prisesShopRepository,
-      this.parsePrice,
+      this.parsePrice
     );
   }
 }

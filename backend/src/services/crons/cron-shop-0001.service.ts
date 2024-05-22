@@ -12,7 +12,7 @@ export class CronShop0001 {
     private readonly scraperUtilsService: ScraperUtilsService,
 
     @InjectRepository(PricesShop0001)
-    private readonly prisesShopRepository: Repository<PricesShop0001>,
+    private readonly prisesShopRepository: Repository<PricesShop0001>
   ) {}
 
   parsePrice(price: string): number {
@@ -25,6 +25,7 @@ export class CronShop0001 {
   async handleCronMilk() {
     const dataForCron: IDataForCron = {
       shop_id: 'shop-0001',
+
       dataForScraper: [
         {
           product_id: 'product-0001',
@@ -57,7 +58,7 @@ export class CronShop0001 {
       dataForCron,
       PricesShop0001,
       this.prisesShopRepository,
-      this.parsePrice,
+      this.parsePrice
     );
   }
 }

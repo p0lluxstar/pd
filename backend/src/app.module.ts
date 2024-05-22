@@ -9,36 +9,25 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { typeOrmConfig } from 'src/configs/typeorm.config';
 import { Product } from './product/product.entity';
-import { Shop } from './shop/shop.entity';
+import { ShopEntity } from './shop/shop.entity';
 import { PricesShop0001 } from './prices/prices-shop-0001.entity';
 import { PricesShop0002 } from './prices/prices-shop-0002.entity';
 import { PricesShop0003 } from './prices/prices-shop-0003.entity';
 import { ScraperUtilsService } from './services/scraper.service';
+import { ShopModule } from './shop/shop.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
     ScheduleModule.forRoot(),
-    TypeOrmModule.forFeature([
-      Shop,
-      Product,
-      PricesShop0001,
-      PricesShop0002,
-      PricesShop0003,
-    ]),
+    TypeOrmModule.forFeature([ShopEntity, Product, PricesShop0001, PricesShop0002, PricesShop0003]),
     TypeOrmModule.forRootAsync({
-      imports: [ConfigModule],
+      imports: [ConfigModule, ShopModule],
       useFactory: () => typeOrmConfig(),
       inject: [ConfigService],
     }),
   ],
   controllers: [AppController],
-  providers: [
-    AppService,
-    CronShop0001,
-    CronShop0002,
-    CronShop0003,
-    ScraperUtilsService,
-  ],
+  providers: [AppService, CronShop0001, CronShop0002, CronShop0003, ScraperUtilsService],
 })
 export class AppModule {}

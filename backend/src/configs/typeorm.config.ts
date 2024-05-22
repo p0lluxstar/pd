@@ -23,5 +23,4 @@ export const postgresConnectionOptions: PostgresConnectionOptions = {
 
 export default new DataSource(postgresConnectionOptions);
 
-export const typeOrmConfig = (): TypeOrmModuleOptions =>
-  postgresConnectionOptions;
+export const typeOrmConfig = (): TypeOrmModuleOptions => postgresConnectionOptions;
