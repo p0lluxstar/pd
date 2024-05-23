@@ -3,7 +3,7 @@
 .wrapper {
   background-color: $color-primary;
   height: 100vh;
-  min-width: 200px;
+  min-width: 240px;
   padding: 50px 20px;
 
   .logo {
@@ -22,20 +22,25 @@
 
   .main-nav {
     ul {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
       list-style-type: none;
-      padding: 0px;
     }
 
     li {
-      text-align: center;
-      font-size: 16px;
-      font-weight: 600;
-      line-height: 24px;
-      margin: 8px 0px;
-      padding: 12px 16px;
-      &:hover {
-        background-color: $color-btn-blue-hover;
-        cursor: pointer;
+      a {
+        display: block;
+        border-radius: 4px;
+        text-align: center;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 24px;
+        padding: 14px;
+        &:hover {
+          background-color: $color-btn-blue-hover;
+          cursor: pointer;
+        }
       }
     }
 

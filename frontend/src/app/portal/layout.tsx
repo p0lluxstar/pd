@@ -15,14 +15,10 @@ export default function PortalLayout({
 }>): JSX.Element {
   return (
     <>
-      <html lang="en">
-        <body>
-          <main className={styles.main}>
-            <Sidebar />
-            <PageContent>{children}</PageContent>
-          </main>
-        </body>
-      </html>
+      <main className={styles.main}>
+        <Sidebar />
+        <PageContent>{children}</PageContent>
+      </main>
     </>
   );
 }
