@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Cron } from '@nestjs/schedule';
 import { IDataForCron } from 'src/types/interfaces';
 import { InjectRepository } from '@nestjs/typeorm';
-import { PricesShop0001 } from 'src/prices/prices-shop-0001.entity';
+import { PricesShop0001 } from 'src/prices/prices-shop-0001/prices-shop-0001.entity';
 import { Repository } from 'typeorm';
 import { ScraperUtilsService } from '../scraper.service';
 

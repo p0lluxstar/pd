@@ -1,5 +1,5 @@
 import { Entity, Column, OneToMany, JoinColumn, PrimaryColumn } from 'typeorm';
-import { PricesShop0001 } from 'src/prices/prices-shop-0001.entity';
+import { PricesShop0001 } from 'src/prices/prices-shop-0001/prices-shop-0001.entity';
 import { PricesShop0002 } from 'src/prices/prices-shop-0002.entity';
 import { PricesShop0003 } from 'src/prices/prices-shop-0003.entity';
 
