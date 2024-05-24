@@ -1,4 +1,6 @@
 'use client';
+import Image from 'next/image';
+import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import styles from '../../../styles/pages/shops.module.scss';
 
@@ -24,29 +26,32 @@ export default function ShopsPage(): JSX.Element {
     }
   };
 
-  /*   useEffect(() => {
-    fetchData();
-  }, []); */
+  useEffect(() => {
+    void fetchData();
+  }, []);
 
   return (
     <>
-      <h1>Shopsssss</h1>
-      <button className={styles.button}
+      <h1>Shops</h1>
+      {/* <button
+        className={styles.button}
         onClick={() => {
           void fetchData();
         }}
       >
         Получить вcе магазины
-      </button>
+      </button> */}
       <div className={styles.shops}>
         {shops.map((shop, index) => (
-          <div className={styles.shop} key={index}>
-            <div>{shop.id}</div>
-            <div>{shop.name}</div>
-          </div>
+          <Link href={`/portal/shops/${shop.id}`} key={shop.id}>
+            <div className={styles.shop} key={index}>
+              <Image src={`/img/shops/${shop.id}.jpg`} width={200} height={100} alt="logo" />
+              <div className={styles.name}>{shop.name}</div>
+            </div>
+          </Link>
         ))}
       </div>
-    <div></div>
+      <div></div>
     </>
   );
 }
