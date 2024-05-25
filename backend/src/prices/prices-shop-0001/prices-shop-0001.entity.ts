@@ -3,7 +3,7 @@ import { Product } from 'src/product/product.entity';
 import { ShopEntity } from 'src/shop/shop.entity';
 
 @Entity({ name: 'prices-shop-0001' })
-export class PricesShop0001 {
+export class PricesShop0001Entity {
   @PrimaryGeneratedColumn()
   id: number;
 

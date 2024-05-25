@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Cron } from '@nestjs/schedule';
 import { IDataForCron } from 'src/types/interfaces';
 import { InjectRepository } from '@nestjs/typeorm';
-import { PricesShop0001 } from 'src/prices/prices-shop-0001/prices-shop-0001.entity';
+import { PricesShop0001Entity } from 'src/prices/prices-shop-0001/prices-shop-0001.entity';
 import { Repository } from 'typeorm';
 import { ScraperUtilsService } from '../scraper.service';
 
@@ -11,8 +11,8 @@ export class CronShop0001 {
   constructor(
     private readonly scraperUtilsService: ScraperUtilsService,
 
-    @InjectRepository(PricesShop0001)
-    private readonly prisesShopRepository: Repository<PricesShop0001>
+    @InjectRepository(PricesShop0001Entity)
+    private readonly prisesShopRepository: Repository<PricesShop0001Entity>
   ) {}
 
   parsePrice(price: string): number {
@@ -56,7 +56,7 @@ export class CronShop0001 {
     };
     await this.scraperUtilsService.scrape(
       dataForCron,
-      PricesShop0001,
+      PricesShop0001Entity,
       this.prisesShopRepository,
       this.parsePrice
     );
