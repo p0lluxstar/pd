@@ -1,6 +1,6 @@
 import { type PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-const initialState = false;
+const initialState = true;
 
 const loaderSlice = createSlice({
   name: 'loader',

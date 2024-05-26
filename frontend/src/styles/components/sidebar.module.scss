@@ -19,48 +19,4 @@
       margin-right: 10px;
     }
   }
-
-  .main-nav {
-    ul {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      list-style-type: none;
-    }
-
-    li {
-      a {
-        display: block;
-        border-radius: 4px;
-        text-align: center;
-        font-size: 16px;
-        font-weight: 600;
-        line-height: 24px;
-        padding: 14px;
-        &:hover {
-          background-color: $color-btn-blue-hover;
-          cursor: pointer;
-        }
-      }
-    }
-
-    li.active {
-      display: block;
-      background-color: $color-btn-blue;
-      border-radius: 4px;
-      &:hover {
-        background-color: $color-btn-blue;
-        cursor: default;
-      }
-
-      a {
-        cursor: default;
-      }
-    }
-
-    a {
-      text-decoration: none;
-      color: $color-white;
-    }
-  }
 }
