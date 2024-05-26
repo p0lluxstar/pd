@@ -8,7 +8,13 @@ import { loaderActions } from '@/src/redux/slices/loaderSlice';
 import { type IProduct, type IStoreReducer } from '@/src/types/interfaсes';
 import styles from '../../../../styles/pages/temp.module.scss';
 
-export default function Shop0001Page(): JSX.Element {
+interface IProps {
+  params: {
+    id: string;
+  };
+}
+
+export default function Products({ params: { id } }: IProps): JSX.Element {
   const dispatch = useDispatch();
   const isLoader = useSelector((state: IStoreReducer) => state.loader);
 
@@ -17,7 +23,7 @@ export default function Shop0001Page(): JSX.Element {
 
   const fetchData = async (): Promise<void> => {
     try {
-      const response = await fetch('http://localhost:4000/prices-shop-0001/unique-product-ids');
+      const response = await fetch(`http://localhost:4000/prices-${id}/unique-product-ids`);
 
       //  'http://localhost:4000/prices-shop-0001/filter?productId=product-0001'
 
