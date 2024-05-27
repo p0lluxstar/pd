@@ -5,11 +5,13 @@ import styles from '../styles/components/mainNavigation.module.scss';
 export default function MainNavigation(): JSX.Element {
   const pathname = usePathname();
 
+  const isShopsActive = pathname.startsWith('/portal/shops');
+
   return (
     <>
       <div className={styles.mainNav}>
         <ul>
-          <li className={pathname === '/portal/shops' ? styles.active : ''}>
+          <li className={isShopsActive ? styles.active : ''}>
             <Link href="/portal/shops">Магазины</Link>
           </li>
           <li className={pathname === '/portal/products' ? styles.active : ''}>

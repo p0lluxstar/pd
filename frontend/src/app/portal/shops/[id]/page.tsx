@@ -57,6 +57,5 @@ export default function Products({ params: { id } }: IProps): JSX.Element {
     );
   }
 
-  console.log('isLoader', isLoader);
   return <>{isLoader ? <Loader /> : shopProductsShopPage()}</>;
 }
