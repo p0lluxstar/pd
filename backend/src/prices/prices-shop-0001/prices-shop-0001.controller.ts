@@ -13,4 +13,9 @@ export class PricesShop0001Controller {
   async getPricesByProductId(@Query('productId') productId: string) {
     return this.priceShop0001Service.findPricesByProductId(productId);
   }
+
+  @Get('unique-product-ids')
+  async getUniqueProductIds() {
+    return this.priceShop0001Service.getUniqueProductIds();
+  }
 }

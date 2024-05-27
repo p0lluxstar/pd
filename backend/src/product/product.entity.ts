@@ -1,13 +1,8 @@
-import {
-  Entity,
-  Column,
-  OneToMany,
-  PrimaryColumn,
-  JoinColumn,
-} from 'typeorm';
+import { Entity, Column, OneToMany, PrimaryColumn, JoinColumn, ManyToOne } from 'typeorm';
 import { PricesShop0001Entity } from 'src/prices/prices-shop-0001/prices-shop-0001.entity';
 import { PricesShop0002 } from 'src/prices/prices-shop-0002.entity';
 import { PricesShop0003 } from 'src/prices/prices-shop-0003.entity';
+import { CategoryEntity } from 'src/category/category.entity';
 
 @Entity({ name: 'products' })
 export class Product {
@@ -28,4 +23,8 @@ export class Product {
   @OneToMany(() => PricesShop0003, (product_id) => product_id.product_id)
   @JoinColumn({ name: 'product_id' })
   pricesShop0003: PricesShop0003[];
+
+  @ManyToOne(() => CategoryEntity, (category) => category.product)
+  @JoinColumn({ name: 'category_id' })
+  category_id: CategoryEntity;
 }
