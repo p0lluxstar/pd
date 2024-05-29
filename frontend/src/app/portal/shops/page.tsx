@@ -33,14 +33,14 @@ export default function ShopsPage(): JSX.Element {
     void fetchData();
   }, []);
 
-  function showShopsPage(): JSX.Element {
+  function showShops(): JSX.Element {
     return (
       <>
         <h1>Shops</h1>
         <div className={styles.shops}>
-          {shops.map((shop, index) => (
+          {shops.map((shop) => (
             <Link href={`/portal/shops/${shop.id}`} key={shop.id}>
-              <div className={styles.shop} key={index}>
+              <div className={styles.shop}>
                 <Image src={`/img/shops/${shop.id}.jpg`} width={200} height={100} alt="shop" />
                 <div className={styles.name}>{shop.name}</div>
               </div>
@@ -51,5 +51,5 @@ export default function ShopsPage(): JSX.Element {
     );
   }
 
-  return <>{isLoader ? <Loader /> : showShopsPage()}</>;
+  return <>{isLoader ? <Loader /> : showShops()}</>;
 }

@@ -4,8 +4,14 @@ export interface IShop {
 }
 
 export interface IProduct {
-  product_name: string;
-  shop_name: string;
+  id: string;
+  name: string;
+  category_id: string;
+}
+
+export interface ICategory {
+  id: string;
+  name: string;
 }
 
 export interface IStoreReducer {
