@@ -16,14 +16,23 @@ import { PricesShop0003 } from './prices/prices-shop-0003.entity';
 import { ScraperUtilsService } from './services/scraper.service';
 import { ShopModule } from './shop/shop.module';
 import { PricesShop0001Module } from './prices/prices-shop-0001/prices-shop-0001.module';
+import { CategoryEntity } from './category/category.entity';
+import { CategoryModule } from './category/category.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
     ScheduleModule.forRoot(),
-    TypeOrmModule.forFeature([ShopEntity, Product, PricesShop0001Entity, PricesShop0002, PricesShop0003]),
+    TypeOrmModule.forFeature([
+      ShopEntity,
+      Product,
+      CategoryEntity,
+      PricesShop0001Entity,
+      PricesShop0002,
+      PricesShop0003,
+    ]),
     TypeOrmModule.forRootAsync({
-      imports: [ConfigModule, ShopModule, PricesShop0001Module],
+      imports: [ConfigModule, ShopModule, CategoryModule, PricesShop0001Module],
       useFactory: () => typeOrmConfig(),
       inject: [ConfigService],
     }),

@@ -10,12 +10,17 @@ export class PricesShop0001Controller {
   }
 
   @Get('filter')
-  async getPricesByProductId(@Query('productId') productId: string) {
-    return this.priceShop0001Service.findPricesByProductId(productId);
+  async getPricesByProductId(@Query('productId') product_id: string) {
+    return this.priceShop0001Service.findPricesByProductId(product_id);
   }
 
-  @Get('unique-product-ids')
-  async getUniqueProductIds() {
-    return this.priceShop0001Service.getUniqueProductIds();
+  @Get('categories')
+  async getСategories() {
+    return this.priceShop0001Service.getCategories();
+  }
+
+  @Get('products')
+  async getProducts(@Query('categoryId') categoryId: string) {
+    return this.priceShop0001Service.getProducts(categoryId);
   }
 }
