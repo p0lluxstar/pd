@@ -15,6 +15,8 @@ export default function ShopsPage(): JSX.Element {
 
   const fetchData = async (): Promise<void> => {
     try {
+      dispatch(loaderActions.setLoader(true));
+
       const response = await fetch('http://localhost:4000/shops');
 
       //  'http://localhost:4000/prices-shop-0001/filter?productId=product-0001'

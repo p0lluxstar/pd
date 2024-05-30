@@ -1,34 +1,36 @@
 'use client';
 
+import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from '@/src/components/Loader';
 import { loaderActions } from '@/src/redux/slices/loaderSlice';
-import { type IStoreReducer, type IProduct } from '@/src/types/interfaсes';
+import { type IStoreReducer } from '@/src/types/interfaсes';
 
 interface IParams {
   shop: string;
   category: string;
 }
 
-interface IResultsData {
+interface IResultsFetch {
   nameShop: string;
   nameCategory: string;
-  nameProducts: IProduct[];
+  dataProducts: [{ product_id: string; name: string }];
 }
 
-export default function ProductsPage(): JSX.Element {
+export default function CategoryPage(): JSX.Element {
   const dispatch = useDispatch();
   const isLoader = useSelector((state: IStoreReducer) => state.loader);
   const params = useParams() as unknown as IParams;
-  const [resultsData, setResultsData] = useState<IResultsData>({
+  const [resultsFetch, setResultsFetch] = useState<IResultsFetch>({
     nameShop: '',
     nameCategory: '',
-    nameProducts: [],
+    dataProducts: [{ product_id: '', name: '' }],
   });
 
   const fetchData = async (): Promise<void> => {
+    console.time('fetchData'); // Start timer
     try {
       dispatch(loaderActions.setLoader(true));
 
@@ -44,10 +46,10 @@ export default function ProductsPage(): JSX.Element {
         productsResponse.json(),
       ]);
 
-      setResultsData({
+      setResultsFetch({
         nameShop: shopResult[0].name,
         nameCategory: categoryResult[0].name,
-        nameProducts: productsResult,
+        dataProducts: productsResult,
       });
 
       dispatch(loaderActions.setLoader(false));
@@ -55,6 +57,7 @@ export default function ProductsPage(): JSX.Element {
       console.error('err');
       dispatch(loaderActions.setLoader(false));
     }
+    console.timeEnd('fetchData'); // End timer and log the duration
   };
 
   useEffect(() => {
@@ -65,11 +68,13 @@ export default function ProductsPage(): JSX.Element {
     return (
       <>
         <h1>
-          Продукты магазина «{resultsData.nameShop}», категории «{resultsData.nameCategory}»
+          Магазин <Link href={`/portal/shops/${params.shop}`}>«{resultsFetch.nameShop}»</Link>, категория «{resultsFetch.nameCategory}»
         </h1>
         <div>
-          {resultsData.nameProducts.map((product) => (
-            <div key={product.id}>{product.name}</div>
+          {resultsFetch.dataProducts.map((product) => (
+            <Link href={`/portal/shops/${params.shop}/${params.category}/${product.product_id}`} key={product.product_id}>
+              <div>{product.name}</div>
+            </Link>
           ))}
         </div>
       </>
