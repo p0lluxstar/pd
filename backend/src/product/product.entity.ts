@@ -5,7 +5,7 @@ import { PricesShop0003 } from 'src/prices/prices-shop-0003.entity';
 import { CategoryEntity } from 'src/category/category.entity';
 
 @Entity({ name: 'products' })
-export class Product {
+export class ProductEntity {
   @PrimaryColumn({ type: 'varchar' })
   id: string;
 

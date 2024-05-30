@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { ShopEntity } from 'src/shop/shop.entity';
-import { Product } from 'src/product/product.entity';
+import { ProductEntity } from 'src/product/product.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { IDataForCron } from 'src/types/interfaces';
 import puppeteer from 'puppeteer';
@@ -9,8 +9,8 @@ import puppeteer from 'puppeteer';
 @Injectable()
 export class ScraperUtilsService {
   constructor(
-    @InjectRepository(Product)
-    private readonly productRepository: Repository<Product>,
+    @InjectRepository(ProductEntity)
+    private readonly productRepository: Repository<ProductEntity>,
 
     @InjectRepository(ShopEntity)
     private readonly shopRepository: Repository<ShopEntity>
@@ -26,7 +26,7 @@ export class ScraperUtilsService {
     return this.shopRepository.findOne({ where: { id: shopId } });
   }
 
-  async getProduct(productId: string): Promise<Product | undefined> {
+  async getProduct(productId: string): Promise<ProductEntity | undefined> {
     return this.productRepository.findOne({ where: { id: productId } });
   }
 

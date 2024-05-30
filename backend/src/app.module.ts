@@ -8,7 +8,7 @@ import { CronShop0003 } from './services/crons/cron-shop-0003.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { typeOrmConfig } from 'src/configs/typeorm.config';
-import { Product } from './product/product.entity';
+import { ProductEntity } from './product/product.entity';
 import { ShopEntity } from './shop/shop.entity';
 import { PricesShop0001Entity } from './prices/prices-shop-0001/prices-shop-0001.entity';
 import { PricesShop0002 } from './prices/prices-shop-0002.entity';
@@ -18,6 +18,7 @@ import { ShopModule } from './shop/shop.module';
 import { PricesShop0001Module } from './prices/prices-shop-0001/prices-shop-0001.module';
 import { CategoryEntity } from './category/category.entity';
 import { CategoryModule } from './category/category.module';
+import { ProductModule } from './product/product.module';
 
 @Module({
   imports: [
@@ -25,14 +26,14 @@ import { CategoryModule } from './category/category.module';
     ScheduleModule.forRoot(),
     TypeOrmModule.forFeature([
       ShopEntity,
-      Product,
+      ProductEntity,
       CategoryEntity,
       PricesShop0001Entity,
       PricesShop0002,
       PricesShop0003,
     ]),
     TypeOrmModule.forRootAsync({
-      imports: [ConfigModule, ShopModule, CategoryModule, PricesShop0001Module],
+      imports: [ConfigModule, ShopModule, CategoryModule, ProductModule, PricesShop0001Module],
       useFactory: () => typeOrmConfig(),
       inject: [ConfigService],
     }),

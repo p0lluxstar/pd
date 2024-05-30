@@ -14,10 +14,6 @@ export class PricesShop0001Controller {
     return this.priceShop0001Service.findPricesByProductId(product_id);
   }
 
-  @Get('categories')
-  async getСategories() {
-    return this.priceShop0001Service.getCategories();
-  }
 
   @Get('products')
   async getProducts(@Query('categoryId') categoryId: string) {
