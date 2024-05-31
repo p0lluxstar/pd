@@ -47,16 +47,17 @@ export default function ProductPage(): JSX.Element {
   ]);
 
   const fetchData = async (): Promise<void> => {
-    console.time('fetchData'); // Start timer
     try {
       dispatch(loaderActions.setLoader(true));
 
+      const API_HOST = process.env.NEXT_PUBLIC_API_HOST;
+
       const [nameShopResponse, nameCategoryResponse, nameProductResponse, pricesProductResponse] =
         await Promise.all([
-          fetch(`http://localhost:4000/shops/filter?shopId=${params.shop}`),
-          fetch(`http://localhost:4000/categories/filter?categoryId=${params.category}`),
-          fetch(`http://localhost:4000/products/filter?productId=${params.product}`),
-          fetch(`http://localhost:4000/prices-${params.shop}/filter?productId=${params.product}`),
+          fetch(`${API_HOST}/shops/filter?shopId=${params.shop}`),
+          fetch(`${API_HOST}/categories/filter?categoryId=${params.category}`),
+          fetch(`${API_HOST}/products/filter?productId=${params.product}`),
+          fetch(`${API_HOST}/prices-${params.shop}/filter?productId=${params.product}`),
         ]);
 
       const [nameShopResult, nameCategoryResult, nameProductResult, pricesProducResult] =
@@ -81,7 +82,6 @@ export default function ProductPage(): JSX.Element {
       console.error('err');
       dispatch(loaderActions.setLoader(false));
     }
-    console.timeEnd('fetchData'); // End timer and log the duration
   };
 
   useEffect(() => {
@@ -89,12 +89,15 @@ export default function ProductPage(): JSX.Element {
   }, [params.product]);
 
   function showProduct(): JSX.Element {
-    console.log('resultsFetch', resultsFetch);
     return (
       <>
         <h1>
-          Магазин <Link href={`/portal/shops/${params.shop}`}>«{resultsFetch[0].nameShop}»</Link>, категория <Link href={`/portal/shops/${params.shop}/${params.category}`}>«{resultsFetch[0].nameCategory}»</Link>, продукт «
-          {resultsFetch[0].nameProduct}»
+          Магазин <Link href={`/portal/shops/${params.shop}`}>«{resultsFetch[0].nameShop}»</Link>,
+          категория{' '}
+          <Link href={`/portal/shops/${params.shop}/${params.category}`}>
+            «{resultsFetch[0].nameCategory}»
+          </Link>
+          , продукт «{resultsFetch[0].nameProduct}»
         </h1>
         <div>
           {resultsFetch[0].pricesProduct.map((price) => (
