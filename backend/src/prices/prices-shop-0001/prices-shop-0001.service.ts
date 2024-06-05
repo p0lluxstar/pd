@@ -21,11 +21,11 @@ export class PricesShop0001Service {
 
   async getProducts(category_id: string) {
     return await this.pricesShop0001Entity.query(
-      `SELECT DISTINCT p.id as product_id, p.name
-      FROM "prices-shop-0001" ps
-      JOIN products p ON ps.product_id = p.id
-      WHERE p.category_id = $1
-      ORDER BY p.name`,
+      `SELECT DISTINCT p.id AS id, p.name AS name
+     FROM "prices-shop-0001" ps
+     JOIN products p ON ps.product_id = p.id
+     WHERE p.category_id = $1
+     ORDER BY p.name`,
       [category_id]
     );
   }

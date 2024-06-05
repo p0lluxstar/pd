@@ -21,12 +21,12 @@ export class PriceShop0002Service {
 
   async getProducts(category_id: string) {
     return await this.pricesShop0002Entity.query(
-      `SELECT DISTINCT p.id as product_id, p.name
+      `SELECT DISTINCT p.id AS id, p.name AS name
       FROM "prices-shop-0002" ps
       JOIN products p ON ps.product_id = p.id
       WHERE p.category_id = $1
       ORDER BY p.name`,
-      [category_id]
+       [category_id]
     );
   }
 }
