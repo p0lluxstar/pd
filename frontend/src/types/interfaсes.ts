@@ -1,19 +1,17 @@
-export interface IShop {
+export interface IData {
   id: string;
   name: string;
-}
-
-export interface IProduct {
-  id: string;
-  name: string;
-  category_id: string;
-}
-
-export interface ICategory {
-  id: string;
-  name: string;
+  date: string;
+  price: number;
 }
 
 export interface IStoreReducer {
   loader: boolean;
+}
+
+export type TFetchData = IData[];
+
+export interface IFetchData {
+  data: TFetchData[];
+  isLoader: boolean;
 }

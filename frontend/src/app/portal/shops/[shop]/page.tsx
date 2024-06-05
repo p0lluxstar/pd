@@ -2,66 +2,30 @@
 
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import Loader from '@/src/components/Loader';
-import { loaderActions } from '@/src/redux/slices/loaderSlice';
-import { type IStoreReducer } from '@/src/types/interfaсes';
+import useFetchData from '@/src/hooks/useFetchData';
+import { type IData } from '@/src/types/interfaсes';
 import styles from '../../../../styles/pages/temp.module.scss';
 
 interface IParams {
   shop: string;
 }
 
-interface IResultsFetch {
-  nameShop: string;
-  dataCategories: [{ id: string; name: string }];
-}
-
 export default function ShopPage(): JSX.Element {
-  const dispatch = useDispatch();
-  const isLoader = useSelector((state: IStoreReducer) => state.loader);
+  const API_HOST = process.env.NEXT_PUBLIC_API_HOST;
   const params = useParams() as unknown as IParams;
-  const [resultsFetch, setResultsFetch] = useState<IResultsFetch>({
-    nameShop: '',
-    dataCategories: [{ id: '', name: '' }],
-  });
+  const urls = [`${API_HOST}/shops/filter?shopId=${params.shop}`, `${API_HOST}/categories`];
+  const { data, isLoader } = useFetchData(urls);
 
-  const fetchData = async (): Promise<void> => {
-    dispatch(loaderActions.setLoader(true));
-    try {
-      const [shopResponse, categoriesResponse] = await Promise.all([
-        fetch(`http://localhost:4000/shops/filter?shopId=${params.shop}`),
-        fetch('http://localhost:4000/categories'),
-      ]);
-
-      const [shopResult, categoriesResult] = await Promise.all([
-        shopResponse.json(),
-        categoriesResponse.json(),
-      ]);
-
-      setResultsFetch({
-        nameShop: shopResult[0].name,
-        dataCategories: categoriesResult,
-      });
-
-      dispatch(loaderActions.setLoader(false));
-    } catch (error) {
-      console.error('err');
-      dispatch(loaderActions.setLoader(false));
-    }
-  };
-
-  useEffect(() => {
-    void fetchData();
-  }, [params.shop]);
+  // Добавляем проверки наличия данных перед их использованием
+  const [shopResult = [], categoriesResult = []] = data;
 
   function showCategories(): JSX.Element {
     return (
       <>
-        <h1>Категории магазина «{resultsFetch.nameShop}»</h1>
+        <h1>Категории магазина «{shopResult.length > 0 && shopResult[0].name}»</h1>
         <div className={styles.products}>
-          {resultsFetch.dataCategories.map((category) => (
+          {categoriesResult.map((category: IData) => (
             <Link href={`/portal/shops/${params.shop}/${category.id}`} key={category.id}>
               <div>{category.name}</div>
             </Link>
@@ -71,5 +35,5 @@ export default function ShopPage(): JSX.Element {
     );
   }
 
-  return <>{isLoader ? <Loader /> : showCategories()}</>;
+  return <>{isLoader ? showCategories() : <Loader />}</>;
 }

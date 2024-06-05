@@ -1,46 +1,25 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import Loader from '@/src/components/Loader';
-import { loaderActions } from '@/src/redux/slices/loaderSlice';
-import { type IShop, type IStoreReducer } from '@/src/types/interfaсes';
+import useFetchData from '@/src/hooks/useFetchData';
+import { type IData } from '@/src/types/interfaсes';
 import styles from '../../../styles/pages/shops.module.scss';
 
 export default function ShopsPage(): JSX.Element {
-  const dispatch = useDispatch();
-  const isLoader = useSelector((state: IStoreReducer) => state.loader);
-  const [shops, setShops] = useState<IShop[]>([]);
+  const API_HOST = process.env.NEXT_PUBLIC_API_HOST;
+  const urls = [`${API_HOST}/shops`];
+  const { data, isLoader } = useFetchData(urls);
 
-  const fetchData = async (): Promise<void> => {
-    try {
-      dispatch(loaderActions.setLoader(true));
-
-      const response = await fetch('http://localhost:4000/shops');
-
-      //  'http://localhost:4000/prices-shop-0001/filter?productId=product-0001'
-
-      const result: IShop[] = await response.json();
-
-      setShops(result);
-      dispatch(loaderActions.setLoader(false));
-    } catch (error) {
-      console.error('err');
-      dispatch(loaderActions.setLoader(false));
-    }
-  };
-
-  useEffect(() => {
-    void fetchData();
-  }, []);
+  // Добавляем проверки наличия данных перед их использованием
+  const [shopResult = []] = data;
 
   function showShops(): JSX.Element {
     return (
       <>
         <h1>Shops</h1>
         <div className={styles.shops}>
-          {shops.map((shop) => (
+          {shopResult.map((shop: IData) => (
             <Link href={`/portal/shops/${shop.id}`} key={shop.id}>
               <div className={styles.shop}>
                 <Image src={`/img/shops/${shop.id}.jpg`} width={200} height={100} alt="shop" />
@@ -53,5 +32,5 @@ export default function ShopsPage(): JSX.Element {
     );
   }
 
-  return <>{isLoader ? <Loader /> : showShops()}</>;
+  return <>{isLoader ? showShops() : <Loader />}</>;
 }

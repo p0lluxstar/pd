@@ -2,11 +2,9 @@
 
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import Loader from '@/src/components/Loader';
-import { loaderActions } from '@/src/redux/slices/loaderSlice';
-import { type IStoreReducer } from '@/src/types/interfaсes';
+import useFetchData from '@/src/hooks/useFetchData';
+import { type IData } from '@/src/types/interfaсes';
 
 interface IParams {
   shop: string;
@@ -14,93 +12,39 @@ interface IParams {
   product: string;
 }
 
-interface IResultsFetch {
-  nameShop: string;
-  nameCategory: string;
-  nameProduct: string;
-  pricesProduct: [
-    {
-      id: 0;
-      date: string;
-      price: number;
-    },
-  ];
-}
-
 export default function ProductPage(): JSX.Element {
-  const dispatch = useDispatch();
-  const isLoader = useSelector((state: IStoreReducer) => state.loader);
+  const API_HOST = process.env.NEXT_PUBLIC_API_HOST;
   const params = useParams() as unknown as IParams;
-  const [resultsFetch, setResultsFetch] = useState<IResultsFetch[]>([
-    {
-      nameShop: '',
-      nameCategory: '',
-      nameProduct: '',
-      pricesProduct: [
-        {
-          id: 0,
-          date: '',
-          price: 0,
-        },
-      ],
-    },
-  ]);
 
-  const fetchData = async (): Promise<void> => {
-    try {
-      dispatch(loaderActions.setLoader(true));
+  const urls = [
+    `${API_HOST}/shops/filter?shopId=${params.shop}`,
+    `${API_HOST}/categories/filter?categoryId=${params.category}`,
+    `${API_HOST}/products/filter?productId=${params.product}`,
+    `${API_HOST}/prices-${params.shop}/filter?productId=${params.product}`,
+  ];
 
-      const API_HOST = process.env.NEXT_PUBLIC_API_HOST;
+  const { data, isLoader } = useFetchData(urls);
 
-      const [nameShopResponse, nameCategoryResponse, nameProductResponse, pricesProductResponse] =
-        await Promise.all([
-          fetch(`${API_HOST}/shops/filter?shopId=${params.shop}`),
-          fetch(`${API_HOST}/categories/filter?categoryId=${params.category}`),
-          fetch(`${API_HOST}/products/filter?productId=${params.product}`),
-          fetch(`${API_HOST}/prices-${params.shop}/filter?productId=${params.product}`),
-        ]);
-
-      const [nameShopResult, nameCategoryResult, nameProductResult, pricesProducResult] =
-        await Promise.all([
-          nameShopResponse.json(),
-          nameCategoryResponse.json(),
-          nameProductResponse.json(),
-          pricesProductResponse.json(),
-        ]);
-
-      setResultsFetch([
-        {
-          nameShop: nameShopResult[0].name,
-          nameCategory: nameCategoryResult[0].name,
-          nameProduct: nameProductResult[0].name,
-          pricesProduct: pricesProducResult,
-        },
-      ]);
-
-      dispatch(loaderActions.setLoader(false));
-    } catch (error) {
-      console.error('err');
-      dispatch(loaderActions.setLoader(false));
-    }
-  };
-
-  useEffect(() => {
-    void fetchData();
-  }, [params.product]);
+  // Добавляем проверки наличия данных перед их использованием
+  const [shopResult = [], categoriesResult = [], productsResult = [], pricesProductResult = []] =
+    data;
 
   function showProduct(): JSX.Element {
     return (
       <>
         <h1>
-          Магазин <Link href={`/portal/shops/${params.shop}`}>«{resultsFetch[0].nameShop}»</Link>,
-          категория{' '}
-          <Link href={`/portal/shops/${params.shop}/${params.category}`}>
-            «{resultsFetch[0].nameCategory}»
+          Магазин{' '}
+          <Link href={`/portal/shops/${params.shop}`}>
+            «{shopResult.length > 0 && shopResult[0].name}»
           </Link>
-          , продукт «{resultsFetch[0].nameProduct}»
+          , категория{' '}
+          <Link href={`/portal/shops/${params.shop}/${params.category}`}>
+            «{categoriesResult.length > 0 && categoriesResult[0].name}»
+          </Link>
+          , продукт «{productsResult.length > 0 && productsResult[0].name}»
         </h1>
         <div>
-          {resultsFetch[0].pricesProduct.map((price) => (
+          {pricesProductResult.map((price: IData) => (
             <div key={price.id}>
               {price.date} - {price.price}
             </div>
@@ -110,5 +54,5 @@ export default function ProductPage(): JSX.Element {
     );
   }
 
-  return <>{isLoader ? <Loader /> : showProduct()}</>;
+  return <>{isLoader ? showProduct() : <Loader />}</>;
 }
