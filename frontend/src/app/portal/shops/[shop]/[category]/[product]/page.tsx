@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
+import ChartLine from '@/src/components/Chartline';
 import Loader from '@/src/components/Loader';
 import useFetchData from '@/src/hooks/useFetchData';
 import { type IData } from '@/src/types/interfaсes';
@@ -10,6 +11,11 @@ interface IParams {
   shop: string;
   category: string;
   product: string;
+}
+
+interface ITransformedData {
+  date: string[];
+  prices: number[];
 }
 
 export default function ProductPage(): JSX.Element {
@@ -29,6 +35,22 @@ export default function ProductPage(): JSX.Element {
   const [shopResult = [], categoriesResult = [], productsResult = [], pricesProductResult = []] =
     data;
 
+  const transformPrices = (prices: IData[]): ITransformedData => {
+    const transformed = {
+      date: [] as string[],
+      prices: [] as number[],
+    };
+
+    prices.forEach((price) => {
+      transformed.date.push(price.date);
+      transformed.prices.push(price.price);
+    });
+
+    return transformed;
+  };
+
+  const transformedData = transformPrices(pricesProductResult);
+
   function showProduct(): JSX.Element {
     return (
       <>
@@ -43,12 +65,15 @@ export default function ProductPage(): JSX.Element {
           </Link>
           , продукт «{productsResult.length > 0 && productsResult[0].name}»
         </h1>
-        <div>
+        {<div>
           {pricesProductResult.map((price: IData) => (
             <div key={price.id}>
               {price.date} - {price.price}
             </div>
           ))}
+        </div>}
+        <div>
+          <ChartLine date={transformedData.date} price={transformedData.prices} />
         </div>
       </>
     );

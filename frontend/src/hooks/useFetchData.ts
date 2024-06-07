@@ -27,6 +27,8 @@ const useFetchData = (urls: string[]): IFetchData => {
     void fetchData();
   }, []);
 
+  console.log(data);
+
   return { data, isLoader };
 };
 
