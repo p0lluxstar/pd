@@ -2,31 +2,31 @@
 
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
-import ChartLine from '@/src/components/Chartline';
+import { useEffect, useState } from 'react';
+import ChartLine from '@/src/components/ChartLine';
+import DateInputForm from '@/src/components/DateInputForm';
 import Loader from '@/src/components/Loader';
 import useFetchData from '@/src/hooks/useFetchData';
-import { type IData } from '@/src/types/interfaсes';
+import { type ITransformedDataForChart } from '@/src/types/interfaсes';
+import fetchUpdatedData from '@/src/utils/fetchUpdatedData';
+import getCurrentAndLastDateFormatted from '@/src/utils/getCurrentAndLastDateFormatted';
+import transformDataForChart from '@/src/utils/transformDataForChart';
 
 interface IParams {
   shop: string;
   category: string;
   product: string;
 }
-
-interface ITransformedData {
-  date: string[];
-  prices: number[];
-}
-
 export default function ProductPage(): JSX.Element {
   const API_HOST = process.env.NEXT_PUBLIC_API_HOST;
   const params = useParams() as unknown as IParams;
+  const dates = getCurrentAndLastDateFormatted();
 
   const urls = [
     `${API_HOST}/shops/filter?shopId=${params.shop}`,
     `${API_HOST}/categories/filter?categoryId=${params.category}`,
     `${API_HOST}/products/filter?productId=${params.product}`,
-    `${API_HOST}/prices-${params.shop}/filter?productId=${params.product}`,
+    `${API_HOST}/prices-${params.shop}/filter?productId=${params.product}&startDate=${dates.lastDate}&endDate=${dates.currentDate}`,
   ];
 
   const { data, isLoader } = useFetchData(urls);
@@ -35,21 +35,19 @@ export default function ProductPage(): JSX.Element {
   const [shopResult = [], categoriesResult = [], productsResult = [], pricesProductResult = []] =
     data;
 
-  const transformPrices = (prices: IData[]): ITransformedData => {
-    const transformed = {
-      date: [] as string[],
-      prices: [] as number[],
-    };
+  const [transformedData, setTransformedData] = useState<ITransformedDataForChart>({
+    date: [],
+    prices: [],
+  });
 
-    prices.forEach((price) => {
-      transformed.date.push(price.date);
-      transformed.prices.push(price.price);
-    });
+  useEffect(() => {
+    setTransformedData(transformDataForChart(pricesProductResult));
+  }, [pricesProductResult]);
 
-    return transformed;
+  const handleUpdateData = async (startDateInput: string, endDateInput: string): Promise<void> => {
+    const updateData = await fetchUpdatedData(params, startDateInput, endDateInput);
+    setTransformedData(transformDataForChart(updateData));
   };
-
-  const transformedData = transformPrices(pricesProductResult);
 
   function showProduct(): JSX.Element {
     return (
@@ -65,13 +63,13 @@ export default function ProductPage(): JSX.Element {
           </Link>
           , продукт «{productsResult.length > 0 && productsResult[0].name}»
         </h1>
-        {<div>
-          {pricesProductResult.map((price: IData) => (
-            <div key={price.id}>
-              {price.date} - {price.price}
-            </div>
-          ))}
-        </div>}
+        <div>
+          <DateInputForm
+            lastDate={dates.lastDate}
+            currentDate={dates.currentDate}
+            onUpdateData={handleUpdateData}
+          />
+        </div>
         <div>
           <ChartLine date={transformedData.date} price={transformedData.prices} />
         </div>

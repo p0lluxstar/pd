@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Loader from '@/src/components/Loader';
 import useFetchData from '@/src/hooks/useFetchData';
-import { type IData } from '@/src/types/interfaсes';
+import { type IDataFromDB } from '@/src/types/interfaсes';
 import styles from '../../../styles/pages/shops.module.scss';
 
 export default function ShopsPage(): JSX.Element {
@@ -19,7 +19,7 @@ export default function ShopsPage(): JSX.Element {
       <>
         <h1>Shops</h1>
         <div className={styles.shops}>
-          {shopResult.map((shop: IData) => (
+          {shopResult.map((shop: IDataFromDB) => (
             <Link href={`/portal/shops/${shop.id}`} key={shop.id}>
               <div className={styles.shop}>
                 <Image src={`/img/shops/${shop.id}.jpg`} width={200} height={100} alt="shop" />

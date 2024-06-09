@@ -1,4 +1,4 @@
-export interface IData {
+export interface IDataFromDB {
   id: string;
   name: string;
   date: string;
@@ -9,9 +9,19 @@ export interface IStoreReducer {
   loader: boolean;
 }
 
-export type TFetchData = IData[];
+export type TFetchData = IDataFromDB[];
 
 export interface IFetchData {
   data: TFetchData[];
   isLoader: boolean;
+}
+
+export interface Dates {
+  currentDate: string;
+  lastDate: string;
+}
+
+export interface ITransformedDataForChart {
+  date: string[];
+  prices: number[];
 }

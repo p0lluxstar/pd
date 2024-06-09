@@ -54,7 +54,7 @@ const ChartLine: React.FC<IProps> = ({ date, price }: IProps) => {
         myChartRef.current.destroy();
       }
     };
-  }, []);
+  }, [price]);
 
   return <canvas ref={chartRef} />;
 };

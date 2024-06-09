@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import Loader from '@/src/components/Loader';
 import useFetchData from '@/src/hooks/useFetchData';
-import { type IData } from '@/src/types/interfaсes';
+import { type IDataFromDB } from '@/src/types/interfaсes';
 
 interface IParams {
   shop: string;
@@ -35,7 +35,7 @@ export default function CategoryPage(): JSX.Element {
           , категория «{categoriesResult.length > 0 && categoriesResult[0].name}»
         </h1>
         <div>
-          {productsResult.map((product: IData) => (
+          {productsResult.map((product: IDataFromDB) => (
             <Link
               href={`/portal/shops/${params.shop}/${params.category}/${product.id}`}
               key={product.id}
