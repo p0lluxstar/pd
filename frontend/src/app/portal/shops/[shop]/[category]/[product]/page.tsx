@@ -1,11 +1,11 @@
 'use client';
 
-import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import ChartLine from '@/src/components/ChartLine';
 import DateInputForm from '@/src/components/DateInputForm';
 import Loader from '@/src/components/Loader';
+import Title from '@/src/components/Title';
 import useFetchData from '@/src/hooks/useFetchData';
 import { type ITransformedDataForChart } from '@/src/types/interfaсes';
 import fetchUpdatedData from '@/src/utils/fetchUpdatedData';
@@ -17,6 +17,7 @@ interface IParams {
   category: string;
   product: string;
 }
+
 export default function ProductPage(): JSX.Element {
   const API_HOST = process.env.NEXT_PUBLIC_API_HOST;
   const params = useParams() as unknown as IParams;
@@ -52,27 +53,18 @@ export default function ProductPage(): JSX.Element {
   function showProduct(): JSX.Element {
     return (
       <>
-        <h1>
-          Магазин{' '}
-          <Link href={`/portal/shops/${params.shop}`}>
-            «{shopResult.length > 0 && shopResult[0].name}»
-          </Link>
-          , категория{' '}
-          <Link href={`/portal/shops/${params.shop}/${params.category}`}>
-            «{categoriesResult.length > 0 && categoriesResult[0].name}»
-          </Link>
-          , продукт «{productsResult.length > 0 && productsResult[0].name}»
-        </h1>
-        <div>
-          <DateInputForm
-            lastDate={dates.lastDate}
-            currentDate={dates.currentDate}
-            onUpdateData={handleUpdateData}
-          />
-        </div>
-        <div>
-          <ChartLine date={transformedData.date} price={transformedData.prices} />
-        </div>
+        <Title
+          params={params}
+          shopResult={shopResult}
+          categoriesResult={categoriesResult}
+          productsResult={productsResult}
+        />
+        <DateInputForm
+          lastDate={dates.lastDate}
+          currentDate={dates.currentDate}
+          onUpdateData={handleUpdateData}
+        />
+        <ChartLine date={transformedData.date} price={transformedData.prices} />
       </>
     );
   }

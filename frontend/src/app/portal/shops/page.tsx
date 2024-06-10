@@ -17,7 +17,7 @@ export default function ShopsPage(): JSX.Element {
   function showShops(): JSX.Element {
     return (
       <>
-        <h1>Shops</h1>
+        <h1>Магазины</h1>
         <div className={styles.shops}>
           {shopResult.map((shop: IDataFromDB) => (
             <Link href={`/portal/shops/${shop.id}`} key={shop.id}>

@@ -29,29 +29,31 @@ export default function DateInputForm({
 
   return (
     <>
-      <label>
-        Дата с:
-        <input
-          type="date"
-          value={startDate}
-          ref={startDateRef}
-          onChange={(e) => {
-            setStartDate(e.target.value);
-          }}
-        />
-      </label>
-      <label>
-        по:
-        <input
-          type="date"
-          value={endDate}
-          ref={endDateRef}
-          onChange={(e) => {
-            setEndDate(e.target.value);
-          }}
-        />
-      </label>
-      <button onClick={handleUpdateData}>Обновить данные</button>
+      <div>
+        <label>
+          Дата с:
+          <input
+            type="date"
+            value={startDate}
+            ref={startDateRef}
+            onChange={(e) => {
+              setStartDate(e.target.value);
+            }}
+          />
+        </label>
+        <label>
+          по:
+          <input
+            type="date"
+            value={endDate}
+            ref={endDateRef}
+            onChange={(e) => {
+              setEndDate(e.target.value);
+            }}
+          />
+        </label>
+        <button onClick={handleUpdateData}>Обновить данные</button>
+      </div>
     </>
   );
 }
