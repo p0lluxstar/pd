@@ -8,7 +8,7 @@ export class PricesShop0002Entity {
   id: number;
 
   @Column({
-    type: 'timestamp without time zone',
+    type: 'date',
     default: () => 'CURRENT_TIMESTAMP',
   })
   date: Date;

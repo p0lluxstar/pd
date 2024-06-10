@@ -10,10 +10,13 @@ export class PricesShop0001Controller {
   }
 
   @Get('filter')
-  async getPricesByProductId(@Query('productId') product_id: string) {
-    return this.priceShop0001Service.findPricesByProductId(product_id);
+  async getPricesByProductId(
+    @Query('productId') product_id: string,
+    @Query('startDate') startDate?: string,
+    @Query('endDate') endDate?: string
+  ) {
+    return this.priceShop0001Service.findPricesByProductIdAndDate(product_id, startDate, endDate);
   }
-
 
   @Get('products')
   async getProducts(@Query('categoryId') categoryId: string) {

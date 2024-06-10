@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PricesShop0001Entity } from './prices-shop-0001.entity';
-import { Repository } from 'typeorm';
+import { Between, Equal, Repository } from 'typeorm';
 
 @Injectable()
 export class PricesShop0001Service {
@@ -13,9 +13,23 @@ export class PricesShop0001Service {
     return await this.pricesShop0001Entity.find();
   }
 
-  async findPricesByProductId(product_id: string) {
+  async findPricesByProductIdAndDate(product_id: string, startDate?: string, endDate?: string) {
+    if (startDate && endDate) {
+      const start = new Date(startDate);
+      const end = new Date(endDate);
+      // Убедитесь, что конец диапазона включает конец дня
+      end.setHours(23, 59, 59, 999);
+
+      return await this.pricesShop0001Entity.find({
+        where: {
+          product_id: Equal(product_id),
+          date: Between(start, end),
+        },
+      });
+    }
+
     return await this.pricesShop0001Entity.find({
-      where: { product_id: { id: product_id } },
+      where: { product_id: Equal(product_id) },
     });
   }
 
