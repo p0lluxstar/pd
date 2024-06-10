@@ -56,7 +56,11 @@ const ChartLine: React.FC<IProps> = ({ date, price }: IProps) => {
     };
   }, [price]);
 
-  return <canvas ref={chartRef} />;
+  return (
+    <div>
+      <canvas ref={chartRef} />
+    </div>
+  );
 };
 
 export default ChartLine;
