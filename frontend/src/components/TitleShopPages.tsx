@@ -16,7 +16,7 @@ interface IProps {
   productsResult?: IEntity[];
 }
 
-export default function Title({
+export default function TitleShopPages({
   params = { shop: '', category: '', product: '' },
   shopResult = [],
   categoriesResult = [],

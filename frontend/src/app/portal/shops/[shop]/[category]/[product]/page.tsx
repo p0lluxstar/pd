@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import ChartLine from '@/src/components/ChartLine';
 import DateInputForm from '@/src/components/DateInputForm';
 import Loader from '@/src/components/Loader';
-import Title from '@/src/components/Title';
+import TitleShopPages from '@/src/components/TitleShopPages';
 import useFetchData from '@/src/hooks/useFetchData';
 import { type ITransformedDataForChart } from '@/src/types/interfaсes';
 import fetchUpdatedData from '@/src/utils/fetchUpdatedData';
@@ -53,7 +53,7 @@ export default function ProductPage(): JSX.Element {
   function showProduct(): JSX.Element {
     return (
       <>
-        <Title
+        <TitleShopPages
           params={params}
           shopResult={shopResult}
           categoriesResult={categoriesResult}

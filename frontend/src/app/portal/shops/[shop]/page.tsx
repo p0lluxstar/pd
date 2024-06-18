@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import Loader from '@/src/components/Loader';
-import Title from '@/src/components/Title';
+import TitleShopPages from '@/src/components/TitleShopPages';
 import useFetchData from '@/src/hooks/useFetchData';
 import { type IDataFromDB } from '@/src/types/interfaсes';
 import styles from '../../../../styles/pages/temp.module.scss';
@@ -24,7 +24,7 @@ export default function ShopPage(): JSX.Element {
   function showCategories(): JSX.Element {
     return (
       <>
-        <Title shopResult={shopResult} />
+        <TitleShopPages shopResult={shopResult} />
         <div className={styles.products}>
           {categoriesResult.map((category: IDataFromDB) => (
             <Link href={`/portal/shops/${params.shop}/${category.id}`} key={category.id}>
