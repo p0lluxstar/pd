@@ -5,7 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loaderActions } from '../redux/slices/loaderSlice';
 import { type IStoreReducer, type TFetchData, type IFetchData } from '../types/interfaсes';
 
-const useFetchData = (urls: string[]): IFetchData => {
+const useFetchData = (urls: string[], fetchTrigger?: number): IFetchData => {
+  /* console.log('useFetchData_urls', urls); */
   const dispatch = useDispatch();
   const [data, setData] = useState<TFetchData[]>([]);
   const isLoader = useSelector((state: IStoreReducer) => state.loader);
@@ -18,16 +19,16 @@ const useFetchData = (urls: string[]): IFetchData => {
         const results = await Promise.all(responses.map(async (response) => await response.json()));
 
         setData(results);
-        dispatch(loaderActions.setLoader(true));
       } catch (error) {
         console.error('Error fetching data:', error);
+      } finally {
         dispatch(loaderActions.setLoader(true));
       }
     };
     void fetchData();
-  }, []);
+  }, [fetchTrigger]);
 
-  /*   console.log(data); */
+  /*  console.log('useFetchData_data', data, isLoader); */
 
   return { data, isLoader };
 };

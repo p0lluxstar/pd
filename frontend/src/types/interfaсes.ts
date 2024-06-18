@@ -3,6 +3,11 @@ export interface IDataFromDB {
   name: string;
   date: string;
   price: number;
+  shopName: string;
+  category_id: {
+    id: string;
+    name: string;
+  };
 }
 
 export interface IStoreReducer {
