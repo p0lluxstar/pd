@@ -12,6 +12,7 @@ export interface IDataFromDB {
 
 export interface IStoreReducer {
   loader: boolean;
+  shops: object;
 }
 
 export type TFetchData = IDataFromDB[];

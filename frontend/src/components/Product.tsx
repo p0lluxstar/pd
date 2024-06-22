@@ -27,15 +27,17 @@ export default function Product(): JSX.Element {
   const [urls, setUrls] = useState<string[]>([]);
   const shops = useSelector((state: IStoreReducer) => state.shops);
 
-  const datesFromLS = JSON.parse(localStorage.getItem('dateForm')) || {
-    startDate: dates.startDate,
-    endDate: dates.endDate,
-  };
-
-  console.log('datesFromLS', datesFromLS);
+  const getDateFormLS = localStorage.getItem('dateForm');
+  const datesFromLS =
+    getDateFormLS != null
+      ? JSON.parse(getDateFormLS)
+      : {
+          startDate: dates.startDate,
+          endDate: dates.endDate,
+        };
 
   useEffect(() => {
-    const createUrls = (startDate: string, endDate: string) => {
+    const createUrls = (startDate: string, endDate: string): void => {
       const baseUrls = [`${API_HOST}/products/filter?productId=${params.product}`];
       Object.keys(shops).forEach((key) => {
         if (shops[key]) {
@@ -52,7 +54,7 @@ export default function Product(): JSX.Element {
 
   const { data, isLoader } = useFetch(urls);
 
-  const handleUpdateData = async (startDateInput: string, endDateInput: string): Promise<void> => {
+  const handleUpdateData = (): void => {
     setFetchTrigger((prev) => prev + 1);
   };
 

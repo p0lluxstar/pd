@@ -6,7 +6,7 @@ import getCurrentAndLastDateFormatted from '../utils/getCurrentAndLastDateFormat
 interface IProps {
   startDateProps: string;
   endDateProps: string;
-  onUpdateData: (startDateInput: string, endDateInput: string) => Promise<void>;
+  onUpdateData: () => void;
 }
 
 interface IParsedDate {
@@ -43,7 +43,7 @@ export default function DateInputForm({
     const endDateInput = endDateRef.current?.value;
 
     if (startDateInput != null && endDateInput != null) {
-      void onUpdateData(startDateInput, endDateInput);
+      void onUpdateData();
       const updatedDate = { startDate: startDateInput, endDate: endDateInput };
       localStorage.setItem('dateForm', JSON.stringify(updatedDate));
     }
