@@ -1,6 +1,8 @@
-'use clinet';
+'use client';
 
 import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { shopsActions } from '../redux/slices/shopsSlice';
 
 type CheckedItems = Record<string, boolean>;
 
@@ -13,17 +15,11 @@ const shops = [
     id: 'shop-0002',
     name: 'spar',
   },
-  {
-    id: 'shop-0003',
-    name: 'magnit',
-  },
 ];
 
-interface IProps {
-  updateDataCharts: () => void;
-}
+export default function ShopsCheckboxForm(): JSX.Element {
+  const dispatch = useDispatch();
 
-export default function ShopsCheckboxForm({ updateDataCharts }: IProps): JSX.Element {
   const initializeCheckedItems = (): CheckedItems => {
     const savedShopsCheckedItems = localStorage.getItem('shopsCheckboxItems');
     if (savedShopsCheckedItems != null) {
@@ -40,6 +36,10 @@ export default function ShopsCheckboxForm({ updateDataCharts }: IProps): JSX.Ele
 
   const [checkedItems, setCheckedItems] = useState<CheckedItems>(initializeCheckedItems);
 
+  useEffect(() => {
+    dispatch(shopsActions.setShops(checkedItems));
+  }, [checkedItems, dispatch]);
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const { id, checked } = event.target;
     const updatedShopsCheckboxItems = {
@@ -48,15 +48,8 @@ export default function ShopsCheckboxForm({ updateDataCharts }: IProps): JSX.Ele
     };
     setCheckedItems(updatedShopsCheckboxItems);
     localStorage.setItem('shopsCheckboxItems', JSON.stringify(updatedShopsCheckboxItems));
+    dispatch(shopsActions.setShops(updatedShopsCheckboxItems));
   };
-
-  useEffect(() => {
-    // При монтировании компонента загружаем данные из localStorage (если они есть)
-    const savedShopsCheckboxItems = localStorage.getItem('shopsCheckboxItems');
-    if (savedShopsCheckboxItems != null) {
-      setCheckedItems(JSON.parse(savedShopsCheckboxItems) as CheckedItems);
-    }
-  }, []);
 
   return (
     <form>
@@ -71,7 +64,6 @@ export default function ShopsCheckboxForm({ updateDataCharts }: IProps): JSX.Ele
           {shop.name}
         </label>
       ))}
-       <button type="button" onClick={updateDataCharts}>Обновить</button>
     </form>
   );
 }

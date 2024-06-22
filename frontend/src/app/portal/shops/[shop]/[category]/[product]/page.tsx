@@ -1,12 +1,12 @@
 'use client';
 
 import { useParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import ChartLine from '@/src/components/ChartLine';
 import DateInputForm from '@/src/components/DateInputForm';
 import Loader from '@/src/components/Loader';
 import TitleShopPages from '@/src/components/TitleShopPages';
-import useFetchData from '@/src/hooks/useFetchData';
+import useFetch from '@/src/hooks/useFetch';
 import { type ITransformedDataForChart } from '@/src/types/interfaсes';
 import fetchUpdatedData from '@/src/utils/fetchUpdatedData';
 import getCurrentAndLastDateFormatted from '@/src/utils/getCurrentAndLastDateFormatted';
@@ -18,19 +18,23 @@ interface IParams {
   product: string;
 }
 
+const API_HOST = process.env.NEXT_PUBLIC_API_HOST;
+
 export default function ProductPage(): JSX.Element {
-  const API_HOST = process.env.NEXT_PUBLIC_API_HOST;
   const params = useParams() as unknown as IParams;
   const dates = getCurrentAndLastDateFormatted();
 
-  const urls = [
-    `${API_HOST}/shops/filter?shopId=${params.shop}`,
-    `${API_HOST}/categories/filter?categoryId=${params.category}`,
-    `${API_HOST}/products/filter?productId=${params.product}`,
-    `${API_HOST}/prices-${params.shop}/filter?productId=${params.product}&startDate=${dates.lastDate}&endDate=${dates.currentDate}`,
-  ];
+  const urls = useMemo(
+    () => [
+      `${API_HOST}/shops/filter?shopId=${params.shop}`,
+      `${API_HOST}/categories/filter?categoryId=${params.category}`,
+      `${API_HOST}/products/filter?productId=${params.product}`,
+      `${API_HOST}/prices-${params.shop}/filter?productId=${params.product}&startDate=${dates.startDate}&endDate=${dates.endDate}`,
+    ],
+    [API_HOST, params]
+  );
 
-  const { data, isLoader } = useFetchData(urls);
+  const { data, isLoader } = useFetch(urls);
 
   // Добавляем проверки наличия данных перед их использованием
   const [shopResult = [], categoriesResult = [], productsResult = [], pricesProductResult = []] =
@@ -60,8 +64,8 @@ export default function ProductPage(): JSX.Element {
           productsResult={productsResult}
         />
         <DateInputForm
-          lastDate={dates.lastDate}
-          currentDate={dates.currentDate}
+          startDateProps={dates.startDate}
+          endDateProps={dates.endDate}
           onUpdateData={handleUpdateData}
         />
         <ChartLine date={transformedData.date} price={transformedData.prices} />

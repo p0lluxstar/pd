@@ -1,16 +1,22 @@
 'use client';
 
+import { useMemo } from 'react';
 import Categories from '@/src/components/Categories';
 import Loader from '@/src/components/Loader';
-import useFetchData from '@/src/hooks/useFetchData';
+import useFetch from '@/src/hooks/useFetch';
 
-export default function Category0002(): JSX.Element {
-  const API_HOST = process.env.NEXT_PUBLIC_API_HOST;
-  const urls = [
-    `${API_HOST}/categories/filter?categoryId=category-0002`,
-    `${API_HOST}/products/filter?categoryId=category-0002`,
-  ];
-  const { data, isLoader } = useFetchData(urls);
+const API_HOST = process.env.NEXT_PUBLIC_API_HOST;
+
+export default function Category0001(): JSX.Element {
+  const urls = useMemo(
+    () => [
+      `${API_HOST}/categories/filter?categoryId=category-0002`,
+      `${API_HOST}/products/filter?categoryId=category-0002`,
+    ],
+    [API_HOST]
+  );
+
+  const { data, isLoader } = useFetch(urls);
 
   const [categoriesResult = [], productsResult = []] = data;
 

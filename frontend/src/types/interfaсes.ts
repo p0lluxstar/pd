@@ -22,8 +22,8 @@ export interface IFetchData {
 }
 
 export interface Dates {
-  currentDate: string;
-  lastDate: string;
+  startDate: string;
+  endDate: string;
 }
 
 export interface ITransformedDataForChart {

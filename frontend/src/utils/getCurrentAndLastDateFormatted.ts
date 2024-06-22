@@ -14,7 +14,7 @@ export default function getCurrentAndLastDateFormatted(): Dates {
   const lastDate = `${lastYear}-${month}-${day}`;
 
   return {
-    currentDate,
-    lastDate,
+    startDate: lastDate,
+    endDate: currentDate,
   };
 }
