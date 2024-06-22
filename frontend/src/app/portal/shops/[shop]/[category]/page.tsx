@@ -38,6 +38,7 @@ export default function CategoryPage(): JSX.Element {
           shopResult={shopResult}
           categoriesResult={categoriesResult}
         />
+
         <div>
           {productsResult.map((product: IDataFromDB) => (
             <Link
