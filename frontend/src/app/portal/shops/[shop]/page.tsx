@@ -41,5 +41,5 @@ export default function ShopPage(): JSX.Element {
     );
   }
 
-  return <>{isLoader ? showCategories() : <Loader />}</>;
+  return <>{isLoader ? <Loader /> : showCategories()}</>;
 }

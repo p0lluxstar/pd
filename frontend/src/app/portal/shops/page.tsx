@@ -34,5 +34,5 @@ export default function ShopsPage(): JSX.Element {
     );
   }
 
-  return <>{isLoader ? showShops() : <Loader />}</>;
+  return <>{isLoader ? <Loader /> : showShops()}</>;
 }

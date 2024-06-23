@@ -53,5 +53,5 @@ export default function CategoryPage(): JSX.Element {
     );
   }
 
-  return <>{isLoader ? showProducts() : <Loader />}</>;
+  return <>{isLoader ? <Loader /> : showProducts()}</>;
 }

@@ -2,18 +2,11 @@
 
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import ChartLine from '@/src/components/ChartLine';
-import DateInputForm from '@/src/components/DateInputForm';
 import Loader from '@/src/components/Loader';
 import TitleShopPages from '@/src/components/TitleShopPages';
 import useFetch from '@/src/hooks/useFetch';
-import { IStoreReducer, type ITransformedDataForChart } from '@/src/types/interfaсes';
-import getCurrentAndLastDateFormatted from '@/src/utils/getCurrentAndLastDateFormatted';
-import transformDataForChart from '@/src/utils/transformDataForChart';
-import useFetchChart from '@/src/hooks/useFetchChart';
 import ChartWithDateForm from '@/src/components/ChartWithDateForm';
-import { useDispatch, useSelector } from 'react-redux';
-import { loaderActions } from '@/src/redux/slices/loaderSlice';
+import { useDispatch } from 'react-redux';
 
 interface IParams {
   shop: string;
@@ -27,8 +20,6 @@ export default function ProductPage(): JSX.Element {
   const params = useParams() as unknown as IParams;
 
   const [urls, setUrls] = useState<string[]>([]);
-
-  const dispatch = useDispatch();
 
   useEffect(() => {
     const createUrls = () => {
@@ -58,11 +49,10 @@ export default function ProductPage(): JSX.Element {
           categoriesResult={categoriesResult}
           productsResult={productsResult}
         />
-        <ChartWithDateForm/>
+        <ChartWithDateForm />
       </>
     );
   }
-  console.log('isLoader', isLoader);
 
-  return <>{isLoader ? showProduct() : <Loader />}</>;
+  return <>{isLoader ? <Loader /> : showProduct()}</>;
 }

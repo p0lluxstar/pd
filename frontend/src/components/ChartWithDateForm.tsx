@@ -1,6 +1,6 @@
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import useFetchChart from '../hooks/useFetchChart';
+import useFetch from '../hooks/useFetch';
 import getCurrentAndLastDateFormatted from '../utils/getCurrentAndLastDateFormatted';
 import transformDataForChart from '../utils/transformDataForChart';
 import ChartLine from './ChartLine';
@@ -42,22 +42,19 @@ export default function ChartWithDateForm(): JSX.Element {
     createUrlsChart(datesFromLS.startDate, datesFromLS.endDate);
   }, [fetchTrigger]);
 
-  const { dataChart, isLoaderChart } = useFetchChart(urlsChart);
+  const { data, isLoader } = useFetch(urlsChart);
 
-  const [pricesProductResult = []] = dataChart;
+  const [pricesProductResult = []] = data;
 
   const handleUpdateData = (): void => {
     setFetchTrigger((prev) => prev + 1);
   };
 
-  console.log('dataChart', dataChart);
-
   const renderCharts = (): JSX.Element => {
     const chartData = transformDataForChart(pricesProductResult);
     return (
       <>
-        {isLoaderChart ? <ChartLine date={chartData.date} price={chartData.prices} /> : <Loader />}
-        {/* <ChartLine date={chartData.date} price={chartData.prices} /> */}
+        <ChartLine date={chartData.date} price={chartData.prices} />
       </>
     );
   };
@@ -69,7 +66,7 @@ export default function ChartWithDateForm(): JSX.Element {
         endDateProps={datesFromLS.endDate}
         onUpdateData={handleUpdateData}
       />
-      {renderCharts()}
+       {isLoader ? <Loader /> : renderCharts()}
     </>
   );
 }
