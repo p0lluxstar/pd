@@ -2,7 +2,7 @@
 
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import useFetch from '../hooks/useFetch';
 import { type IStoreReducer } from '../types/interfaсes';
 import getCurrentAndLastDateFormatted from '../utils/getCurrentAndLastDateFormatted';
@@ -12,6 +12,7 @@ import DateInputForm from './DateInputForm';
 import Loader from './Loader';
 import ShopsCheckboxForm from './ShopsCheckboxForm';
 import TitleCategoryPages from './TitleCategoryPages';
+import { loaderActions } from '../redux/slices/loaderSlice';
 
 interface IParams {
   category: string;
@@ -72,26 +73,26 @@ export default function Product(): JSX.Element {
     </div>
   );
 
-  /*   if (isLoader) {
-    return <Loader />;
-  } */
-
-  return (
-    <>
-      {data.length > 0 && (
-        <TitleCategoryPages
-          categoryId={data[0][0].category_id.id}
-          categoryName={data[0][0].category_id.name}
-          productName={data[0][0].name}
+  function showProduct(): JSX.Element {
+    return (
+      <>
+        {data.length > 0 && (
+          <TitleCategoryPages
+            categoryId={data[0][0].category_id.id}
+            categoryName={data[0][0].category_id.name}
+            productName={data[0][0].name}
+          />
+        )}
+        <ShopsCheckboxForm />
+        <DateInputForm
+          startDateProps={datesFromLS.startDate}
+          endDateProps={datesFromLS.endDate}
+          onUpdateData={handleUpdateData}
         />
-      )}
-      <ShopsCheckboxForm />
-      <DateInputForm
-        startDateProps={datesFromLS.startDate}
-        endDateProps={datesFromLS.endDate}
-        onUpdateData={handleUpdateData}
-      />
-      {data.length > 0 && renderCharts()}
-    </>
-  );
+        {data.length > 0 && renderCharts()}
+      </>
+    );
+  }
+
+  return <>{isLoader ? showProduct() : <Loader />}</>;
 }

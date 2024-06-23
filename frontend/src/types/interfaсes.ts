@@ -1,8 +1,6 @@
 export interface IDataFromDB {
   id: string;
   name: string;
-  date: string;
-  price: number;
   shopName: string;
   category_id: {
     id: string;
@@ -10,8 +8,14 @@ export interface IDataFromDB {
   };
 }
 
+export interface IDataChartFromDB {
+  date: string;
+  price: number;
+}
+
 export interface IStoreReducer {
   loader: boolean;
+  loaderChart: boolean;
   shops: object;
 }
 
@@ -20,6 +24,12 @@ export type TFetchData = IDataFromDB[];
 export interface IFetchData {
   data: TFetchData[];
   isLoader: boolean;
+}
+export type TFetchChartData = IDataChartFromDB[];
+
+export interface IFetchDataChart {
+  dataChart: TFetchChartData[];
+  isLoaderChart: boolean;
 }
 
 export interface Dates {
