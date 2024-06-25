@@ -10,7 +10,7 @@ export class ShopController {
   }
 
   @Get('filter')
-  async getShop(@Query('shopId') shop_id: string) {
-    return this.shopService.getShop(shop_id);
+  async getShopById(@Query('shopId') shop_id: string) {
+    return this.shopService.getShopById(shop_id);
   }
 }

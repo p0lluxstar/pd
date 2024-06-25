@@ -13,7 +13,7 @@ export class ShopService {
     return await this.shopRepository.find();
   }
 
-  async getShop(shop_id: string) {
+  async getShopById(shop_id: string) {
     return await this.shopRepository.find({
       where: { id: shop_id },
     });

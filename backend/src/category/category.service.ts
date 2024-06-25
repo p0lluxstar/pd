@@ -14,7 +14,7 @@ export class CategoryService {
     return await this.categoryRepository.find();
   }
 
-  async getCategory(category_id: string) {
+  async getCategoryById(category_id: string) {
     return await this.categoryRepository.find({
       where: { id: category_id },
     });

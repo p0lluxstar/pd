@@ -1,4 +1,4 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { BadRequestException, Controller, Get, Query } from '@nestjs/common';
 import { ProductService } from './product.service';
 
 @Controller('products')
@@ -11,7 +11,16 @@ export class ProductController {
   }
 
   @Get('filter')
-  async getProduct(@Query('productId') product_id: string) {
-    return this.productService.getProduct(product_id);
+  async getProductsByFilter(
+    @Query('productId') product_id?: string,
+    @Query('categoryId') category_id?: string
+  ) {
+    if (product_id) {
+      return this.productService.getProductByProductId(product_id);
+    } else if (category_id) {
+      return this.productService.getProductsByCategoryId(category_id);
+    } else {
+      throw new BadRequestException('Either productId or categoryId must be provided');
+    }
   }
 }

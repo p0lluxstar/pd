@@ -10,7 +10,7 @@ export class PricesShop0002Controller {
   }
 
   @Get('filter')
-  async getPricesByProductId(
+  async findPricesByProductIdAndDate(
     @Query('productId') product_id: string,
     @Query('startDate') startDate?: string,
     @Query('endDate') endDate?: string

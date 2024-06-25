@@ -14,23 +14,29 @@ export class PricesShop0001Service {
   }
 
   async findPricesByProductIdAndDate(product_id: string, startDate?: string, endDate?: string) {
+    const query = this.pricesShop0001Entity
+      .createQueryBuilder('prices')
+      .innerJoinAndSelect('prices.shop_id', 'shop')
+      .where('prices.product_id = :product_id', { product_id });
+
     if (startDate && endDate) {
       const start = new Date(startDate);
       const end = new Date(endDate);
-      // Убедитесь, что конец диапазона включает конец дня
       end.setHours(23, 59, 59, 999);
 
-      return await this.pricesShop0001Entity.find({
-        where: {
-          product_id: Equal(product_id),
-          date: Between(start, end),
-        },
-      });
+      query.andWhere('prices.date BETWEEN :start AND :end', { start, end });
     }
 
-    return await this.pricesShop0001Entity.find({
-      where: { product_id: Equal(product_id) },
-    });
+    const result = await query.getMany();
+
+    // Форматируем результат для добавления nameShop
+    return result.map((price) => ({
+      id: price.id,
+      date: price.date,
+      price: price.price,
+      shopName: price.shop_id.name,
+      shopId: price.shop_id.id,
+    }));
   }
 
   async getProducts(category_id: string) {

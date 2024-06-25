@@ -11,7 +11,7 @@ export class CategoryController {
   }
 
   @Get('filter')
-  async getCategory(@Query('categoryId') category_id: string) {
-    return this.categoryService.getCategory(category_id);
+  async getCategoryById(@Query('categoryId') category_id: string) {
+    return this.categoryService.getCategoryById(category_id);
   }
 }

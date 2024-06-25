@@ -23,5 +23,4 @@ export class PricesShop0001Entity {
 
   @Column({ type: 'numeric' })
   price: number;
-  newEntry: ShopEntity;
 }
