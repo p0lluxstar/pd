@@ -1,16 +1,18 @@
-import { type ITransformedDataForChart, type IDataFromDB } from '../types/interfaсes';
+import { type ITransformedDataForChart, type IProductDataForChart } from '../types/interfaсes';
 
-export default function transformDataForChart(prices: IDataFromDB[]): ITransformedDataForChart {
+export default function transformDataForChart(
+  props: IProductDataForChart[]
+): ITransformedDataForChart {
   const transformed = {
     date: [] as string[],
     prices: [] as number[],
   };
 
-  prices.forEach((price) => {
+  props.forEach((price: IProductDataForChart) => {
     const [year, month, day] = price.date.split('-');
     const formattedDate = `${day}-${month}-${year}`;
     transformed.date.push(formattedDate);
-    transformed.prices.push(price.price);
+    transformed.prices.push(Number(price.price));
   });
 
   return transformed;

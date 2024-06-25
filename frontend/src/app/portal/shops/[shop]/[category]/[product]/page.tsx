@@ -5,8 +5,7 @@ import { useEffect, useState } from 'react';
 import Loader from '@/src/components/Loader';
 import TitleShopPages from '@/src/components/TitleShopPages';
 import useFetch from '@/src/hooks/useFetch';
-import ChartWithDateForm from '@/src/components/ChartWithDateForm';
-import { useDispatch } from 'react-redux';
+import FilterDate from '@/src/components/FilterDate';
 
 interface IParams {
   shop: string;
@@ -49,7 +48,7 @@ export default function ProductPage(): JSX.Element {
           categoriesResult={categoriesResult}
           productsResult={productsResult}
         />
-        <ChartWithDateForm />
+        <FilterDate />
       </>
     );
   }

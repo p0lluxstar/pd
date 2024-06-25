@@ -1,7 +1,7 @@
 import { useQueries } from '@tanstack/react-query';
 import { type TFetchData, type IFetchData } from '../types/interfaсes';
 
-const fetchUrl = async (url: string): Promise<TFetchData> => {
+const fetchData = async (url: string): Promise<TFetchData> => {
   const response = await fetch(url);
   if (!response.ok) {
     throw new Error('Network response was not ok');
@@ -13,7 +13,7 @@ const useFetch = (urls: string[]): IFetchData => {
   const queryResults = useQueries({
     queries: urls.map((url) => ({
       queryKey: [url],
-      queryFn: () => fetchUrl(url),
+      queryFn: () => fetchData(url),
     })),
   });
 

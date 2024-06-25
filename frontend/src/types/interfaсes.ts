@@ -41,3 +41,16 @@ export interface ITransformedDataForChart {
   date: string[];
   prices: number[];
 }
+
+export interface IDatesFromLS {
+  startDate: string;
+  endDate: string;
+}
+
+export interface IProductDataForChart {
+  id: number;
+  date: string;
+  price: string;
+  shopId: string;
+  shopName: string;
+}

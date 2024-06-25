@@ -23,9 +23,9 @@ export default function Category0001(): JSX.Element {
   return (
     <>
       {isLoader ? (
-        <Categories categoriesResult={categoriesResult} productsResult={productsResult} />
-      ) : (
         <Loader />
+      ) : (
+        <Categories categoriesResult={categoriesResult} productsResult={productsResult} />
       )}
     </>
   );
