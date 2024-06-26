@@ -24,6 +24,7 @@
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "arrow-body-style": ["error", "as-needed"],
+    "multiline-ternary": ["error", "never"],
     "import/order": [
       "error",
       {

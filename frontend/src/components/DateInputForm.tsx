@@ -1,29 +1,51 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
+import getCurrentAndLastDateFormatted from '../utils/getCurrentAndLastDateFormatted';
 
 interface IProps {
-  lastDate: string;
-  currentDate: string;
-  onUpdateData: (startDateInput: string, endDateInput: string) => Promise<void>;
+  startDateProps: string;
+  endDateProps: string;
+  onUpdateData: () => void;
+}
+
+interface IParsedDate {
+  startDate: string;
+  endDate: string;
 }
 
 export default function DateInputForm({
-  lastDate,
-  currentDate,
+  startDateProps,
+  endDateProps,
   onUpdateData,
 }: IProps): JSX.Element {
-  const [startDate, setStartDate] = useState(lastDate);
-  const [endDate, setEndDate] = useState(currentDate);
+  const dates = getCurrentAndLastDateFormatted();
+  const [startDate, setStartDate] = useState(startDateProps);
+  const [endDate, setEndDate] = useState(endDateProps);
   const startDateRef = useRef<HTMLInputElement>(null);
   const endDateRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    const savedDate = localStorage.getItem('dateForm');
+    if (savedDate != null) {
+      const parsedDate: IParsedDate = JSON.parse(savedDate);
+      setStartDate(parsedDate.startDate);
+      setEndDate(parsedDate.endDate);
+    } else {
+      const initialDate = { startDate: dates.startDate, endDate: dates.endDate };
+      console.log(initialDate);
+      localStorage.setItem('dateForm', JSON.stringify(initialDate));
+    }
+  }, []);
 
   const handleUpdateData = (): void => {
     const startDateInput = startDateRef.current?.value;
     const endDateInput = endDateRef.current?.value;
 
     if (startDateInput != null && endDateInput != null) {
-      void onUpdateData(startDateInput, endDateInput);
+      void onUpdateData();
+      const updatedDate = { startDate: startDateInput, endDate: endDateInput };
+      localStorage.setItem('dateForm', JSON.stringify(updatedDate));
     }
   };
 

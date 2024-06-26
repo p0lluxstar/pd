@@ -2,15 +2,10 @@
 
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import ChartLine from '@/src/components/ChartLine';
-import DateInputForm from '@/src/components/DateInputForm';
 import Loader from '@/src/components/Loader';
-import Title from '@/src/components/Title';
-import useFetchData from '@/src/hooks/useFetchData';
-import { type ITransformedDataForChart } from '@/src/types/interfaсes';
-import fetchUpdatedData from '@/src/utils/fetchUpdatedData';
-import getCurrentAndLastDateFormatted from '@/src/utils/getCurrentAndLastDateFormatted';
-import transformDataForChart from '@/src/utils/transformDataForChart';
+import TitleShopPages from '@/src/components/TitleShopPages';
+import useFetch from '@/src/hooks/useFetch';
+import FilterDate from '@/src/components/FilterDate';
 
 interface IParams {
   shop: string;
@@ -18,56 +13,45 @@ interface IParams {
   product: string;
 }
 
+const API_HOST = process.env.NEXT_PUBLIC_API_HOST;
+
 export default function ProductPage(): JSX.Element {
-  const API_HOST = process.env.NEXT_PUBLIC_API_HOST;
   const params = useParams() as unknown as IParams;
-  const dates = getCurrentAndLastDateFormatted();
 
-  const urls = [
-    `${API_HOST}/shops/filter?shopId=${params.shop}`,
-    `${API_HOST}/categories/filter?categoryId=${params.category}`,
-    `${API_HOST}/products/filter?productId=${params.product}`,
-    `${API_HOST}/prices-${params.shop}/filter?productId=${params.product}&startDate=${dates.lastDate}&endDate=${dates.currentDate}`,
-  ];
-
-  const { data, isLoader } = useFetchData(urls);
-
-  // Добавляем проверки наличия данных перед их использованием
-  const [shopResult = [], categoriesResult = [], productsResult = [], pricesProductResult = []] =
-    data;
-
-  const [transformedData, setTransformedData] = useState<ITransformedDataForChart>({
-    date: [],
-    prices: [],
-  });
+  const [urls, setUrls] = useState<string[]>([]);
 
   useEffect(() => {
-    setTransformedData(transformDataForChart(pricesProductResult));
-  }, [pricesProductResult]);
+    const createUrls = () => {
+      const baseUrls = [
+        `${API_HOST}/shops/filter?shopId=${params.shop}`,
+        `${API_HOST}/categories/filter?categoryId=${params.category}`,
+        `${API_HOST}/products/filter?productId=${params.product}`,
+      ];
 
-  const handleUpdateData = async (startDateInput: string, endDateInput: string): Promise<void> => {
-    const updateData = await fetchUpdatedData(params, startDateInput, endDateInput);
-    setTransformedData(transformDataForChart(updateData));
-  };
+      setUrls(baseUrls);
+    };
+
+    createUrls();
+  }, []);
+
+  const { data, isLoader } = useFetch(urls);
+
+  // Добавляем проверки наличия данных перед их использованием
+  const [shopResult = [], categoriesResult = [], productsResult = []] = data;
 
   function showProduct(): JSX.Element {
     return (
       <>
-        <Title
+        <TitleShopPages
           params={params}
           shopResult={shopResult}
           categoriesResult={categoriesResult}
           productsResult={productsResult}
         />
-        <DateInputForm
-          lastDate={dates.lastDate}
-          currentDate={dates.currentDate}
-          onUpdateData={handleUpdateData}
-        />
-        <ChartLine date={transformedData.date} price={transformedData.prices} />
+        <FilterDate />
       </>
     );
   }
 
-  return <>{isLoader ? showProduct() : <Loader />}</>;
+  return <>{isLoader ? <Loader /> : showProduct()}</>;
 }

@@ -1,15 +1,17 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useMemo } from 'react';
 import Loader from '@/src/components/Loader';
-import useFetchData from '@/src/hooks/useFetchData';
+import useFetch from '@/src/hooks/useFetch';
 import { type IDataFromDB } from '@/src/types/interfaсes';
 import styles from '../../../styles/pages/shops.module.scss';
 
+const API_HOST = process.env.NEXT_PUBLIC_API_HOST;
+
 export default function ShopsPage(): JSX.Element {
-  const API_HOST = process.env.NEXT_PUBLIC_API_HOST;
-  const urls = [`${API_HOST}/shops`];
-  const { data, isLoader } = useFetchData(urls);
+  const urls = useMemo(() => [`${API_HOST}/shops`], [API_HOST]);
+  const { data, isLoader } = useFetch(urls);
 
   // Добавляем проверки наличия данных перед их использованием
   const [shopResult = []] = data;
@@ -32,5 +34,5 @@ export default function ShopsPage(): JSX.Element {
     );
   }
 
-  return <>{isLoader ? showShops() : <Loader />}</>;
+  return <>{isLoader ? <Loader /> : showShops()}</>;
 }
