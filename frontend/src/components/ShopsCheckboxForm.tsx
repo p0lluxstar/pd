@@ -3,18 +3,34 @@
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { shopsActions } from '../redux/slices/shopsSlice';
-import { type IShop } from '../types/interfaсes';
+/* import { type IShop } from '../types/interfaсes'; */
 
 type CheckedItems = Record<string, boolean>;
 
-const API_HOST = process.env.NEXT_PUBLIC_API_HOST;
+/* const API_HOST = process.env.NEXT_PUBLIC_API_HOST; */
+
+const shops = [
+  {
+    id: 'shop-0003',
+    name: 'Mагнит',
+  },
+  {
+    id: 'shop-0001',
+    name: 'Перекресток',
+  },
+  {
+    id: 'shop-0002',
+    name: 'Спар',
+  },
+];
 
 export default function ShopsCheckboxForm(): JSX.Element {
   const dispatch = useDispatch();
-  const [shops, setShops] = useState<IShop[]>([]);
+  /*  const [shops, setShops] = useState<IShop[]>([]);
 
   useEffect(() => {
     const fetchShops = async (): Promise<void> => {
+      console.log('useEffect');
       try {
         const response = await fetch(`${API_HOST}/shops`);
         if (!response.ok) {
@@ -27,7 +43,7 @@ export default function ShopsCheckboxForm(): JSX.Element {
       }
     };
     void fetchShops();
-  }, []);
+  }, []); */
 
   const initializeCheckedItems = (): CheckedItems => {
     const savedShopsCheckedItems = localStorage.getItem('shopsCheckboxItems');
@@ -59,6 +75,10 @@ export default function ShopsCheckboxForm(): JSX.Element {
     localStorage.setItem('shopsCheckboxItems', JSON.stringify(updatedShopsCheckboxItems));
     dispatch(shopsActions.setShops(updatedShopsCheckboxItems));
   };
+
+  useEffect(() => {
+    initializeCheckedItems();
+  }, []);
 
   return (
     <form>

@@ -30,7 +30,7 @@ export default function Charts(props: IProps): JSX.Element {
                 (props.productData.length > 1 && (
                   <h2>
                     Магазин{' '}
-                    <Link href={`/portal/shops/${productData[0].id}`}>{productData[0].name}</Link>
+                    <Link href={`/portal/shops/${productData[0].id}`}>«{productData[0].name}»</Link>
                   </h2>
                 ))}
               {chartData.date.length > 0 ? (
