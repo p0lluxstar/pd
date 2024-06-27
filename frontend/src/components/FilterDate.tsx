@@ -6,7 +6,8 @@ import { type IStoreReducer, type IDatesFromLS } from '../types/interfaсes';
 import getCurrentAndLastDateFormatted from '../utils/getCurrentAndLastDateFormatted';
 import Charts from './Charts';
 import DateInputForm from './DateInputForm';
-import Loader from './Loader';
+import Loading from './Loading';
+import LoadingError from './LoadingError';
 
 interface IParams {
   shop: string;
@@ -55,7 +56,7 @@ export default function FilterDate(): JSX.Element {
     createUrls(datesFromLS.startDate, datesFromLS.endDate);
   }, [fetchTrigger, shops]);
 
-  const { data, isLoader } = useFetch(urls);
+  const { data, isLoading, isError } = useFetch(urls);
 
   const handleUpdateData = (): void => {
     setFetchTrigger((prev) => prev + 1);
@@ -68,7 +69,15 @@ export default function FilterDate(): JSX.Element {
         endDateProps={datesFromLS.endDate}
         onUpdateData={handleUpdateData}
       />
-      {isLoader ? <Loader /> : <Charts productData={data} />}
+      {isLoading ? (
+        <Loading />
+      ) : isError ?? false ? (
+        <LoadingError />
+      ) : (
+        <>
+          <Charts productData={data} />
+        </>
+      )}
     </>
   );
 }

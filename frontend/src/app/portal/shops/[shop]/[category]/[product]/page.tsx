@@ -2,10 +2,11 @@
 
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import Loader from '@/src/components/Loader';
+import Loading from '@/src/components/Loading';
 import TitleShopPages from '@/src/components/TitleShopPages';
 import useFetch from '@/src/hooks/useFetch';
 import FilterDate from '@/src/components/FilterDate';
+import LoadingError from '@/src/components/LoadingError';
 
 interface IParams {
   shop: string;
@@ -34,7 +35,7 @@ export default function ProductPage(): JSX.Element {
     createUrls();
   }, []);
 
-  const { data, isLoader } = useFetch(urls);
+  const { data, isLoading, isError } = useFetch(urls);
 
   // Добавляем проверки наличия данных перед их использованием
   const [shopResult = [], categoriesResult = [], productsResult = []] = data;
@@ -53,5 +54,5 @@ export default function ProductPage(): JSX.Element {
     );
   }
 
-  return <>{isLoader ? <Loader /> : showProduct()}</>;
+  return isLoading ? <Loading /> : isError ?? false ? <LoadingError /> : <>{showProduct()}</>;
 }

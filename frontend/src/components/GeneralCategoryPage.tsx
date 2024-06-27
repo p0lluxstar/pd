@@ -2,8 +2,9 @@
 
 import { useMemo } from 'react';
 import Categories from '@/src/components/Categories';
-import Loader from '@/src/components/Loader';
+import Loading from '@/src/components/Loading';
 import useFetch from '@/src/hooks/useFetch';
+import LoadingError from './LoadingError';
 
 interface IProps {
   categoryId: string;
@@ -20,17 +21,15 @@ export default function GeneralCategoryPage(props: IProps): JSX.Element {
     [API_HOST]
   );
 
-  const { data, isLoader } = useFetch(urls);
+  const { data, isLoading, isError } = useFetch(urls);
 
   const [categoriesResult = [], productsResult = []] = data;
 
-  return (
-    <>
-      {isLoader ? (
-        <Loader />
-      ) : (
-        <Categories categoriesResult={categoriesResult} productsResult={productsResult} />
-      )}
-    </>
+  return isLoading ? (
+    <Loading />
+  ) : isError ?? false ? (
+    <LoadingError />
+  ) : (
+    <Categories categoriesResult={categoriesResult} productsResult={productsResult} />
   );
 }

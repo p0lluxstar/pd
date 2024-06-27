@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import styles from '../styles/components/loader.module.scss';
 
-export default function Loader(): JSX.Element {
+export default function Loading(): JSX.Element {
   return (
     <>
       <div className={styles.loader}>

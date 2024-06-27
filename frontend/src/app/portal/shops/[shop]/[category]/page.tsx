@@ -3,7 +3,8 @@
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { useMemo } from 'react';
-import Loader from '@/src/components/Loader';
+import Loading from '@/src/components/Loading';
+import LoadingError from '@/src/components/LoadingError';
 import TitleShopPages from '@/src/components/TitleShopPages';
 import useFetch from '@/src/hooks/useFetch';
 import { type IDataFromDB } from '@/src/types/interfaсes';
@@ -25,7 +26,7 @@ export default function CategoryPage(): JSX.Element {
     ],
     [API_HOST, params]
   );
-  const { data, isLoader } = useFetch(urls);
+  const { data, isLoading, isError } = useFetch(urls);
 
   // Добавляем проверки наличия данных перед их использованием
   const [shopResult = [], categoriesResult = [], productsResult = []] = data;
@@ -53,5 +54,5 @@ export default function CategoryPage(): JSX.Element {
     );
   }
 
-  return <>{isLoader ? <Loader /> : showProducts()}</>;
+  return isLoading ? <Loading /> : isError ?? false ? <LoadingError /> : <>{showProducts()}</>;
 }

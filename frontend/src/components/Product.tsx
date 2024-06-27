@@ -4,7 +4,8 @@ import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import useFetch from '../hooks/useFetch';
 import FilterDate from './FilterDate';
-import Loader from './Loader';
+import Loading from './Loading';
+import LoadingError from './LoadingError';
 import ShopsCheckboxForm from './ShopsCheckboxForm';
 import TitleCategoryPages from './TitleCategoryPages';
 
@@ -29,7 +30,7 @@ export default function Product(): JSX.Element {
     createUrls();
   }, []);
 
-  const { data, isLoader } = useFetch(urls);
+  const { data, isLoading, isError } = useFetch(urls);
 
   function showProduct(): JSX.Element {
     return (
@@ -47,5 +48,5 @@ export default function Product(): JSX.Element {
     );
   }
 
-  return <>{isLoader ? <Loader /> : showProduct()}</>;
+  return isLoading ? <Loading /> : isError ?? false ? <LoadingError /> : <>{showProduct()}</>;
 }

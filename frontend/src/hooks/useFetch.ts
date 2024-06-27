@@ -20,10 +20,10 @@ const useFetch = (urls: string[]): IFetchData => {
   const data = queryResults.every((result) => result.data !== undefined)
     ? queryResults.map((result) => result.data as TFetchData)
     : [];
-  const isLoader = queryResults.some((result) => result.isLoading);
+  const isLoading = queryResults.some((result) => result.isLoading);
   const isError = queryResults.some((result) => result.isError);
 
-  return { data, isLoader };
+  return { data, isLoading, isError };
 };
 
 export default useFetch;

@@ -23,7 +23,8 @@ export type TFetchData = IDataFromDB[];
 
 export interface IFetchData {
   data: TFetchData[];
-  isLoader: boolean;
+  isLoading: boolean;
+  isError?: boolean;
 }
 export type TFetchChartData = IDataChartFromDB[];
 
