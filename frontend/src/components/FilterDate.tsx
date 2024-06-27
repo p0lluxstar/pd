@@ -19,7 +19,7 @@ const API_HOST = process.env.NEXT_PUBLIC_API_HOST;
 export default function FilterDate(): JSX.Element {
   const params = useParams() as unknown as IParams;
   const [fetchTrigger, setFetchTrigger] = useState(0);
-  const [urlsChart, setUrlsChart] = useState<string[]>([]);
+  const [urls, setUrls] = useState<string[]>([]);
   const shops = useSelector((state: IStoreReducer) => state.shops);
 
   const dates = getCurrentAndLastDateFormatted();
@@ -34,28 +34,28 @@ export default function FilterDate(): JSX.Element {
 
   useEffect(() => {
     const createUrls = (startDate: string, endDate: string): void => {
-      let baseUrlsChart: string[] = [];
+      let baseUrls: string[] = [];
       if (params.shop !== undefined) {
-        baseUrlsChart = [
+        baseUrls = [
           `${API_HOST}/prices-${params.shop}/filter?productId=${params.product}&startDate=${startDate}&endDate=${endDate}`,
         ];
       } else {
         Object.keys(shops).forEach((key: string) => {
-          console.log(key);
           if (shops[key]) {
-            baseUrlsChart.push(
+            baseUrls.push(
+              `${API_HOST}/shops/filter?shopId=${key}`,
               `${API_HOST}/prices-${key}/filter?productId=${params.product}&startDate=${startDate}&endDate=${endDate}`
             );
           }
         });
       }
-      setUrlsChart(baseUrlsChart);
+      setUrls(baseUrls);
     };
 
     createUrls(datesFromLS.startDate, datesFromLS.endDate);
   }, [fetchTrigger, shops]);
 
-  const { data, isLoader } = useFetch(urlsChart);
+  const { data, isLoader } = useFetch(urls);
 
   const handleUpdateData = (): void => {
     setFetchTrigger((prev) => prev + 1);
@@ -68,7 +68,7 @@ export default function FilterDate(): JSX.Element {
         endDateProps={datesFromLS.endDate}
         onUpdateData={handleUpdateData}
       />
-      {isLoader ? <Loader /> : <Charts data={data} isShop={params.shop} />}
+      {isLoader ? <Loader /> : <Charts productData={data} />}
     </>
   );
 }

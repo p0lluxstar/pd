@@ -51,6 +51,10 @@ export interface IProductDataForChart {
   id: number;
   date: string;
   price: string;
-  shopId: string;
-  shopName: string;
+  name: string;
+}
+
+export interface IShop {
+  id: string;
+  name: string;
 }

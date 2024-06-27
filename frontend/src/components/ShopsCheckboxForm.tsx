@@ -3,22 +3,31 @@
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { shopsActions } from '../redux/slices/shopsSlice';
+import { type IShop } from '../types/interfaсes';
 
 type CheckedItems = Record<string, boolean>;
 
-const shops = [
-  {
-    id: 'shop-0001',
-    name: 'perekrestok',
-  },
-  {
-    id: 'shop-0002',
-    name: 'spar',
-  },
-];
+const API_HOST = process.env.NEXT_PUBLIC_API_HOST;
 
 export default function ShopsCheckboxForm(): JSX.Element {
   const dispatch = useDispatch();
+  const [shops, setShops] = useState<IShop[]>([]);
+
+  useEffect(() => {
+    const fetchShops = async (): Promise<void> => {
+      try {
+        const response = await fetch(`${API_HOST}/shops`);
+        if (!response.ok) {
+          throw new Error('Network response was not ok ' + response.statusText);
+        }
+        const data: IShop[] = await response.json();
+        setShops(data);
+      } catch (error) {
+        console.error('There has been a problem with your fetch operation:', error);
+      }
+    };
+    void fetchShops();
+  }, []);
 
   const initializeCheckedItems = (): CheckedItems => {
     const savedShopsCheckedItems = localStorage.getItem('shopsCheckboxItems');

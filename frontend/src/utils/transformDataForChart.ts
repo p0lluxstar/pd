@@ -8,7 +8,7 @@ export default function transformDataForChart(
     prices: [] as number[],
   };
 
-  props.forEach((price: IProductDataForChart) => {
+  props.slice(1).forEach((price: IProductDataForChart) => {
     const [year, month, day] = price.date.split('-');
     const formattedDate = `${day}-${month}-${year}`;
     transformed.date.push(formattedDate);
