@@ -1,0 +1,93 @@
+@import '../abstracts/colors';
+
+.checkboxMain {
+  display: inline-flex;
+  flex-direction: column;
+  position: relative;
+
+  .checkboxTitle {
+    position: absolute;
+    display: block;
+    top: -23px;
+    padding: 5px 10px 0px;
+    background: $color-light-grey;
+    border-radius: 5px 5px 0px 0px;
+    border-top: 1px solid $color-grey;
+    border-right: 1px solid $color-grey;
+    border-left: 1px solid $color-grey;
+    font-weight: 600;
+  }
+
+  .checkboxShop {
+    display: inline-flex;
+    gap: 20px;
+    margin-bottom: 40px;
+    border-radius: 0px 5px 5px 5px;
+    padding: 10px 15px 15px 15px;
+    background: $color-light-grey;
+    border: 1px solid $color-grey;
+  }
+
+  .checkboxShop .checkboxItem {
+    display: flex;
+    align-items: center;
+
+    input[type='checkbox'] {
+      -webkit-appearance: none;
+      width: 25px;
+      height: 25px;
+      background-color: transparent;
+      border: 1px solid #979797;
+      border-radius: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    input[type='checkbox']:after {
+      content: '';
+      display: block;
+      width: 70%;
+      height: 40%;
+      background-color: transparente;
+      border-bottom: 35px solid white;
+      border-left: 35px solid white;
+      transform: rotate(-45deg) translate(7%, -5%);
+      box-sizing: border-box;
+      transition: all 0.2s;
+    }
+
+    input[type='checkbox']:checked {
+      background-color: $color-pink;
+      border-color: $color-pink;
+    }
+
+    input[type='checkbox']:checked:after {
+      border-bottom: 4px solid white;
+      border-left: 4px solid white;
+    }
+
+    input[type='checkbox']:focus {
+      outline: none;
+    }
+
+    input[type='checkbox']:disabled {
+      background-color: #eee;
+      border-color: transparent;
+    }
+
+    input[type='checkbox']:disabled:after {
+      border-color: #aaa;
+    }
+
+    label {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+  }
+}
