@@ -1,0 +1,14 @@
+@import '../base/mixins';
+
+.breadcrumbs {
+  @include breadcrumbs;
+}
+
+/* .linkShopName {
+  @include linkBreadcrumbs;
+}
+
+.linkCategoryName {
+  @include linkBreadcrumbs;
+}
+ */

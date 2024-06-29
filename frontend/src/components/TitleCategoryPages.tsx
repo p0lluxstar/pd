@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import styles from '../styles/components/titleCategoryPages.module.scss';
 
 interface IProps {
   categoryId?: string;
@@ -16,10 +17,13 @@ export default function TitleCategoryPages({
   function titleOnProductPage(): JSX.Element {
     return (
       <>
-        <h1>
-          Категория <Link href={`/portal/${categoryId}`}>«{categoryName}»</Link>, продукт «
-          {productName}»
-        </h1>
+        <div className={styles.breadcrumbs}>
+          {' '}
+          <Link href={`/portal/${categoryId}`}>{categoryName}</Link>
+          {' » '}
+          <span>{productName}</span>
+        </div>
+        <h1>{productName}</h1>
       </>
     );
   }

@@ -1,0 +1,17 @@
+@import '../abstracts/colors';
+
+@mixin breadcrumbs {
+  a {
+    background: $color-light-grey;
+    text-decoration: none;
+    padding: 0px 5px;
+    border-radius: 5px;
+    color: $color-black;
+    border: 1px solid $color-grey;
+    font-size: 12px;
+  }
+
+  span {
+    font-size: 12px;
+  }
+}

@@ -66,7 +66,7 @@ export default function DateInputForm({
         <div className={styles.inputDate}>
           <div className={styles.inputDateWrap}>
             <label className={styles.inputDateItem}>
-              Дата с:
+              с:
               <input
                 type="date"
                 value={startDate}
@@ -88,7 +88,7 @@ export default function DateInputForm({
               />
             </label>
           </div>
-          {/* 
+          {/*
         <button onClick={handleUpdateData}>Обновить данные</button> */}
         </div>
       </div>
