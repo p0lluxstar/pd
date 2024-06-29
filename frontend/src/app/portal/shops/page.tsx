@@ -21,12 +21,18 @@ export default function ShopsPage(): JSX.Element {
     return (
       <>
         <h1>Магазины</h1>
-        <div className={styles.shops}>
+        <div className={`${styles.shops} ${styles.cards}`}>
           {shopResult.map((shop: IDataFromDB) => (
-            <Link href={`/portal/shops/${shop.id}`} key={shop.id}>
-              <div className={styles.shop}>
-                <Image src={`/img/shops/${shop.id}.jpg`} width={200} height={100} alt="shop" />
-                <div className={styles.name}>{shop.name}</div>
+            <Link className={styles.cardLink} href={`/portal/shops/${shop.id}`} key={shop.id}>
+              <div className={styles.card}>
+                <Image
+                  className={styles.cardImg}
+                  src={`/img/shops/${shop.id}.jpg`}
+                  width={200}
+                  height={100}
+                  alt="shop"
+                />
+                <div className={styles.cardName}>{shop.name}</div>
               </div>
             </Link>
           ))}
