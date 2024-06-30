@@ -31,18 +31,42 @@ const ChartLine: React.FC<IProps> = ({ date, price }: IProps) => {
             labels: date,
             datasets: [
               {
-                label: 'My First dataset',
+                label: '',
                 backgroundColor: 'rgba(255, 99, 132, 0.2)',
                 borderColor: 'rgba(255, 99, 132, 1)',
-                borderWidth: 1,
+                borderWidth: 2,
                 data: price,
-                fill: false,
+                fill: true,
+                pointStyle: false,
               },
             ],
           },
           options: {
             responsive: true,
             maintainAspectRatio: false,
+            plugins: {
+              legend: { display: false },
+            },
+            scales: {
+              x: {
+                title: {
+                  display: true,
+                  text: 'Дата',
+                  font: {
+                    weight: 'bold',
+                  },
+                },
+              },
+              y: {
+                title: {
+                  display: true,
+                  text: 'Цена',
+                  font: {
+                    weight: 'bold',
+                  },
+                },
+              },
+            },
           },
         });
       }

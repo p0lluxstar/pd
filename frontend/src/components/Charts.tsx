@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { type IProductDataForChart } from '../types/interfaсes';
 import transformDataForChart from '../utils/transformDataForChart';
 import ChartLine from './ChartLine';
+import styles from '../styles/components/сharts.module.scss';
 
 interface IProps {
   productData: any[];
@@ -21,18 +22,17 @@ export default function Charts(props: IProps): JSX.Element {
 
   return (
     <>
-      <div>
+      <div className={styles.charts}>
         {combinedArray.map((productData: IProductDataForChart[], index) => {
           const chartData = transformDataForChart(productData);
           return (
-            <div key={index}>
-              {
-                (props.productData.length > 1 && (
-                  <h2>
-                    Магазин{' '}
-                    <Link href={`/portal/shops/${productData[0].id}`}>«{productData[0].name}»</Link>
-                  </h2>
-                ))}
+            <div className={styles.chart} key={index}>
+              {props.productData.length > 1 && (
+                <h2 className={styles.chartTitle}>
+                  Магазин{' '}
+                  <Link href={`/portal/shops/${productData[0].id}`}>«{productData[0].name}»</Link>
+                </h2>
+              )}
               {chartData.date.length > 0 ? (
                 <ChartLine date={chartData.date} price={chartData.prices} />
               ) : (
