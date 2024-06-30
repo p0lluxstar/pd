@@ -1,12 +1,15 @@
 'use client';
 
 import { Chart, registerables } from 'chart.js';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { useRef, useEffect } from 'react';
 
 interface IProps {
   date: string[];
   price: number[];
 }
+
+Chart.register(ChartDataLabels);
 
 const ChartLine: React.FC<IProps> = ({ date, price }: IProps) => {
   const chartRef = useRef<HTMLCanvasElement>(null);
@@ -46,6 +49,13 @@ const ChartLine: React.FC<IProps> = ({ date, price }: IProps) => {
             maintainAspectRatio: false,
             plugins: {
               legend: { display: false },
+              datalabels: {
+                align: -40,
+                /* backgroundColor: '#f1f1f1', */
+                offset: -5,
+                font: { weight: 'bold' },
+              },
+              tooltip: { enabled: false }, // отключаем появление labeldata при наведении курсором
             },
             scales: {
               x: {
@@ -58,9 +68,10 @@ const ChartLine: React.FC<IProps> = ({ date, price }: IProps) => {
                 },
               },
               y: {
+                offset: true,
                 title: {
                   display: true,
-                  text: 'Цена',
+                  text: 'Цена (руб.)',
                   font: {
                     weight: 'bold',
                   },
@@ -68,6 +79,7 @@ const ChartLine: React.FC<IProps> = ({ date, price }: IProps) => {
               },
             },
           },
+          plugins: [ChartDataLabels],
         });
       }
     }
