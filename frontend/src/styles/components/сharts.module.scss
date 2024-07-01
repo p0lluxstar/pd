@@ -8,9 +8,11 @@
     background: $color-light-grey;
     padding: 10px;
     border-radius: 5px;
+    border: 1px solid $color-grey;
     margin-bottom: 20px;
 
     .chartTitle {
+      margin-bottom: 10px;
       a {
         color: $color-primary;
         text-decoration: none;

@@ -1,0 +1,14 @@
+@import '../abstracts/colors';
+
+.priceMessage {
+  font-weight: 600;
+  margin-bottom: 5px;
+
+  .percentMinus {
+    color: $color-green;
+  }
+
+  .percentPlus {
+    color: $color-red;
+  }
+}

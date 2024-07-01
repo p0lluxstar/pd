@@ -62,7 +62,7 @@ export default function DateInputForm({
   return (
     <>
       <div className={styles.inputDateMain}>
-        <span className={styles.inputDateTitle}>Выберите дату</span>
+        <span className={styles.inputDateTitle}>Выберите период</span>
         <div className={styles.inputDate}>
           <div className={styles.inputDateWrap}>
             <label className={styles.inputDateItem}>
