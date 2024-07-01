@@ -1,0 +1,65 @@
+@import '../abstracts/colors';
+
+.inputDateMain {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  .inputDateTitle {
+    position: absolute;
+    display: block;
+    top: -24px;
+    padding: 5px 10px 0px;
+    background: $color-light-grey;
+    border-radius: 5px 5px 0px 0px;
+    border-top: 1px solid $color-grey;
+    border-right: 1px solid $color-grey;
+    border-left: 1px solid $color-grey;
+    font-weight: 600;
+  }
+
+  .inputDate {
+    margin-bottom: 20px;
+
+    input[type='date'] {
+      background-color: $color-pink;
+      padding: 10px;
+      color: $color-white;
+      font-size: 18px;
+      border: none;
+      outline: none;
+      border-radius: 5px;
+    }
+
+    .inputDateItem {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .inputDateWrap {
+      display: inline-flex;
+      align-items: flex-end;
+      gap: 20px;
+      padding: 10px 15px 15px 15px;
+      border-radius: 0px 5px 5px 5px;
+      background: $color-light-grey;
+      border: 1px solid $color-grey;
+      font-weight: 700;
+    }
+
+    .btnDate {
+      background: $color-primary;
+      border: none;
+      border-radius: 5px;
+      padding: 10px;
+      color: $color-white;
+      height: 42px;
+      font-weight: 600;
+      &:hover {
+        cursor: pointer;
+        opacity: 0.9;
+      }
+    }
+  }
+}

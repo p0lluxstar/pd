@@ -1,12 +1,15 @@
 'use client';
 
 import { Chart, registerables } from 'chart.js';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { useRef, useEffect } from 'react';
 
 interface IProps {
   date: string[];
   price: number[];
 }
+
+Chart.register(ChartDataLabels);
 
 const ChartLine: React.FC<IProps> = ({ date, price }: IProps) => {
   const chartRef = useRef<HTMLCanvasElement>(null);
@@ -31,19 +34,52 @@ const ChartLine: React.FC<IProps> = ({ date, price }: IProps) => {
             labels: date,
             datasets: [
               {
-                label: 'My First dataset',
+                label: '',
                 backgroundColor: 'rgba(255, 99, 132, 0.2)',
                 borderColor: 'rgba(255, 99, 132, 1)',
-                borderWidth: 1,
+                borderWidth: 2,
                 data: price,
-                fill: false,
+                fill: true,
+                pointStyle: false,
               },
             ],
           },
           options: {
             responsive: true,
             maintainAspectRatio: false,
+            plugins: {
+              legend: { display: false },
+              datalabels: {
+                align: -40,
+                /* backgroundColor: '#f1f1f1', */
+                offset: -5,
+                font: { weight: 'bold' },
+              },
+              tooltip: { enabled: false }, // отключаем появление labeldata при наведении курсором
+            },
+            scales: {
+              x: {
+                title: {
+                  display: true,
+                  text: 'Дата',
+                  font: {
+                    weight: 'bold',
+                  },
+                },
+              },
+              y: {
+                offset: true,
+                title: {
+                  display: true,
+                  text: 'Цена (руб.)',
+                  font: {
+                    weight: 'bold',
+                  },
+                },
+              },
+            },
           },
+          plugins: [ChartDataLabels],
         });
       }
     }

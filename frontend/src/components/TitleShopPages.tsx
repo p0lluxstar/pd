@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import styles from '../styles/components/titleShopPages.module.scss';
 
 interface IEntity {
   id: string;
@@ -25,17 +26,21 @@ export default function TitleShopPages({
   function titleOnProductPage(): JSX.Element {
     return (
       <>
-        <h1>
-          Магазин{' '}
+        <div className={styles.breadcrumbs}>
+          {' '}
+          <Link href={'/portal/shops/'}>Магазины</Link>
+          {' » '}
           <Link href={`/portal/shops/${params.shop}`}>
-            «{shopResult.length > 0 && shopResult[0].name}»
+            {shopResult.length > 0 && shopResult[0].name}
           </Link>
-          , категория{' '}
+          {' » '}
           <Link href={`/portal/shops/${params.shop}/${params.category}`}>
-            «{categoriesResult.length > 0 && categoriesResult[0].name}»
+            {categoriesResult.length > 0 && categoriesResult[0].name}
           </Link>
-          , продукт «{productsResult.length > 0 && productsResult[0].name}»
-        </h1>
+          {' » '}
+          <span>{productsResult.length > 0 && productsResult[0].name}</span>
+        </div>
+        <h1>{productsResult.length > 0 && productsResult[0].name}</h1>
       </>
     );
   }
@@ -43,13 +48,17 @@ export default function TitleShopPages({
   function titleOnCategoryPage(): JSX.Element {
     return (
       <>
-        <h1>
-          Магазин{' '}
+        <div className={styles.breadcrumbs}>
+          {' '}
+          <Link href={'/portal/shops/'}>Магазины</Link>
+          {' » '}
           <Link href={`/portal/shops/${params.shop}`}>
-            «{shopResult.length > 0 && shopResult[0].name}»
+            {shopResult.length > 0 && shopResult[0].name}
           </Link>
-          , категория «{categoriesResult.length > 0 && categoriesResult[0].name}»
-        </h1>{' '}
+          {' » '}
+          <span>{categoriesResult.length > 0 && categoriesResult[0].name}</span>
+        </div>
+        <h1>Категория «{categoriesResult.length > 0 && categoriesResult[0].name}»</h1>{' '}
       </>
     );
   }
@@ -57,6 +66,12 @@ export default function TitleShopPages({
   function titleOnShopPage(): JSX.Element {
     return (
       <>
+        <div className={styles.breadcrumbs}>
+          <Link href={'/portal/shops/'}>Магазины</Link>
+          {' » '}
+          <span>{shopResult.length > 0 && shopResult[0].name}</span>
+        </div>
+
         <h1>Категории магазина «{shopResult.length > 0 && shopResult[0].name}»</h1>
       </>
     );

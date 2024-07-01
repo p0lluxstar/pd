@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef, useState, useEffect } from 'react';
+import styles from '../styles/components/dateInputForm.module.scss';
 import getCurrentAndLastDateFormatted from '../utils/getCurrentAndLastDateFormatted';
 
 interface IProps {
@@ -33,10 +34,19 @@ export default function DateInputForm({
       setEndDate(parsedDate.endDate);
     } else {
       const initialDate = { startDate: dates.startDate, endDate: dates.endDate };
-      console.log(initialDate);
       localStorage.setItem('dateForm', JSON.stringify(initialDate));
     }
   }, []);
+
+  /*   useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      handleUpdateData();
+    }, 300);
+
+    return () => {
+      clearTimeout(timeoutId);
+    }; // Очистка таймаута при изменении
+  }, [startDate, endDate]); */
 
   const handleUpdateData = (): void => {
     const startDateInput = startDateRef.current?.value;
@@ -51,30 +61,35 @@ export default function DateInputForm({
 
   return (
     <>
-      <div>
-        <label>
-          Дата с:
-          <input
-            type="date"
-            value={startDate}
-            ref={startDateRef}
-            onChange={(e) => {
-              setStartDate(e.target.value);
-            }}
-          />
-        </label>
-        <label>
-          по:
-          <input
-            type="date"
-            value={endDate}
-            ref={endDateRef}
-            onChange={(e) => {
-              setEndDate(e.target.value);
-            }}
-          />
-        </label>
-        <button onClick={handleUpdateData}>Обновить данные</button>
+      <div className={styles.inputDateMain}>
+        <span className={styles.inputDateTitle}>Выберите дату</span>
+        <div className={styles.inputDate}>
+          <div className={styles.inputDateWrap}>
+            <label className={styles.inputDateItem}>
+              с:
+              <input
+                type="date"
+                value={startDate}
+                ref={startDateRef}
+                onChange={(e) => {
+                  setStartDate(e.target.value);
+                }}
+              />
+            </label>
+            <label className={styles.inputDateItem}>
+              по:
+              <input
+                type="date"
+                value={endDate}
+                ref={endDateRef}
+                onChange={(e) => {
+                  setEndDate(e.target.value);
+                }}
+              />
+            </label>
+            <button className={styles.btnDate} onClick={handleUpdateData}>Применить</button>
+          </div>
+        </div>
       </div>
     </>
   );

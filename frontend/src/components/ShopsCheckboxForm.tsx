@@ -3,6 +3,8 @@
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { shopsActions } from '../redux/slices/shopsSlice';
+import styles from '../styles/components/shopsCheckboxForm.module.scss';
+
 /* import { type IShop } from '../types/interfaсes'; */
 
 type CheckedItems = Record<string, boolean>;
@@ -81,18 +83,25 @@ export default function ShopsCheckboxForm(): JSX.Element {
   }, []);
 
   return (
-    <form>
-      {shops.map((shop) => (
-        <label key={shop.id}>
-          <input
-            type="checkbox"
-            id={shop.id}
-            checked={!!checkedItems[shop.id]}
-            onChange={handleChange}
-          />
-          {shop.name}
-        </label>
-      ))}
-    </form>
+    <>
+      <div className={styles.checkboxMain}>
+        <span className={styles.checkboxTitle}>Выберите магазины</span>
+        <div className={styles.checkboxShop}>
+          {shops.map((shop) => (
+            <div key={shop.id} className={styles.checkboxItem}>
+              <label>
+                <input
+                  type="checkbox"
+                  id={shop.id}
+                  checked={!!checkedItems[shop.id]}
+                  onChange={handleChange}
+                />
+                {shop.name}
+              </label>
+            </div>
+          ))}
+        </div>
+      </div>
+    </>
   );
 }
