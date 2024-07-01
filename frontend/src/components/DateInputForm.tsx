@@ -38,7 +38,7 @@ export default function DateInputForm({
     }
   }, []);
 
-  useEffect(() => {
+  /*   useEffect(() => {
     const timeoutId = setTimeout(() => {
       handleUpdateData();
     }, 300);
@@ -46,7 +46,7 @@ export default function DateInputForm({
     return () => {
       clearTimeout(timeoutId);
     }; // Очистка таймаута при изменении
-  }, [startDate, endDate]);
+  }, [startDate, endDate]); */
 
   const handleUpdateData = (): void => {
     const startDateInput = startDateRef.current?.value;
@@ -87,9 +87,8 @@ export default function DateInputForm({
                 }}
               />
             </label>
+            <button className={styles.btnDate} onClick={handleUpdateData}>Применить</button>
           </div>
-          {/*
-        <button onClick={handleUpdateData}>Обновить данные</button> */}
         </div>
       </div>
     </>

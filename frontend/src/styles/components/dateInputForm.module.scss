@@ -8,7 +8,7 @@
   .inputDateTitle {
     position: absolute;
     display: block;
-    top: -23px;
+    top: -24px;
     padding: 5px 10px 0px;
     background: $color-light-grey;
     border-radius: 5px 5px 0px 0px;
@@ -39,12 +39,27 @@
 
     .inputDateWrap {
       display: inline-flex;
+      align-items: flex-end;
       gap: 20px;
       padding: 10px 15px 15px 15px;
       border-radius: 0px 5px 5px 5px;
       background: $color-light-grey;
       border: 1px solid $color-grey;
       font-weight: 700;
+    }
+
+    .btnDate {
+      background: $color-primary;
+      border: none;
+      border-radius: 5px;
+      padding: 10px;
+      color: $color-white;
+      height: 42px;
+      font-weight: 600;
+      &:hover {
+        cursor: pointer;
+        opacity: 0.9;
+      }
     }
   }
 }
