@@ -12,16 +12,18 @@ interface IProps {
 }
 
 export default function Charts(props: IProps): JSX.Element {
-  // объединяем данные массивов 1 и 2, 3 и 4 и тд
-  const combinedArray = props.productData.reduce<any[][]>((result, current, index) => {
-    if (index % 2 === 0) {
-      result.push(current);
-    } else {
-      result[result.length - 1] = result[result.length - 1].concat(current);
-    }
-
-    return result;
-  }, []);
+  // объединяем данные массивов 1 и 2, 3 и 4 и тд если приходит больше одного массива
+  const combinedArray =
+    props.productData.length === 1
+      ? [[{}, ...props.productData[0]]]
+      : props.productData.reduce((result: Array<Array<{ id: number }>>, current, index) => {
+          if (index % 2 === 0) {
+            result.push(current);
+          } else {
+            result[result.length - 1] = result[result.length - 1].concat(current);
+          }
+          return result;
+        }, []);
 
   return (
     <>

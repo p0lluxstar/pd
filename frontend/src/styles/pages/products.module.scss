@@ -1,5 +1,5 @@
 @import '../base/mixins';
 
 .cards {
-  @include cardProduct;
+  @include cards(220px);
 }

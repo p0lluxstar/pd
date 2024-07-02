@@ -16,10 +16,10 @@
   }
 }
 
-@mixin cards {
+@mixin cards($card-height) {
   display: flex;
   gap: 20px;
-  width: 220px;
+  flex-wrap: wrap;
 
   .card {
     display: flex;
@@ -29,48 +29,7 @@
     border: 1px solid $color-light-grey;
     border-radius: 5px;
     width: 220px;
-    height: 150px;
-    -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
-    -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
-    box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
-
-    &:hover {
-      -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.4);
-      -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.4);
-      box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.4);
-    }
-  }
-
-  .cardLink {
-    text-decoration: none;
-  }
-
-  .cardImg {
-    margin: 0 auto;
-  }
-
-  .cardName {
-    font-size: 18px;
-    font-weight: 600;
-    text-align: center;
-    color: $color-primary;
-  }
-}
-
-@mixin cardProduct {
-  display: flex;
-  gap: 20px;
-  width: 220px;
-
-  .card {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 10px;
-    border: 1px solid $color-light-grey;
-    border-radius: 5px;
-    width: 220px;
-    height: 220px;
+    height: $card-height;
     -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
     -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
     box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
