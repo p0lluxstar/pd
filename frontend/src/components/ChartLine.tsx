@@ -67,7 +67,7 @@ const ChartLine: React.FC<IProps> = ({ date, price }: IProps) => {
                   },
                 },
                 border: {
-                  width: 2, // толщина оси X
+                  width: 3, // толщина оси X
                 },
               },
               y: {
@@ -83,7 +83,10 @@ const ChartLine: React.FC<IProps> = ({ date, price }: IProps) => {
                   display: false, // скрыть линии по оси Y
                 },
                 border: {
-                  width: 2, // толщина оси Y
+                  width: 1, // толщина оси Y
+                },
+                ticks: {
+                  display: false, // скрыть значения по оси Y
                 },
               },
             },

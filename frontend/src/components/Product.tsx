@@ -1,7 +1,7 @@
 'use client';
 
 import { useParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useMemo } from 'react';
 import useFetch from '../hooks/useFetch';
 import FilterDate from './FilterDate';
 import Loading from './Loading';
@@ -18,17 +18,11 @@ const API_HOST = process.env.NEXT_PUBLIC_API_HOST;
 
 export default function Product(): JSX.Element {
   const params = useParams() as unknown as IParams;
-  const [urls, setUrls] = useState<string[]>([]);
 
-  useEffect(() => {
-    const createUrls = (): void => {
-      const baseUrls = [`${API_HOST}/products/filter?productId=${params.product}`];
-
-      setUrls(baseUrls);
-    };
-
-    createUrls();
-  }, []);
+  const urls = useMemo(
+    () => [`${API_HOST}/products/filter?productId=${params.product}`],
+    [API_HOST, params]
+  );
 
   const { data, isLoading, isError } = useFetch(urls);
 
