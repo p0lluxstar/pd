@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 import styles from '../styles/components/сharts.module.scss';
 import { type IProductDataForChart } from '../types/interfaсes';
@@ -38,7 +40,7 @@ export default function Charts(props: IProps): JSX.Element {
                   <Link href={`/portal/shops/${productData[0].id}`}>«{productData[0].name}»</Link>
                 </h2>
               )}
-              {(startPrice !== undefined && endPrice !== undefined) && (
+              {startPrice !== undefined && endPrice !== undefined && (
                 <PriceChange startPrice={startPrice} endPrice={endPrice} />
               )}
               {chartData.date.length > 0 ? (

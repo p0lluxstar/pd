@@ -1,3 +1,5 @@
+'use client';
+
 import styles from '../styles/components/priceChange.module.scss';
 
 interface IProps {

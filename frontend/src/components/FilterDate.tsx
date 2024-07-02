@@ -26,14 +26,21 @@ export default function FilterDate(): JSX.Element {
   const shops = useSelector((state: IStoreReducer) => state.shops);
 
   const dates = getCurrentAndLastDateFormatted();
-  const getDateFormLS = localStorage.getItem('dateForm');
-  const datesFromLS: IDatesFromLS =
-    getDateFormLS != null
-      ? JSON.parse(getDateFormLS)
-      : {
-          startDate: dates.startDate,
-          endDate: dates.endDate,
-        };
+  let datesFromLS: IDatesFromLS = {
+    startDate: dates.startDate,
+    endDate: dates.endDate,
+  };
+
+  if (typeof window !== 'undefined') {
+    const getDateFormLS = localStorage.getItem('dateForm');
+    datesFromLS =
+      getDateFormLS != null
+        ? JSON.parse(getDateFormLS)
+        : {
+            startDate: dates.startDate,
+            endDate: dates.endDate,
+          };
+  }
 
   useEffect(() => {
     const createUrls = (startDate: string, endDate: string): void => {

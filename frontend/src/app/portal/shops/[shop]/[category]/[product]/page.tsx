@@ -1,7 +1,7 @@
 'use client';
 
 import { useParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useMemo } from 'react';
 import FilterDate from '@/src/components/FilterDate';
 import Loading from '@/src/components/Loading';
 import LoadingError from '@/src/components/LoadingError';
@@ -18,9 +18,16 @@ const API_HOST = process.env.NEXT_PUBLIC_API_HOST;
 
 export default function ProductPage(): JSX.Element {
   const params = useParams() as unknown as IParams;
-  const [urls, setUrls] = useState<string[]>([]);
+  const urls = useMemo(
+    () => [
+      `${API_HOST}/shops/filter?shopId=${params.shop}`,
+      `${API_HOST}/categories/filter?categoryId=${params.category}`,
+      `${API_HOST}/products/filter?productId=${params.product}`,
+    ],
+    [API_HOST, params]
+  );
 
-  useEffect(() => {
+  /*  useEffect(() => {
     const createUrls = (): void => {
       const baseUrls = [
         `${API_HOST}/shops/filter?shopId=${params.shop}`,
@@ -32,7 +39,7 @@ export default function ProductPage(): JSX.Element {
     };
 
     createUrls();
-  }, []);
+  }, []); */
 
   const { data, isLoading, isError } = useFetch(urls);
 

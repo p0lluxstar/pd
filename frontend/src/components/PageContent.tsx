@@ -1,3 +1,5 @@
+'use client';
+
 import styles from '../styles/components/pageContent.module.scss';
 import type { ReactNode } from 'react';
 
