@@ -53,7 +53,8 @@ export default function DateInputForm({
     const endDateInput = endDateRef.current?.value;
 
     if (startDateInput != null && endDateInput != null) {
-      void onUpdateData();
+      onUpdateData();
+
       const updatedDate = { startDate: startDateInput, endDate: endDateInput };
       localStorage.setItem('dateForm', JSON.stringify(updatedDate));
     }
@@ -87,7 +88,9 @@ export default function DateInputForm({
                 }}
               />
             </label>
-            <button className={styles.btnDate} onClick={handleUpdateData}>Применить</button>
+            <button className={styles.btnDate} onClick={handleUpdateData}>
+              Применить
+            </button>
           </div>
         </div>
       </div>

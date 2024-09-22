@@ -4,7 +4,12 @@ import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import useFetch from '../hooks/useFetch';
-import { type IStoreReducer, type IDatesFromLS } from '../types/interfaсes';
+import {
+  type IStoreReducer,
+  type IDatesFromLS,
+  type IProductDataForChart,
+  type IShop,
+} from '../types/interfaсes';
 import getCurrentAndLastDateFormatted from '../utils/getCurrentAndLastDateFormatted';
 import Charts from './Charts';
 import DateInputForm from './DateInputForm';
@@ -23,7 +28,7 @@ export default function FilterDate(): JSX.Element {
   const params = useParams() as unknown as IParams;
   const [fetchTrigger, setFetchTrigger] = useState(0);
   const [urls, setUrls] = useState<string[]>([]);
-  const shops = useSelector((state: IStoreReducer) => state.shops);
+  const shops = useSelector((state: IStoreReducer) => state.shops) as Record<string, boolean>;
 
   const dates = getCurrentAndLastDateFormatted();
   let datesFromLS: IDatesFromLS = {
@@ -36,15 +41,13 @@ export default function FilterDate(): JSX.Element {
     datesFromLS =
       getDateFormLS != null
         ? JSON.parse(getDateFormLS)
-        : {
-            startDate: dates.startDate,
-            endDate: dates.endDate,
-          };
+        : { startDate: dates.startDate, endDate: dates.endDate };
   }
 
   useEffect(() => {
     const createUrls = (startDate: string, endDate: string): void => {
       let baseUrls: string[] = [];
+
       if (params.shop !== undefined) {
         baseUrls = [
           `${API_HOST}/prices-${params.shop}/filter?productId=${params.product}&startDate=${startDate}&endDate=${endDate}`,
@@ -84,7 +87,7 @@ export default function FilterDate(): JSX.Element {
         <LoadingError />
       ) : (
         <>
-          <Charts productData={data} />
+          <Charts productData={data as unknown as [Array<IShop | IProductDataForChart>]} />
         </>
       )}
     </>

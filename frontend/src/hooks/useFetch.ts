@@ -8,14 +8,14 @@ const fetchData = async (url: string): Promise<TFetchData> => {
   if (!response.ok) {
     throw new Error('Network response was not ok');
   }
-  return response.json();
+  return await response.json();
 };
 
 const useFetch = (urls: string[]): IFetchData => {
   const queryResults = useQueries({
     queries: urls.map((url) => ({
       queryKey: [url],
-      queryFn: () => fetchData(url),
+      queryFn: async () => await fetchData(url),
     })),
   });
 

@@ -15,16 +15,17 @@
   },
   "plugins": ["react", "@typescript-eslint", "react-hooks"],
   "rules": {
-    "no-console": "warn",
+    "no-console": "error",
     "@typescript-eslint/space-before-function-paren": "off",
     "@typescript-eslint/semi": "off",
     "@typescript-eslint/comma-dangle": "off",
     "@typescript-eslint/member-delimiter-style": "off",
-    "@typescript-eslint/no-explicit-any": "warn",
+    "@typescript-eslint/no-explicit-any": "error",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "arrow-body-style": ["error", "as-needed"],
-    "multiline-ternary": ["error", "never"],
+    "multiline-ternary": ["warn", "never"],
+    "@typescript-eslint/non-nullable-type-assertion-style": "warn",
     "import/order": [
       "error",
       {

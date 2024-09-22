@@ -52,7 +52,7 @@ export interface IProductDataForChart {
   id: number;
   date: string;
   price: string;
-  name: string;
+  name?: string;
 }
 
 export interface IShop {
