@@ -19,9 +19,9 @@ export class CronShop0001 {
     return Number(price.replace(/[^\d,]/g, '').replace(',', '.'));
   }
 
-  //@Cron('0 1-23/2 * * *')
-  //@Cron('14 * * * *')
-  //@Cron('*/16 * * * * *')
+  //@Cron('0 1-23/2 * * *') //Этот cron выполняется каждый день с 1 часа до 23 часов, через каждые 2 часа (то есть, в 1:00, 3:00, 5:00, и так далее)
+  //@Cron('26 * * * *') //на 14-й минуте каждого часа.
+  //@Cron('*/16 * * * * *') //Этот cron запускается каждые 16 секунд.
   async handleCronMilk() {
     const dataForCron: IDataForCron = {
       shop_id: 'shop-0001',

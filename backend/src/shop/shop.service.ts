@@ -10,7 +10,11 @@ export class ShopService {
     private readonly shopRepository: Repository<ShopEntity>
   ) {}
   async getShops() {
-    return await this.shopRepository.find();
+    return await this.shopRepository.find({
+      order: {
+        name: 'ASC', // Сортировка по имени в алфавитном порядке (ASC - по возрастанию)
+      },
+    });
   }
 
   async getShopById(shop_id: string) {

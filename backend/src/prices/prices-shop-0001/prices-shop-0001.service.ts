@@ -27,15 +27,16 @@ export class PricesShop0001Service {
       query.andWhere('prices.date BETWEEN :start AND :end', { start, end });
     }
 
+    query.orderBy('prices.id', 'ASC'); // Добавляем сортировку по id по возрастанию
+
     const result = await query.getMany();
 
     // Форматируем результат для добавления nameShop
+
     return result.map((price) => ({
       id: price.id,
       date: price.date,
       price: price.price,
-      shopName: price.shop_id.name,
-      shopId: price.shop_id.id,
     }));
   }
 

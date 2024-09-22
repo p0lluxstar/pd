@@ -18,24 +18,24 @@ export class PriceShop0002Service {
       .createQueryBuilder('prices')
       .innerJoinAndSelect('prices.shop_id', 'shop')
       .where('prices.product_id = :product_id', { product_id });
-
+  
     if (startDate && endDate) {
       const start = new Date(startDate);
       const end = new Date(endDate);
       end.setHours(23, 59, 59, 999);
-
+  
       query.andWhere('prices.date BETWEEN :start AND :end', { start, end });
     }
-
+  
+    query.orderBy('prices.id', 'ASC'); // Добавляем сортировку по id по возрастанию
+  
     const result = await query.getMany();
-
+  
     // Форматируем результат для добавления nameShop
     return result.map((price) => ({
       id: price.id,
       date: price.date,
       price: price.price,
-      shopName: price.shop_id.name,
-      shopId: price.shop_id.id,
     }));
   }
 
