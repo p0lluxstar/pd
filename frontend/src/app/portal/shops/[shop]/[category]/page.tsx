@@ -51,7 +51,7 @@ export default function CategoryPage(): JSX.Element {
               <div className={styles.card}>
                 <Image
                   className={styles.cardImg}
-                  src={'/img/products/product-0001.jpg'}
+                  src={`/img/products/${product.id}.jpg`}
                   width={150}
                   height={120}
                   alt="shop"
