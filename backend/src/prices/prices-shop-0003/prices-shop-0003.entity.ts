@@ -3,12 +3,12 @@ import { ProductEntity } from 'src/product/product.entity';
 import { ShopEntity } from 'src/shop/shop.entity';
 
 @Entity({ name: 'prices-shop-0003' })
-export class PricesShop0003 {
+export class PricesShop0003Entity {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column({
-    type: 'timestamp without time zone',
+    type: 'date',
     default: () => 'CURRENT_TIMESTAMP',
   })
   date: Date;

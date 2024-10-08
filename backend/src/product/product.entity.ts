@@ -1,7 +1,7 @@
 import { Entity, Column, OneToMany, PrimaryColumn, JoinColumn, ManyToOne } from 'typeorm';
 import { PricesShop0001Entity } from 'src/prices/prices-shop-0001/prices-shop-0001.entity';
 import { PricesShop0002Entity } from 'src/prices/prices-shop-0002/prices-shop-0002.entity';
-import { PricesShop0003 } from 'src/prices/prices-shop-0003.entity';
+import { PricesShop0003Entity } from 'src/prices/prices-shop-0003/prices-shop-0003.entity';
 import { CategoryEntity } from 'src/category/category.entity';
 
 @Entity({ name: 'products' })
@@ -20,9 +20,9 @@ export class ProductEntity {
   @JoinColumn({ name: 'product_id' })
   pricesShop0002: PricesShop0002Entity[];
 
-  @OneToMany(() => PricesShop0003, (product_id) => product_id.product_id)
+  @OneToMany(() => PricesShop0003Entity, (product_id) => product_id.product_id)
   @JoinColumn({ name: 'product_id' })
-  pricesShop0003: PricesShop0003[];
+  pricesShop0003: PricesShop0003Entity[];
 
   @ManyToOne(() => CategoryEntity, (category) => category.product)
   @JoinColumn({ name: 'category_id' })

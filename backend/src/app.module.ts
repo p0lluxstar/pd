@@ -12,11 +12,12 @@ import { ProductEntity } from './product/product.entity';
 import { ShopEntity } from './shop/shop.entity';
 import { PricesShop0001Entity } from './prices/prices-shop-0001/prices-shop-0001.entity';
 import { PricesShop0002Entity } from './prices/prices-shop-0002/prices-shop-0002.entity';
-import { PricesShop0003 } from './prices/prices-shop-0003.entity';
+import { PricesShop0003Entity } from './prices/prices-shop-0003/prices-shop-0003.entity';
 import { ScraperUtilsService } from './services/scraper.service';
 import { ShopModule } from './shop/shop.module';
 import { PricesShop0001Module } from './prices/prices-shop-0001/prices-shop-0001.module';
 import { PricesShop0002Module } from './prices/prices-shop-0002/prices-shop-0002.module';
+import { PricesShop0003Module } from './prices/prices-shop-0003/prices-shop-0003.module';
 import { CategoryEntity } from './category/category.entity';
 import { CategoryModule } from './category/category.module';
 import { ProductModule } from './product/product.module';
@@ -31,7 +32,7 @@ import { ProductModule } from './product/product.module';
       CategoryEntity,
       PricesShop0001Entity,
       PricesShop0002Entity,
-      PricesShop0003,
+      PricesShop0003Entity,
     ]),
     TypeOrmModule.forRootAsync({
       imports: [
@@ -41,6 +42,7 @@ import { ProductModule } from './product/product.module';
         ProductModule,
         PricesShop0001Module,
         PricesShop0002Module,
+        PricesShop0003Module,
       ],
       useFactory: () => typeOrmConfig(),
       inject: [ConfigService],

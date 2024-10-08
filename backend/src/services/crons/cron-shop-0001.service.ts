@@ -20,7 +20,7 @@ export class CronShop0001 {
   }
 
   //@Cron('0 1-23/2 * * *') //Этот cron выполняется каждый день с 1 часа до 23 часов, через каждые 2 часа (то есть, в 1:00, 3:00, 5:00, и так далее)
-  //@Cron('26 * * * *') //на 14-й минуте каждого часа.
+  //@Cron('18 * * * *') //на 14-й минуте каждого часа.
   //@Cron('*/16 * * * * *') //Этот cron запускается каждые 16 секунд.
   async handleCronMilk() {
     const dataForCron: IDataForCron = {
@@ -30,27 +30,27 @@ export class CronShop0001 {
         {
           product_id: 'product-0001',
           url: 'https://www.perekrestok.ru/cat/114/p/moloko-domik-v-derevne-sterilizovannoe-0-5-950ml-48036',
-          elementOnPage: '.price-new',
+          elementOnPage: '#price-card .price-new',
         },
         {
           product_id: 'product-0002',
           url: 'https://www.perekrestok.ru/cat/114/p/moloko-domik-v-derevne-sterilizovannoe-1-5-950ml-2059345',
-          elementOnPage: '.price-new',
+          elementOnPage: '#price-card .price-new',
         },
         {
           product_id: 'product-0003',
           url: 'https://www.perekrestok.ru/cat/114/p/moloko-domik-v-derevne-sterilizovannoe-2-5-950ml-3199747',
-          elementOnPage: '.price-new',
+          elementOnPage: '#price-card .price-new',
         },
         {
           product_id: 'product-0004',
           url: 'https://www.perekrestok.ru/cat/114/p/moloko-domik-v-derevne-sterilizovannoe-3-5-950ml-21459',
-          elementOnPage: '.price-new',
+          elementOnPage: '#price-card .price-new',
         },
         {
           product_id: 'product-0005',
           url: 'https://www.perekrestok.ru/cat/114/p/moloko-domik-v-derevne-sterilizovannoe-6-950ml-42414',
-          elementOnPage: '.price-new',
+          elementOnPage: '#price-card .price-new',
         },
       ],
     };

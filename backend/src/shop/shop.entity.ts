@@ -1,7 +1,7 @@
 import { Entity, Column, OneToMany, JoinColumn, PrimaryColumn } from 'typeorm';
 import { PricesShop0001Entity } from 'src/prices/prices-shop-0001/prices-shop-0001.entity';
 import { PricesShop0002Entity } from 'src/prices/prices-shop-0002/prices-shop-0002.entity';
-import { PricesShop0003 } from 'src/prices/prices-shop-0003.entity';
+import { PricesShop0003Entity } from 'src/prices/prices-shop-0003/prices-shop-0003.entity';
 
 @Entity({ name: 'shops' })
 export class ShopEntity {
@@ -19,7 +19,7 @@ export class ShopEntity {
   @JoinColumn({ name: 'shop_id' })
   PricesShop0002: PricesShop0002Entity[];
 
-  @OneToMany(() => PricesShop0003, (shop) => shop.shop_id)
+  @OneToMany(() => PricesShop0003Entity, (shop) => shop.shop_id)
   @JoinColumn({ name: 'shop_id' })
-  PricesShop0003: PricesShop0003[];
+  PricesShop0003: PricesShop0003Entity[];
 }
