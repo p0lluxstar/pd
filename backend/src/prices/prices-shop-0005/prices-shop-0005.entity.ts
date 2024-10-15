@@ -2,8 +2,8 @@ import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 't
 import { ProductEntity } from 'src/product/product.entity';
 import { ShopEntity } from 'src/shop/shop.entity';
 
-@Entity({ name: 'prices-shop-0003' })
-export class PricesShop0003Entity {
+@Entity({ name: 'prices-shop-0005' })
+export class PricesShop0005Entity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -14,11 +14,11 @@ export class PricesShop0003Entity {
   })
   date: Date;
 
-  @ManyToOne(() => ShopEntity, (shop) => shop.PricesShop0003)
+  @ManyToOne(() => ShopEntity, (shop) => shop.PricesShop0005)
   @JoinColumn({ name: 'shop_id' })
   shop_id: ShopEntity;
 
-  @ManyToOne(() => ProductEntity, (product) => product.pricesShop0003)
+  @ManyToOne(() => ProductEntity, (product) => product.pricesShop0005)
   @JoinColumn({ name: 'product_id' })
   product_id: ProductEntity;
 

@@ -5,6 +5,8 @@ import { ScheduleModule } from '@nestjs/schedule';
 import { CronShop0001 } from './services/crons/cron-shop-0001.service';
 import { CronShop0002 } from './services/crons/cron-shop-0002.service';
 import { CronShop0003 } from './services/crons/cron-shop-0003.service';
+import { CronShop0004 } from './services/crons/cron-shop-0004.service';
+import { CronShop0005 } from './services/crons/cron-shop-0005.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { typeOrmConfig } from 'src/configs/typeorm.config';
@@ -13,11 +15,15 @@ import { ShopEntity } from './shop/shop.entity';
 import { PricesShop0001Entity } from './prices/prices-shop-0001/prices-shop-0001.entity';
 import { PricesShop0002Entity } from './prices/prices-shop-0002/prices-shop-0002.entity';
 import { PricesShop0003Entity } from './prices/prices-shop-0003/prices-shop-0003.entity';
+import { PricesShop0004Entity } from './prices/prices-shop-0004/prices-shop-0004.entity';
+import { PricesShop0005Entity } from './prices/prices-shop-0005/prices-shop-0005.entity';
 import { ScraperUtilsService } from './services/scraper.service';
 import { ShopModule } from './shop/shop.module';
 import { PricesShop0001Module } from './prices/prices-shop-0001/prices-shop-0001.module';
 import { PricesShop0002Module } from './prices/prices-shop-0002/prices-shop-0002.module';
 import { PricesShop0003Module } from './prices/prices-shop-0003/prices-shop-0003.module';
+import { PricesShop0004Module } from './prices/prices-shop-0004/prices-shop-0004.module';
+import { PricesShop0005Module } from './prices/prices-shop-0005/prices-shop-0005.module';
 import { CategoryEntity } from './category/category.entity';
 import { CategoryModule } from './category/category.module';
 import { ProductModule } from './product/product.module';
@@ -33,6 +39,8 @@ import { ProductModule } from './product/product.module';
       PricesShop0001Entity,
       PricesShop0002Entity,
       PricesShop0003Entity,
+      PricesShop0004Entity,
+      PricesShop0005Entity
     ]),
     TypeOrmModule.forRootAsync({
       imports: [
@@ -43,12 +51,22 @@ import { ProductModule } from './product/product.module';
         PricesShop0001Module,
         PricesShop0002Module,
         PricesShop0003Module,
+        PricesShop0004Module,
+        PricesShop0005Module
       ],
       useFactory: () => typeOrmConfig(),
       inject: [ConfigService],
     }),
   ],
   controllers: [AppController],
-  providers: [AppService, CronShop0001, CronShop0002, CronShop0003, ScraperUtilsService],
+  providers: [
+    AppService,
+    CronShop0001,
+    CronShop0002,
+    CronShop0003,
+    CronShop0004,
+    CronShop0005,
+    ScraperUtilsService,
+  ],
 })
 export class AppModule {}

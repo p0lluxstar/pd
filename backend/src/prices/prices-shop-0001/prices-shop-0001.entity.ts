@@ -9,7 +9,8 @@ export class PricesShop0001Entity {
 
   @Column({
     type: 'date',
-    default: () => 'CURRENT_TIMESTAMP',
+    name: 'date',
+    default: () => 'CURRENT_DATE',
   })
   date: Date;
 
