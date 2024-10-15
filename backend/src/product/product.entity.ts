@@ -4,6 +4,8 @@ import { PricesShop0002Entity } from 'src/prices/prices-shop-0002/prices-shop-00
 import { PricesShop0003Entity } from 'src/prices/prices-shop-0003/prices-shop-0003.entity';
 import { PricesShop0004Entity } from 'src/prices/prices-shop-0004/prices-shop-0004.entity';
 import { PricesShop0005Entity } from 'src/prices/prices-shop-0005/prices-shop-0005.entity';
+import { PricesShop0006Entity } from 'src/prices/prices-shop-0006/prices-shop-0006.entity';
+import { PricesShop0007Entity } from 'src/prices/prices-shop-0007/prices-shop-0007.entity';
 import { CategoryEntity } from 'src/category/category.entity';
 
 @Entity({ name: 'products' })
@@ -33,6 +35,14 @@ export class ProductEntity {
   @OneToMany(() => PricesShop0005Entity, (product_id) => product_id.product_id)
   @JoinColumn({ name: 'product_id' })
   pricesShop0005: PricesShop0005Entity[];
+
+  @OneToMany(() => PricesShop0006Entity, (product_id) => product_id.product_id)
+  @JoinColumn({ name: 'product_id' })
+  pricesShop0006: PricesShop0006Entity[];
+
+  @OneToMany(() => PricesShop0007Entity, (product_id) => product_id.product_id)
+  @JoinColumn({ name: 'product_id' })
+  pricesShop0007: PricesShop0007Entity[];
 
   @ManyToOne(() => CategoryEntity, (category) => category.product)
   @JoinColumn({ name: 'category_id' })
