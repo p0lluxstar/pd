@@ -10,12 +10,19 @@
     border-radius: 5px;
     border: 1px solid $color-grey;
     margin-bottom: 20px;
+    img{
+      margin-left: 10px;
+    }
 
-    .chartTitle {
+    .chartTitleWrapper {
+      display: flex;
+      align-items: center;
       margin-bottom: 10px;
-      a {
-        color: $color-primary;
-        text-decoration: none;
+      .chartTitle {
+        a {
+          color: $color-primary;
+          text-decoration: none;
+        }
       }
     }
   }

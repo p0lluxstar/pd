@@ -49,7 +49,7 @@ export interface IDatesFromLS {
 }
 
 export interface IProductDataForChart {
-  id: number;
+  id: string;
   date: string;
   price: string;
   name?: string;

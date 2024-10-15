@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { shopsActions } from '../redux/slices/shopsSlice';
@@ -13,16 +14,32 @@ type CheckedItems = Record<string, boolean>;
 
 const shops = [
   {
-    id: 'shop-0003',
-    name: 'Mагнит',
-  },
-  {
     id: 'shop-0001',
     name: 'Перекресток',
   },
   {
     id: 'shop-0002',
     name: 'Спар',
+  },
+  {
+    id: 'shop-0003',
+    name: 'Mагнит',
+  },
+  {
+    id: 'shop-0004',
+    name: 'Ашан',
+  },
+  {
+    id: 'shop-0005',
+    name: 'Глобус',
+  },
+  {
+    id: 'shop-0006',
+    name: 'Лента',
+  },
+  {
+    id: 'shop-0007',
+    name: 'Пятерочка',
   },
 ];
 
@@ -101,7 +118,14 @@ export default function ShopsCheckboxForm(): JSX.Element {
                   checked={!!checkedItems[shop.id]}
                   onChange={handleChange}
                 />
-                {shop.name}
+                {/*  {shop.name} */}
+                <Image
+                  className={styles.cardImg}
+                  src={`/img/shops/${shop.id}.png`}
+                  width={100}
+                  height={50}
+                  alt="shop"
+                />
               </label>
             </div>
           ))}

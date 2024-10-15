@@ -28,7 +28,7 @@ export default function ShopsPage(): JSX.Element {
               <div className={styles.card}>
                 <Image
                   className={styles.cardImg}
-                  src={`/img/shops/${shop.id}.jpg`}
+                  src={`/img/shops/${shop.id}.png`}
                   width={200}
                   height={100}
                   alt="shop"
