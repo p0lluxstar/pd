@@ -5,6 +5,7 @@ import { ProductEntity } from 'src/product/product.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { IDataForCron } from 'src/types/interfaces';
 import puppeteer from 'puppeteer';
+import loggerScraper from 'src/utils/loggerScraper.utils';
 
 @Injectable()
 export class ScraperUtilsService {
@@ -54,29 +55,36 @@ export class ScraperUtilsService {
 
     try {
       for (const info of dataForCron.dataForScraper) {
-        const price = await this.getPrice(page, info);
-        if (price) {
-          const shop = await this.getShop(dataForCron.shop_id);
-          const product = await this.getProduct(info.product_id);
+        try {
+          const price = await this.getPrice(page, info);
+          if (price) {
+            const shop = await this.getShop(dataForCron.shop_id);
+            const product = await this.getProduct(info.product_id);
 
-          if (!shop || !product) {
-            console.log('Shop or product not found in database!');
-            continue;
+            if (!shop || !product) {
+              console.log('Магазин или продукт не найдены в базе данных!');
+              continue;
+            }
+
+            const newEntry = new PricesShop();
+            newEntry.shop_id = shop;
+            newEntry.product_id = product;
+            newEntry.price = parsePrice(price);
+            await prisesShopRepository.save(newEntry);
+
+            console.log(
+              `Магазин id: '${dataForCron.shop_id}', продукт id: '${info.product_id}', успешно записан в базу данных.`
+            );
           }
-
-          const newEntry = new PricesShop();
-          newEntry.shop_id = shop;
-          newEntry.product_id = product;
-          newEntry.price = parsePrice(price);
-          await prisesShopRepository.save(newEntry);
-
-          console.log(
-            `Shop id: '${dataForCron.shop_id}', product id: '${info.product_id}', successfully written to the database.`
-          );
+        } catch (err) {
+          const errorMessage = `Ошибка при обработке продукта. Mагазин id: '${dataForCron.shop_id}', продукт id: '${info.product_id}': ${err}`;
+          console.error(errorMessage);
+          loggerScraper(errorMessage);
+          continue;
         }
       }
     } catch (err) {
-      console.error('Error when trying to parse a page or save product:', err);
+      console.error('Общая ошибка при скрапинге:', err);
     } finally {
       await browser.close();
     }

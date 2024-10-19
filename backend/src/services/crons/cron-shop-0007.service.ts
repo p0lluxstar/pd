@@ -17,41 +17,50 @@ export class CronShop0007 {
 
   parsePrice(price: string): number {
     console.log(price);
-    return parseFloat(price.replace(/[^\d.,]/g, '').replace(',', '.'));
+    // Убираем все нецифровые символы
+    const cleanedPrice = price.replace(/[^\d]/g, '');
+
+    // Преобразуем строку в нужный формат с копейками
+    const formattedPrice = cleanedPrice.slice(0, -2) + '.' + cleanedPrice.slice(-2);
+
+    // Преобразуем в число
+    return parseFloat(formattedPrice.replace(',', '.'));
   }
 
   //@Cron('0 1-23/2 * * *')
-  // @Cron('51 * * * *')
- //@Cron('*/20 * * * * *')
+  //@Cron('38 * * * *')
+  //@Cron('*/20 * * * * *')
+  @Cron('50 3 * * *')
   async handleCron() {
     const dataForCron: IDataForCron = {
       shop_id: 'shop-0007',
       dataForScraper: [
-        /*       {
+        {
           product_id: 'product-0001',
-          url: 'https://magnit.ru/catalog/1812450015/',
+          url: 'https://asdfmagnit.ru/catalog/1812450015/',
           elementOnPage: '.product-details__price span',
         },
         {
           product_id: 'product-0002',
-          url: 'https://lenta.com/',
+          url: 'https://asdflenta.com/',
           elementOnPage: '.fullPricePDP',
-        }, */
+        },
         {
           product_id: 'product-0003',
           url: 'https://online.globus.ru/products/moloko-ultrapasterizovannoe-domik-v-derevne-25-925-ml-117719_ST',
           elementOnPage: 'div[itemprop="price"]',
         },
-        /*{
+
+        {
           product_id: 'product-0004',
-          url: 'https://magnit.ru/product/1812450001-1',
-          elementOnPage: 'span[data-v-db612f9b]',
+          url: 'https://5ka.ru/product/2059346/moloko-domik-v-derevne--bzmzh-g/',
+          elementOnPage: '.j_IdgaDq-111',
         },
-        /* {
+        {
           product_id: 'product-0005',
-          url: 'https://magnit.ru/catalog/1812450017/',
-          elementOnPage: '.product-details__price span',
-        }, */
+          url: 'https://asdfmagnit.ru/catalog/1812450017/',
+          elementOnPage: '.pj_IdgaDq-',
+        },
       ],
     };
     await this.scraperUtilsService.scrape(

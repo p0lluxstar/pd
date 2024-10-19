@@ -34,7 +34,7 @@ export class PricesShop0004Service {
     // Форматируем результат для добавления nameShop
 
     return result.map((price) => ({
-      id: price.id,
+      id: product_id,
       date: price.date,
       price: price.price,
     }));
