@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { shopsActions } from '../redux/slices/shopsSlice';
@@ -118,14 +117,14 @@ export default function ShopsCheckboxForm(): JSX.Element {
                   checked={!!checkedItems[shop.id]}
                   onChange={handleChange}
                 />
-                {/*  {shop.name} */}
-                <Image
+                {`«${shop.name}»`}
+                {/* <Image
                   className={styles.cardImg}
                   src={`/img/shops/${shop.id}.png`}
                   width={100}
                   height={50}
                   alt="shop"
-                />
+                /> */}
               </label>
             </div>
           ))}

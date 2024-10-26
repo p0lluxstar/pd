@@ -2,7 +2,8 @@
 
 .main {
   display: flex;
-  background-color: $color-primary;
+  background: linear-gradient(180deg, $color-primary, rgb(48 142 189));
+  /* background-color: $color-primary; */
   justify-content: center;
   align-items: center;
   height: 100vh;
@@ -39,7 +40,7 @@
     justify-content: center;
 
     .btn {
-      background-color: $color-btn-blue;
+      background-color: #34479080;
       border: none;
       border-radius: 100px;
       padding: 28px 56px;
