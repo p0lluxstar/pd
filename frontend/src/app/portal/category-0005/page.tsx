@@ -1,10 +1,10 @@
 'use client';
 import GeneralCategoryPage from '@/src/components/GeneralCategoryPage';
 
-export default function Category0002(): JSX.Element {
+export default function Category0005(): JSX.Element {
   return (
     <>
-      <GeneralCategoryPage categoryId={'category-0002'} />
+      <GeneralCategoryPage categoryId={'category-0005'} />
     </>
   );
 }
