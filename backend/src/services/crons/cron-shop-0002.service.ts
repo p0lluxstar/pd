@@ -17,16 +17,22 @@ export class CronShop0002 {
 
   parsePrice(price: string): number {
     return Number(parseFloat(price.replace(/[^\d.]/g, '')).toFixed(2));
-    /*   const priceAsString = price.replace(/[^\d,]/g, '');
-    return parseFloat(
-      priceAsString.slice(0, -2) + '.' + priceAsString.slice(-2),
-    ); */
   }
+
+    // Общий метод для обработки данных
+    private async handleCronJob(dataForCron: IDataForCron) {
+      await this.scraperUtilsService.scrape(
+        dataForCron,
+        PricesShop0002Entity,
+        this.prisesShopRepository,
+        this.parsePrice
+      );
+    }
 
   //@Cron('0 1-23/2 * * *')
   //@Cron('27 * * * *')
   //@Cron('17 * * * *')
-  @Cron('20 3 * * *')
+  @Cron('1 3 * * 2')
   async handleCron() {
     const dataForCron: IDataForCron = {
       shop_id: 'shop-0002',
@@ -58,11 +64,39 @@ export class CronShop0002 {
         },
       ],
     };
-    await this.scraperUtilsService.scrape(
-      dataForCron,
-      PricesShop0002Entity,
-      this.prisesShopRepository,
-      this.parsePrice
-    );
+    await this.handleCronJob(dataForCron);
+  }
+
+  @Cron('5 3 * * 2')
+  async handleCron2() {
+    const dataForCron: IDataForCron = {
+      shop_id: 'shop-0002',
+      dataForScraper: [
+        {
+          product_id: 'product-0006',
+          url: 'https://myspar.ru/catalog/voda/voda-mineralnaya-aqua-minerale-negazirovannaya-0-6l/',
+          elementOnPage: '.prices__cur.js-item-price',
+        },
+        
+      ],
+    };
+    await this.handleCronJob(dataForCron);
+  }
+
+  @Cron('10 3 * * 2')
+  async handleCron3() {
+    const dataForCron: IDataForCron = {
+      shop_id: 'shop-0002',
+      dataForScraper: [
+        {
+          product_id: 'product-0007',
+          url: 'https://myspar.ru/catalog/soki-nektary/nektar-lyubimyy-vishnya-chereshnya-0-95l/',
+          elementOnPage: '.prices__cur.js-item-price',
+        },
+        
+      ],
+    };
+    await this.handleCronJob(dataForCron);
   }
 }
+

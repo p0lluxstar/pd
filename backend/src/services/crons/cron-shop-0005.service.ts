@@ -30,7 +30,7 @@ export class CronShop0005 {
   //@Cron('0 1-23/2 * * *')
   //@Cron('26 * * * *')
   //@Cron('*/20 * * * * *')
-  @Cron('40 3 * * *')
+  @Cron('0 3 * * 5')
   async handleCron() {
     const dataForCron: IDataForCron = {
       shop_id: 'shop-0005',

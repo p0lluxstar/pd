@@ -40,6 +40,7 @@ export class ScraperUtilsService {
     const browser = await puppeteer.launch({
       headless: false,
       args: ['--no-sandbox', '--disable-setuid-sandbox'],
+      executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe'
     });
     const page = await browser.newPage();
 

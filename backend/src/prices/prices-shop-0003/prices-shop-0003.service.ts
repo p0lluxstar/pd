@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PricesShop0003Entity } from '../prices-shop-0003/prices-shop-0003.entity';
-import { Between, Equal, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class PricesShop0003Service {

@@ -21,13 +21,13 @@ export class CronShop0004 {
   }
 
   //@Cron('0 1-23/2 * * *')
- // @Cron('51 * * * *')
- //@Cron('*/20 * * * * *')
+  //@Cron('51 * * * *')
+  //@Cron('*/20 * * * * *')
   async handleCron() {
     const dataForCron: IDataForCron = {
       shop_id: 'shop-0004',
       dataForScraper: [
-  /*       {
+        /*       {
           product_id: 'product-0001',
           url: 'https://magnit.ru/catalog/1812450015/',
           elementOnPage: '.product-details__price span',
@@ -54,7 +54,7 @@ export class CronShop0004 {
         }, */
       ],
     };
-   await this.scraperUtilsService.scrape(
+    await this.scraperUtilsService.scrape(
       dataForCron,
       PricesShop0004Entity,
       this.prisesShopRepository,

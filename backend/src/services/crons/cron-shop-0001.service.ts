@@ -19,10 +19,20 @@ export class CronShop0001 {
     return Number(price.replace(/[^\d,]/g, '').replace(',', '.'));
   }
 
+  private async handleCronJob(dataForCron: IDataForCron) {
+    await this.scraperUtilsService.scrape(
+      dataForCron,
+      PricesShop0001Entity,
+      this.prisesShopRepository,
+      this.parsePrice
+    );
+  }
+
   //@Cron('0 1-23/2 * * *') //Этот cron выполняется каждый день с 1 часа до 23 часов, через каждые 2 часа (то есть, в 1:00, 3:00, 5:00, и так далее)
   //@Cron('18 * * * *') //на 14-й минуте каждого часа.
   //@Cron('*/16 * * * * *') //Этот cron запускается каждые 16 секунд.
-  @Cron('10 3 * * *') // запускается каждый день в 3:10
+  // @Cron('50 3 * * *') // запускается каждый день в 3:50
+  @Cron('0 3 * * 1') // запускается в понедельник в 3:00
   async handleCronMilk() {
     const dataForCron: IDataForCron = {
       shop_id: 'shop-0001',
@@ -51,15 +61,43 @@ export class CronShop0001 {
         {
           product_id: 'product-0005',
           url: 'https://www.perekrestok.ru/cat/114/p/moloko-domik-v-derevne-sterilizovannoe-6-950ml-42414',
+          elementOnPage:
+            'https://www.perekrestok.ru/cat/208/p/voda-aqua-minerale-pitevaa-negazirovannaa-500ml-3922562',
+        },
+      ],
+    };
+    await this.handleCronJob(dataForCron);
+  }
+
+  @Cron('5 3 * * 1')
+  async handleCron2() {
+    const dataForCron: IDataForCron = {
+      shop_id: 'shop-0001',
+
+      dataForScraper: [
+        {
+          product_id: 'product-0006',
+          url: 'https://www.perekrestok.ru/cat/208/p/voda-aqua-minerale-pitevaa-negazirovannaa-500ml-3922562',
           elementOnPage: '#price-card .price-new',
         },
       ],
     };
-    await this.scraperUtilsService.scrape(
-      dataForCron,
-      PricesShop0001Entity,
-      this.prisesShopRepository,
-      this.parsePrice
-    );
+    await this.handleCronJob(dataForCron);
+  }
+
+  @Cron('10 3 * * 7')
+  async handleCron3() {
+    const dataForCron: IDataForCron = {
+      shop_id: 'shop-0001',
+
+      dataForScraper: [
+        {
+          product_id: 'product-0007',
+          url: 'https://www.perekrestok.ru/cat/740/p/napitok-sokosoderzasij-lubimyj-visnevaa-ceresna-950ml-3456934',
+          elementOnPage: '#price-card .price-new',
+        },
+      ],
+    };
+    await this.handleCronJob(dataForCron);
   }
 }
