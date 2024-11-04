@@ -6,6 +6,7 @@ import { FaStore } from 'react-icons/fa';
 import { GiChipsBag, GiKetchup, GiFruitBowl, GiMilkCarton, GiManualJuicer } from 'react-icons/gi';
 import { IoPeople } from 'react-icons/io5';
 import styles from '../styles/components/mainNavigation.module.scss';
+import ToggleSwitchTheme from './ToggleSwitchTheme';
 
 export default function MainNavigation(): JSX.Element {
   const pathname = usePathname();
@@ -19,7 +20,7 @@ export default function MainNavigation(): JSX.Element {
   const isAbout = pathname.startsWith('/portal/about');
 
   return (
-    <>
+    <div className={styles.mainNavWrapper}>
       <div className={styles.mainNav}>
         <ul className={styles.navItems}>
           <li className={`${styles.navItem} ${isShopsActive ? styles.active : ''}`}>
@@ -65,6 +66,7 @@ export default function MainNavigation(): JSX.Element {
           </li>
         </ul>
       </div>
-    </>
+      <ToggleSwitchTheme />
+    </div>
   );
 }
