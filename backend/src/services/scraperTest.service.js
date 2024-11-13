@@ -6,17 +6,17 @@ const puppeteer = require('puppeteer');
   const page = await browser.newPage(); // Создание новой вкладки
 
   // Переход на нужную страницу
-  await page.goto('https://www.perekrestok.ru/cat/740/p/napitok-sokosoderzasij-lubimyj-visnevaa-ceresna-950ml-3456934', { waitUntil: 'load', timeout: 0 });
+  await page.goto('https://5ka.ru/product/3922562/voda--yeye-negazirovannaya-l/', { waitUntil: 'load', timeout: 0 });
 
 /*   // Ожидание загрузки нужного элемента на странице (например, заголовок h1)
   await page.waitForSelector('.prices__cur.js-item-price'); */
 
   // Извлечение текста из выбранного элемента
-  const elementText = await page.$eval('#price-card .price-new', el => el.textContent);
+  const elementText = await page.$eval('.j_IdgaDq-', el => el.textContent);
   console.log('Извлечённый текст:', elementText);
 
   // Закрытие браузера
-  await browser.close();
+ await browser.close();
 })();
 
 /* const price = await page.evaluate(() => {

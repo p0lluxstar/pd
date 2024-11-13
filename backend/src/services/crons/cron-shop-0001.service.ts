@@ -29,14 +29,13 @@ export class CronShop0001 {
   }
 
   //@Cron('0 1-23/2 * * *') //Этот cron выполняется каждый день с 1 часа до 23 часов, через каждые 2 часа (то есть, в 1:00, 3:00, 5:00, и так далее)
-  //@Cron('18 * * * *') //на 14-й минуте каждого часа.
+  //@Cron('56 * * * *') //на 14-й минуте каждого часа.
   //@Cron('*/16 * * * * *') //Этот cron запускается каждые 16 секунд.
   // @Cron('50 3 * * *') // запускается каждый день в 3:50
   @Cron('0 3 * * 1') // запускается в понедельник в 3:00
-  async handleCronMilk() {
+  async handleCronCategory0001() {
     const dataForCron: IDataForCron = {
       shop_id: 'shop-0001',
-
       dataForScraper: [
         {
           product_id: 'product-0001',
@@ -61,8 +60,17 @@ export class CronShop0001 {
         {
           product_id: 'product-0005',
           url: 'https://www.perekrestok.ru/cat/114/p/moloko-domik-v-derevne-sterilizovannoe-6-950ml-42414',
-          elementOnPage:
-            'https://www.perekrestok.ru/cat/208/p/voda-aqua-minerale-pitevaa-negazirovannaa-500ml-3922562',
+          elementOnPage: '#price-card .price-new',
+        },
+        {
+          product_id: 'product-0011',
+          url: 'https://www.perekrestok.ru/cat/118/p/smetana-prostokvasino-15-300g-4121592',
+          elementOnPage: '#price-card .price-new',
+        },
+        {
+          product_id: 'product-0012',
+          url: 'https://www.perekrestok.ru/cat/119/p/biojogurt-aktibio-obogasennyj-bifidobakteriami-1-8-260ml-4298986',
+          elementOnPage: '#price-card .price-new',
         },
       ],
     };
@@ -70,7 +78,7 @@ export class CronShop0001 {
   }
 
   @Cron('5 3 * * 1')
-  async handleCron2() {
+  async handleCronCategory0002() {
     const dataForCron: IDataForCron = {
       shop_id: 'shop-0001',
 
@@ -78,6 +86,26 @@ export class CronShop0001 {
         {
           product_id: 'product-0006',
           url: 'https://www.perekrestok.ru/cat/208/p/voda-aqua-minerale-pitevaa-negazirovannaa-500ml-3922562',
+          elementOnPage: '#price-card .price-new',
+        },
+        {
+          product_id: 'product-0007',
+          url: 'https://www.perekrestok.ru/cat/740/p/napitok-sokosoderzasij-lubimyj-visnevaa-ceresna-950ml-3456934',
+          elementOnPage: '#price-card .price-new',
+        },
+        {
+          product_id: 'product-0008',
+          url: 'https://www.perekrestok.ru/cat/211/p/sok-dobryj-abloko-1l-58049',
+          elementOnPage: '#price-card .price-new',
+        },
+        {
+          product_id: 'product-0009',
+          url: 'https://www.perekrestok.ru/cat/211/p/sok-j7-apelsinovyj-s-makotu-970ml-3190682',
+          elementOnPage: '#price-card .price-new',
+        },
+        {
+          product_id: 'product-0010',
+          url: 'https://www.perekrestok.ru/cat/208/p/voda-svatoj-istocnik-klucevaa-pitevaa-negazirovannaa-1-5l-1913',
           elementOnPage: '#price-card .price-new',
         },
       ],
@@ -89,7 +117,6 @@ export class CronShop0001 {
   async handleCron3() {
     const dataForCron: IDataForCron = {
       shop_id: 'shop-0001',
-
       dataForScraper: [
         {
           product_id: 'product-0007',

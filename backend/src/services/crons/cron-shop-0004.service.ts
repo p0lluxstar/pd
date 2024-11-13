@@ -27,31 +27,6 @@ export class CronShop0004 {
     const dataForCron: IDataForCron = {
       shop_id: 'shop-0004',
       dataForScraper: [
-        /*       {
-          product_id: 'product-0001',
-          url: 'https://magnit.ru/catalog/1812450015/',
-          elementOnPage: '.product-details__price span',
-        }, */
-        {
-          product_id: 'product-0002',
-          url: 'https://lenta.com/',
-          elementOnPage: '.fullPricePDP',
-        },
-        /*{
-          product_id: 'product-0003',
-          url: 'https://magnit.ru/product/1812450029-1',
-          elementOnPage: 'span[data-v-db612f9b]',
-        },
-        {
-          product_id: 'product-0004',
-          url: 'https://magnit.ru/product/1812450001-1',
-          elementOnPage: 'span[data-v-db612f9b]',
-        },
-        /* {
-          product_id: 'product-0005',
-          url: 'https://magnit.ru/catalog/1812450017/',
-          elementOnPage: '.product-details__price span',
-        }, */
       ],
     };
     await this.scraperUtilsService.scrape(

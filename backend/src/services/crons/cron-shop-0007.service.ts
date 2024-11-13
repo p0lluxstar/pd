@@ -16,7 +16,6 @@ export class CronShop0007 {
   ) {}
 
   parsePrice(price: string): number {
-    console.log(price);
     // Убираем все нецифровые символы
     const cleanedPrice = price.replace(/[^\d]/g, '');
 
@@ -27,47 +26,71 @@ export class CronShop0007 {
     return parseFloat(formattedPrice.replace(',', '.'));
   }
 
-  //@Cron('0 1-23/2 * * *')
-  //@Cron('38 * * * *')
-  //@Cron('*/20 * * * * *')
-  @Cron('0 3 * * 7')
-  async handleCron() {
-    const dataForCron: IDataForCron = {
-      shop_id: 'shop-0007',
-      dataForScraper: [
-        {
-          product_id: 'product-0001',
-          url: 'https://asdfmagnit.ru/catalog/1812450015/',
-          elementOnPage: '.product-details__price span',
-        },
-        {
-          product_id: 'product-0002',
-          url: 'https://asdflenta.com/',
-          elementOnPage: '.fullPricePDP',
-        },
-        {
-          product_id: 'product-0003',
-          url: 'https://online.globus.ru/products/moloko-ultrapasterizovannoe-domik-v-derevne-25-925-ml-117719_ST',
-          elementOnPage: 'div[itemprop="price"]',
-        },
-
-        {
-          product_id: 'product-0004',
-          url: 'https://5ka.ru/product/2059346/moloko-domik-v-derevne--bzmzh-g/',
-          elementOnPage: '.j_IdgaDq-111',
-        },
-        {
-          product_id: 'product-0005',
-          url: 'https://asdfmagnit.ru/catalog/1812450017/',
-          elementOnPage: '.pj_IdgaDq-',
-        },
-      ],
-    };
+  // Общий метод для обработки данных
+  private async handleCronJob(dataForCron: IDataForCron) {
     await this.scraperUtilsService.scrape(
       dataForCron,
       PricesShop0007Entity,
       this.prisesShopRepository,
       this.parsePrice
     );
+  }
+
+  //@Cron('0 1-23/2 * * *')
+  //@Cron('7 * * * *')
+  //@Cron('*/20 * * * * *')
+  @Cron('0 3 * * 7')
+  async handleCronCategory0001() {
+    const dataForCron: IDataForCron = {
+      shop_id: 'shop-0007',
+      dataForScraper: [
+        {
+          product_id: 'product-0003',
+          url: 'https://5ka.ru/product/3199747/moloko-domik-v-derevne--bzmzh-g/',
+          elementOnPage: '.j_IdgaDq-',
+        },
+        {
+          product_id: 'product-0012',
+          url: 'https://5ka.ru/product/4298986/yogurt-pitevoy-aktibio--g/',
+          elementOnPage: '.j_IdgaDq-',
+        },
+      ],
+    };
+    await this.handleCronJob(dataForCron);
+  }
+
+  @Cron('5 3 * * 7')
+  async handleCronCategory0002() {
+    const dataForCron: IDataForCron = {
+      shop_id: 'shop-0007',
+      dataForScraper: [
+        {
+          product_id: 'product-0006',
+          url: 'https://5ka.ru/product/3922562/voda--yeye-negazirovannaya-l/',
+          elementOnPage: '.j_IdgaDq-',
+        },
+        {
+          product_id: 'product-0007',
+          url: 'https://5ka.ru/product/3456934/napitok-sokosoderzhashchiy-lyubimyy-vishnevaya-che/',
+          elementOnPage: '.j_IdgaDq-',
+        },
+        {
+          product_id: 'product-0008',
+          url: 'https://5ka.ru/product/58049/sok-dobryy-yabloko-l/',
+          elementOnPage: '.j_IdgaDq-',
+        },
+        {
+          product_id: 'product-0009',
+          url: 'https://5ka.ru/product/3190682/sok--apelsinovyy-s-myakotyu-l/',
+          elementOnPage: '.j_IdgaDq-',
+        },
+        {
+          product_id: 'product-0010',
+          url: 'https://5ka.ru/product/1913/voda-svyatoy-istochnik-negazirovannaya-l/',
+          elementOnPage: '.j_IdgaDq-',
+        },
+      ],
+    };
+    await this.handleCronJob(dataForCron);
   }
 }
