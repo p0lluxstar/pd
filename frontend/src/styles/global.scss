@@ -1,9 +1,17 @@
 * {
-    margin: 0px;
-    padding: 0px;
-    box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
+}
+
+body.light {
+  background: #ffffff;
+}
+
+body.dark {
+  background: #2c2c2c;
 }

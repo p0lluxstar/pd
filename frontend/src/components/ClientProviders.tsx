@@ -4,6 +4,7 @@
 
 import { type ReactNode } from 'react';
 import ReactQueryProvider from '../context/ReactQueryProvider';
+import { ThemeProvider } from '../context/ThemeContextProvider';
 import StoreProvaider from '../redux/StoreProvaider';
 import type React from 'react';
 
@@ -12,9 +13,11 @@ interface ClientProvidersProps {
 }
 
 const ClientProviders: React.FC<ClientProvidersProps> = ({ children }) => (
-  <ReactQueryProvider>
-    <StoreProvaider>{children}</StoreProvaider>
-  </ReactQueryProvider>
+  <ThemeProvider>
+    <ReactQueryProvider>
+      <StoreProvaider>{children}</StoreProvaider>
+    </ReactQueryProvider>
+  </ThemeProvider>
 );
 
 export default ClientProviders;
