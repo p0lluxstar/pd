@@ -32,7 +32,7 @@ export class CronShop0002 {
   //@Cron('0 1-23/2 * * *')
   //@Cron('5 * * * *')
   //@Cron('17 * * * *')
-  @Cron('0 3 * * 2')
+  @Cron('5 3 * * 1')
   async handleCronCategory0001() {
     const dataForCron: IDataForCron = {
       shop_id: 'shop-0002',
@@ -105,6 +105,86 @@ export class CronShop0002 {
         {
           product_id: 'product-0010',
           url: 'https://myspar.ru/catalog/voda/voda-pitevaya-svyatoy-istochnik-negazirovannaya-1-5l/',
+          elementOnPage: '.prices__cur.js-item-price',
+        },
+      ],
+    };
+    await this.handleCronJob(dataForCron);
+  }
+
+  @Cron('5 3 * * 3')
+  async handleCronCategory0003() {
+    const dataForCron: IDataForCron = {
+      shop_id: 'shop-0002',
+      dataForScraper: [
+        {
+          product_id: 'product-0013',
+          url: 'https://myspar.ru/catalog/makarony/makaronnye-izdeliya-shebekinskie-spagetti-tonkie-450g/',
+          elementOnPage: '.prices__cur.js-item-price',
+        },
+        {
+          product_id: 'product-0014',
+          url: 'https://myspar.ru/catalog/krupy/grechka-yadritsa-mistral-900-g/',
+          elementOnPage: '.prices__cur.js-item-price',
+        },
+        {
+          product_id: 'product-0015',
+          url: 'https://myspar.ru/catalog/krupy/ris-belyy-kruglozernyy-mistral-kuban-900-g/',
+          elementOnPage: '.prices__cur.js-item-price',
+        },
+      ],
+    };
+    await this.handleCronJob(dataForCron);
+  }
+
+  @Cron('5 3 * * 4')
+  async handleCronCategory0004() {
+    const dataForCron: IDataForCron = {
+      shop_id: 'shop-0002',
+      dataForScraper: [
+        {
+          product_id: 'product-0016',
+          url: 'https://myspar.ru/catalog/ketchupy/ketchup-makheev-tomatnyy-doy-pak-300g/',
+          elementOnPage: '.prices__cur.js-item-price',
+        },
+        {
+          product_id: 'product-0017',
+          url: 'https://myspar.ru/catalog/mayonez-2/mayonez-sloboda-olivkovyy-67-doy-pak-375g/',
+          elementOnPage: '.prices__cur.js-item-price',
+        },
+      ],
+    };
+    await this.handleCronJob(dataForCron);
+  }
+
+  @Cron('5 3 * * 5')
+  async handleCronCategory0005() {
+    const dataForCron: IDataForCron = {
+      shop_id: 'shop-0002',
+      dataForScraper: [
+        {
+          product_id: 'product-0018',
+          url: 'https://myspar.ru/catalog/frukty/banany/',
+          elementOnPage: '.prices__cur.js-item-price',
+        },
+        {
+          product_id: 'product-0019',
+          url: 'https://myspar.ru/catalog/frukty/yabloki-golden/',
+          elementOnPage: '.prices__cur.js-item-price',
+        },
+        {
+          product_id: 'product-0020',
+          url: 'https://myspar.ru/catalog/ovoshchi/tomat-rozovyy-azerbaydzhan/',
+          elementOnPage: '.prices__cur.js-item-price',
+        },
+        {
+          product_id: 'product-0021',
+          url: 'https://myspar.ru/catalog/ovoshchi/tomaty-slivovidnye-flamenco-450g/',
+          elementOnPage: '.prices__cur.js-item-price',
+        },
+        {
+          product_id: 'product-0022',
+          url: 'https://myspar.ru/catalog/ovoshchi/ogurtsy-teplichnye-sredneplodnye/',
           elementOnPage: '.prices__cur.js-item-price',
         },
       ],

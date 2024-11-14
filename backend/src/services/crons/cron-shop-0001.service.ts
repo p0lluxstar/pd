@@ -77,7 +77,7 @@ export class CronShop0001 {
     await this.handleCronJob(dataForCron);
   }
 
-  @Cron('5 3 * * 1')
+  @Cron('0 3 * * 2')
   async handleCronCategory0002() {
     const dataForCron: IDataForCron = {
       shop_id: 'shop-0001',
@@ -113,14 +113,80 @@ export class CronShop0001 {
     await this.handleCronJob(dataForCron);
   }
 
-  @Cron('10 3 * * 7')
-  async handleCron3() {
+  @Cron('0 3 * * 3')
+  async handleCronCategory0003() {
     const dataForCron: IDataForCron = {
       shop_id: 'shop-0001',
       dataForScraper: [
         {
-          product_id: 'product-0007',
-          url: 'https://www.perekrestok.ru/cat/740/p/napitok-sokosoderzasij-lubimyj-visnevaa-ceresna-950ml-3456934',
+          product_id: 'product-0013',
+          url: 'https://www.perekrestok.ru/cat/105/p/spagetti-sebekinskie-no2-tonkie-450g-82760',
+          elementOnPage: '#price-card .price-new',
+        },
+        {
+          product_id: 'product-0014',
+          url: 'https://www.perekrestok.ru/cat/107/p/grecka-mistral-900g-53673',
+          elementOnPage: '#price-card .price-new',
+        },
+        {
+          product_id: 'product-0015',
+          url: 'https://www.perekrestok.ru/cat/107/p/ris-mistral-kuban-belyj-kruglozernyj-900g-3766',
+          elementOnPage: '#price-card .price-new',
+        },
+      ],
+    };
+    await this.handleCronJob(dataForCron);
+  }
+
+  @Cron('0 3 * * 4')
+  async handleCronCategory0004() {
+    const dataForCron: IDataForCron = {
+      shop_id: 'shop-0001',
+      dataForScraper: [
+        {
+          product_id: 'product-0016',
+          url: 'https://www.perekrestok.ru/cat/219/p/ketcup-maheev-tomatnyj-300g-4044938',
+          elementOnPage: '#price-card .price-new',
+        },
+        {
+          product_id: 'product-0017',
+          url: 'https://www.perekrestok.ru/cat/221/p/majonez-sloboda-olivkovyj-67-400g-2108609',
+          elementOnPage: '#price-card .price-new',
+        },
+
+      ],
+    };
+    await this.handleCronJob(dataForCron);
+  }
+
+  @Cron('0 3 * * 5')
+  async handleCronCategory0005() {
+    const dataForCron: IDataForCron = {
+      shop_id: 'shop-0001',
+      dataForScraper: [
+        {
+          product_id: 'product-0018',
+          url: 'https://www.perekrestok.ru/cat/153/p/banany-3757',
+          elementOnPage: '#price-card .price-new',
+        },
+        {
+          product_id: 'product-0019',
+          url: 'https://www.perekrestok.ru/cat/153/p/abloki-golden-market-perekrestok-3366324',
+          elementOnPage: '#price-card .price-new',
+        },
+        {
+          product_id: 'product-0020',
+          url: 'https://www.perekrestok.ru/cat/150/p/tomaty-rozovye-azerbajdzan-3695580',
+          elementOnPage: '#price-card .price-new',
+        },
+        {
+          product_id: 'product-0021',
+          url: 'https://www.perekrestok.ru/cat/150/p/tomaty-flamenco-slivovidnye-krasnye-450g-4217380',
+          elementOnPage: '#price-card .price-new',
+        },
+        {
+          product_id: 'product-0022',
+          url: 'https://www.perekrestok.ru/cat/150/p/ogurcy-kolucie-sredneplodnye-3255111',
           elementOnPage: '#price-card .price-new',
         },
       ],

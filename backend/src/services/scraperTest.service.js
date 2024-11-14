@@ -6,13 +6,13 @@ const puppeteer = require('puppeteer');
   const page = await browser.newPage(); // Создание новой вкладки
 
   // Переход на нужную страницу
-  await page.goto('https://5ka.ru/product/3922562/voda--yeye-negazirovannaya-l/', { waitUntil: 'load', timeout: 0 });
+  await page.goto('https://online.globus.ru/products/yabloki-golden-delishes-1-kg-78_KG', { waitUntil: 'load', timeout: 0 });
 
 /*   // Ожидание загрузки нужного элемента на странице (например, заголовок h1)
   await page.waitForSelector('.prices__cur.js-item-price'); */
 
   // Извлечение текста из выбранного элемента
-  const elementText = await page.$eval('.j_IdgaDq-', el => el.textContent);
+  const elementText = await page.$eval('div[itemtype="http://schema.org/Product"] .css-1t0dwxn', el => el.textContent);
   console.log('Извлечённый текст:', elementText);
 
   // Закрытие браузера

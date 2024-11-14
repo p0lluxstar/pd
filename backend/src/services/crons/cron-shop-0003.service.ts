@@ -32,7 +32,7 @@ export class CronShop0003 {
   //@Cron('0 1-23/2 * * *')
   //@Cron('25 * * * *')
   //@Cron('*/20 * * * * *')
-  @Cron('0 3 * * 3')
+  @Cron('10 3 * * 1')
   async handleCronCategory0001() {
     const dataForCron: IDataForCron = {
       shop_id: 'shop-0003',
@@ -72,7 +72,7 @@ export class CronShop0003 {
     await this.handleCronJob(dataForCron);
   }
 
-  @Cron('5 3 * * 3')
+  @Cron('10 3 * * 2')
   async handleCronCategory0002() {
     const dataForCron: IDataForCron = {
       shop_id: 'shop-0003',
@@ -85,6 +85,81 @@ export class CronShop0003 {
         {
           product_id: 'product-0008',
           url: 'https://magnit.ru/product/2400017290-sok_dobryy_yablochnyy_osvetlennyy_1l?shopCode=992301&shopType=6',
+          elementOnPage: 'span[data-v-365ce4a9]',
+        },
+      ],
+    };
+    await this.handleCronJob(dataForCron);
+  }
+
+  @Cron('10 3 * * 3')
+  async handleCronCategory0003() {
+    const dataForCron: IDataForCron = {
+      shop_id: 'shop-0003',
+      dataForScraper: [
+        {
+          product_id: 'product-0013',
+          url: 'https://magnit.ru/product/3174070006-makarony_shebekinskie_spagetti_450g?shopCode=992301&shopType=6',
+          elementOnPage: 'span[data-v-365ce4a9]',
+        },
+        {
+          product_id: 'product-0014',
+          url: 'https://magnit.ru/product/1342500014-grechka_yadritsa_mistral_900g?shopCode=992301&shopType=6',
+          elementOnPage: 'span[data-v-365ce4a9]',
+        },
+      ],
+    };
+    await this.handleCronJob(dataForCron);
+  }
+
+  @Cron('10 3 * * 4')
+  async handleCronCategory0004() {
+    const dataForCron: IDataForCron = {
+      shop_id: 'shop-0003',
+      dataForScraper: [
+        {
+          product_id: 'product-0016',
+          url: 'https://magnit.ru/product/1000477942-1500065172?shopCode=992301&shopType=6',
+          elementOnPage: 'span[data-v-365ce4a9]',
+        },
+        {
+          product_id: 'product-0017',
+          url: 'https://magnit.ru/product/1728400015-mayonez_sloboda_olivkovyy_67_400ml?shopCode=992301&shopType=6',
+          elementOnPage: 'span[data-v-365ce4a9]',
+        },
+      ],
+    };
+    await this.handleCronJob(dataForCron);
+  }
+
+  @Cron('10 3 * * 5')
+  async handleCronCategory0005() {
+    const dataForCron: IDataForCron = {
+      shop_id: 'shop-0003',
+      dataForScraper: [
+        {
+          product_id: 'product-0018',
+          url: 'https://magnit.ru/product/9072651501-banany?shopCode=992301&shopType=6',
+          elementOnPage: 'span[data-v-365ce4a9]',
+        },
+        {
+          product_id: 'product-0019',
+          url: 'https://magnit.ru/product/1444282005-yabloki_golden?shopCode=992301&shopType=6',
+          elementOnPage: 'span[data-v-365ce4a9]',
+        },
+        {
+          product_id: 'product-0020',
+          url: 'https://magnit.ru/product/1000291140-tomaty_rozovye_azerbaydzhan_1kg?shopCode=992301&shopType=6',
+          elementOnPage: 'span[data-v-365ce4a9]',
+        },
+        {
+          product_id: 'product-0021',
+          url: 'https://magnit.ru/product/1000382819-tomaty_flamenco_slivovidnye_450g?shopCode=992301&shopType=6',
+          elementOnPage: 'span[data-v-365ce4a9]',
+        },
+        {
+          product_id: 'product-0022',
+          url: 'https://magnit.ru/product/3412070013-ogurtsy_sredneplodnye_pupyrchatye?shopCode=992301&shopType=6',
           elementOnPage: 'span[data-v-365ce4a9]',
         },
       ],

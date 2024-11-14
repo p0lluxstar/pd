@@ -39,7 +39,7 @@ export class CronShop0007 {
   //@Cron('0 1-23/2 * * *')
   //@Cron('7 * * * *')
   //@Cron('*/20 * * * * *')
-  @Cron('0 3 * * 7')
+  @Cron('30 3 * * 1')
   async handleCronCategory0001() {
     const dataForCron: IDataForCron = {
       shop_id: 'shop-0007',
@@ -59,7 +59,7 @@ export class CronShop0007 {
     await this.handleCronJob(dataForCron);
   }
 
-  @Cron('5 3 * * 7')
+  @Cron('30 3 * * 2')
   async handleCronCategory0002() {
     const dataForCron: IDataForCron = {
       shop_id: 'shop-0007',
@@ -87,6 +87,76 @@ export class CronShop0007 {
         {
           product_id: 'product-0010',
           url: 'https://5ka.ru/product/1913/voda-svyatoy-istochnik-negazirovannaya-l/',
+          elementOnPage: '.j_IdgaDq-',
+        },
+      ],
+    };
+    await this.handleCronJob(dataForCron);
+  }
+
+  @Cron('30 3 * * 3')
+  async handleCronCategory0003() {
+    const dataForCron: IDataForCron = {
+      shop_id: 'shop-0007',
+      dataForScraper: [
+        {
+          product_id: 'product-0013',
+          url: 'https://5ka.ru/product/82760/spagetti-shebekinskie--tonkie-g/',
+          elementOnPage: '.j_IdgaDq-',
+        },
+        {
+          product_id: 'product-0014',
+          url: 'https://5ka.ru/product/53673/grechka-mistral-g/',
+          elementOnPage: '.j_IdgaDq-',
+        },
+        {
+          product_id: 'product-0015',
+          url: 'https://5ka.ru/product/3766/ris-mistral-kuban-belyy-kruglozyornyy-g/',
+          elementOnPage: '.j_IdgaDq-',
+        },
+      ],
+    };
+    await this.handleCronJob(dataForCron);
+  }
+
+  @Cron('30 3 * * 4')
+  async handleCronCategory0004() {
+    const dataForCron: IDataForCron = {
+      shop_id: 'shop-0007',
+      dataForScraper: [
+        {
+          product_id: 'product-0016',
+          url: 'https://5ka.ru/product/4044938/ketchup-makheev-tomatnyy-g/',
+          elementOnPage: '.j_IdgaDq-',
+        },
+        {
+          product_id: 'product-0017',
+          url: 'https://5ka.ru/product/2108609/mayonez-sloboda-olivkovyy--ml/',
+          elementOnPage: '.j_IdgaDq-',
+        },
+      ],
+    };
+    await this.handleCronJob(dataForCron);
+  }
+
+  @Cron('30 3 * * 5')
+  async handleCronCategory0005() {
+    const dataForCron: IDataForCron = {
+      shop_id: 'shop-0007',
+      dataForScraper: [
+        {
+          product_id: 'product-0018',
+          url: 'https://5ka.ru/product/3021692/banany-krasnaya-tsena-fasovannye/',
+          elementOnPage: '.j_IdgaDq-',
+        },
+        {
+          product_id: 'product-0019',
+          url: 'https://5ka.ru/product/48188/yabloki-golden/',
+          elementOnPage: '.j_IdgaDq-',
+        },
+        {
+          product_id: 'product-0021',
+          url: 'https://5ka.ru/product/4217380/tomaty-flamenko-slivovidnye-krasnye-g/',
           elementOnPage: '.j_IdgaDq-',
         },
       ],
