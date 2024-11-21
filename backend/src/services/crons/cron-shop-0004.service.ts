@@ -20,9 +20,7 @@ export class CronShop0004 {
     return parseFloat(price.replace(/[^\d.,]/g, '').replace(',', '.'));
   }
 
-  //@Cron('0 1-23/2 * * *')
   //@Cron('51 * * * *')
-  //@Cron('*/20 * * * * *')
   async handleCron() {
     const dataForCron: IDataForCron = {
       shop_id: 'shop-0004',

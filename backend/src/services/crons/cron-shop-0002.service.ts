@@ -29,8 +29,6 @@ export class CronShop0002 {
     );
   }
 
-  //@Cron('0 1-23/2 * * *')
-  //@Cron('5 * * * *')
   //@Cron('17 * * * *')
   @Cron('5 3 * * 1')
   async handleCronCategory0001() {

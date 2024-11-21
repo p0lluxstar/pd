@@ -36,10 +36,7 @@ export class CronShop0005 {
     );
   }
 
-  //@Cron('0 1-23/2 * * *')
   //@Cron('26 * * * *')
-  //@Cron('*/20 * * * * *')
-  //@Cron('41 * * * *')
   @Cron('20 3 * * 1')
   async handleCronCategory0001() {
     const dataForCron: IDataForCron = {
@@ -148,12 +145,12 @@ export class CronShop0005 {
         {
           product_id: 'product-0016',
           url: 'https://online.globus.ru/products/ketchup-tomatnyj-maxeev-300-g-511795_ST',
-          elementOnPage: 'div[itemtype="http://schema.org/Product"] .css-1t0dwxn',
+          elementOnPage: 'div[itemtype="http://schema.org/Product"] .css-13aw5n7',
         },
         {
           product_id: 'product-0017',
           url: 'https://online.globus.ru/products/majonez-olivkovyj-sloboda-67-400-ml-86215_ST',
-          elementOnPage: 'div[itemtype="http://schema.org/Product"] .css-1ebnygn',
+          elementOnPage: 'div[itemtype="http://schema.org/Product"] .css-13aw5n7',
         },
       ],
     };
