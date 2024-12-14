@@ -24,8 +24,6 @@ export const ThemeProvider = ({ children }: ThemeProviderProps): JSX.Element => 
   const savedTheme = getLocalStorage('theme') as unknown as string;
   const [theme, setTheme] = useState<string>(savedTheme);
 
-  console.log('sss', savedTheme);
-
   // Функция переключения темы
   const toggleTheme = (): void => {
     setTheme((prevTheme) => {

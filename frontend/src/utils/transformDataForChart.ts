@@ -8,7 +8,11 @@ export default function transformDataForChart(
     prices: [] as number[],
   };
 
-  props.slice(1).forEach((price: IProductDataForChart) => {
+  let numSlice;
+
+  'name' in props[0] ? (numSlice = 1) : (numSlice = 0); // если открывается страница товара из раздела 'магазины' тогда 0
+
+  props.slice(numSlice).forEach((price: IProductDataForChart) => {
     const [year, month, day] = price.date.split('-');
     const formattedDate = `${day}-${month}-${year}`;
     transformed.date.push(formattedDate);

@@ -17,8 +17,6 @@ type CombinedArray = CombinedArrayItem[];
 
 export default function Charts(props: IProps): JSX.Element {
   // Объединяем данные массивов 1 и 2, 3 и 4 и т.д., если приходит больше одного массива
-
-  console.log('props.productData', props.productData);
   let combinedArray: CombinedArray[] = [];
 
   if (props.productData.length === 1) {
@@ -28,7 +26,7 @@ export default function Charts(props: IProps): JSX.Element {
       if (index % 2 === 0) {
         result.push(current as CombinedArray);
       } else {
-        result[result.length - 1] = result[result.length - 1].concat(current as CombinedArray); // Явное указание типа
+        result[result.length - 1] = result[result.length - 1].concat(current as CombinedArray);
       }
       return result;
     }, []);

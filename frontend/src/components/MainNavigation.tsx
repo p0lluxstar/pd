@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { FaStore } from 'react-icons/fa';
+import { FaStore } from 'react-icons/fa6';
 import { GiChipsBag, GiKetchup, GiFruitBowl, GiMilkCarton, GiManualJuicer } from 'react-icons/gi';
 import { IoPeople } from 'react-icons/io5';
 import styles from '../styles/components/mainNavigation.module.scss';
