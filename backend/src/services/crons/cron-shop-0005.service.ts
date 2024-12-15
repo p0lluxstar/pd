@@ -36,7 +36,6 @@ export class CronShop0005 {
     );
   }
 
-  //@Cron('26 * * * *')
   @Cron('20 3 * * 1')
   async handleCronCategory0001() {
     const dataForCron: IDataForCron = {
@@ -50,27 +49,27 @@ export class CronShop0005 {
         {
           product_id: 'product-0003',
           url: 'https://online.globus.ru/products/moloko-ultrapasterizovannoe-domik-v-derevne-25-925-ml-117719_ST',
-          elementOnPage: 'div[itemtype="http://schema.org/Product"] .css-1t0dwxn',
+          elementOnPage: 'div[itemtype="http://schema.org/Product"] .css-4kkr24',
         },
         {
           product_id: 'product-0004',
           url: 'https://online.globus.ru/products/moloko-ultrapasterizovannoe-domik-v-derevne-32-925-ml-102929_ST',
-          elementOnPage: 'div[itemtype="http://schema.org/Product"] .css-1t0dwxn',
+          elementOnPage: 'div[itemtype="http://schema.org/Product"] .css-13aw5n7',
         },
         {
           product_id: 'product-0005',
           url: 'https://online.globus.ru/products/moloko-ultrapasterizovannoe-domik-v-derevne-6-928-ml-179517_ST',
-          elementOnPage: 'div[itemtype="http://schema.org/Product"] .css-1t0dwxn',
+          elementOnPage: 'div[itemtype="http://schema.org/Product"] .css-13aw5n7',
         },
         {
           product_id: 'product-0011',
           url: 'https://online.globus.ru/products/smetana-prostokvashino-15-300-g-629411_ST',
-          elementOnPage: 'div[itemtype="http://schema.org/Product"] .css-ou7p07',
+          elementOnPage: 'div[itemtype="http://schema.org/Product"] .css-13aw5n7',
         },
         {
           product_id: 'product-0012',
           url: 'https://online.globus.ru/products/biojogurt-pitevoj-naturalnyj-aktibio-18-260-g-762173_ST',
-          elementOnPage: 'div[itemtype="http://schema.org/Product"] .css-1t0dwxn',
+          elementOnPage: 'div[itemtype="http://schema.org/Product"] .css-13aw5n7',
         },
       ],
     };
@@ -85,27 +84,27 @@ export class CronShop0005 {
         {
           product_id: 'product-0006',
           url: 'https://online.globus.ru/products/voda-pitevaya-aqua-minerale-negazirovannaya-05-l-515050_ST',
-          elementOnPage: 'div[itemtype="http://schema.org/Product"] .css-1t0dwxn',
+          elementOnPage: 'div[itemtype="http://schema.org/Product"] .css-13aw5n7',
         },
         {
           product_id: 'product-0007',
           url: 'https://online.globus.ru/products/napitok-sokosoderzhashhij-lyubimyj-vishnyovaya-chereshnya-095-l-327334_ST',
-          elementOnPage: 'div[itemtype="http://schema.org/Product"] .css-1t0dwxn',
+          elementOnPage: 'div[itemtype="http://schema.org/Product"] .css-13aw5n7',
         },
         {
           product_id: 'product-0008',
           url: 'https://online.globus.ru/products/sok-dobryj-yabloko-1-l-19882_ST',
-          elementOnPage: 'div[itemtype="http://schema.org/Product"] .css-1t0dwxn',
+          elementOnPage: 'div[itemtype="http://schema.org/Product"] .css-4kkr24',
         },
         {
           product_id: 'product-0009',
-          url: '        https://online.globus.ru/products/sok-j7-apelsin-s-myakotyu-097-l-140172_ST',
-          elementOnPage: 'div[itemtype="http://schema.org/Product"] .css-1t0dwxn',
+          url: 'https://online.globus.ru/products/sok-j7-apelsin-s-myakotyu-097-l-140172_ST',
+          elementOnPage: 'div[itemtype="http://schema.org/Product"] .css-13aw5n7',
         },
         {
           product_id: 'product-0010',
-          url: ' https://online.globus.ru/products/voda-pitevaya-svyatoj-istochnik-negazirovannaya-15-l-6017_ST',
-          elementOnPage: 'div[itemtype="http://schema.org/Product"] .css-1t0dwxn',
+          url: 'https://online.globus.ru/products/voda-pitevaya-svyatoj-istochnik-negazirovannaya-15-l-6017_ST',
+          elementOnPage: 'div[itemtype="http://schema.org/Product"] .css-13aw5n7',
         },
       ],
     };
@@ -170,12 +169,12 @@ export class CronShop0005 {
         {
           product_id: 'product-0019',
           url: 'https://online.globus.ru/products/yabloki-golden-delishes-1-kg-78_KG',
-          elementOnPage: 'div[itemtype="http://schema.org/Product"] .css-1t0dwxn',
+          elementOnPage: 'div[itemtype="http://schema.org/Product"] .css-13aw5n7',
         },
         {
           product_id: 'product-0021',
           url: 'https://online.globus.ru/products/pomidory-slivovidnye-krasnye-rost-flamenco-450-g-599685_ST',
-          elementOnPage: 'div[itemtype="http://schema.org/Product"] .css-1t0dwxn',
+          elementOnPage: 'div[itemtype="http://schema.org/Product"] .css-13aw5n7',
         },
       ],
     };
