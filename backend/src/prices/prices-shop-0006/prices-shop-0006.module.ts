@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { PricesShop0006Entity } from '../prices-shop-0006/prices-shop-0006.entity';
-import { PricesShop0006Controller } from '../prices-shop-0006/prices-shop-0006.controller';
-import { PricesShop0006Service } from '../prices-shop-0006/prices-shop-0006.service';
+import { PricesShop0006Entity } from './prices-shop-0006.entity';
+import { PricesShop0006Controller } from './prices-shop-0006.controller';
+import { PricesShop0006Service } from './prices-shop-0006.service';
 import { ProductEntity } from 'src/product/product.entity';
 import { CategoryEntity } from 'src/category/category.entity';
 

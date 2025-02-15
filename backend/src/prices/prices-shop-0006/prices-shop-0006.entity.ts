@@ -14,7 +14,7 @@ export class PricesShop0006Entity {
   })
   date: Date;
 
-  @ManyToOne(() => ShopEntity, (shop) => shop.PricesShop0006)
+  @ManyToOne(() => ShopEntity, (shop) => shop.pricesShop0006)
   @JoinColumn({ name: 'shop_id' })
   shop_id: ShopEntity;
 

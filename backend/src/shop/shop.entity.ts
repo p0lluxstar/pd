@@ -21,25 +21,25 @@ export class ShopEntity {
 
   @OneToMany(() => PricesShop0002Entity, (shop) => shop.shop_id)
   @JoinColumn({ name: 'shop_id' })
-  PricesShop0002: PricesShop0002Entity[];
+  pricesShop0002: PricesShop0002Entity[];
 
   @OneToMany(() => PricesShop0003Entity, (shop) => shop.shop_id)
   @JoinColumn({ name: 'shop_id' })
-  PricesShop0003: PricesShop0003Entity[];
+  pricesShop0003: PricesShop0003Entity[];
 
   @OneToMany(() => PricesShop0004Entity, (shop) => shop.shop_id)
   @JoinColumn({ name: 'shop_id' })
-  PricesShop0004: PricesShop0004Entity[];
+  pricesShop0004: PricesShop0004Entity[];
 
   @OneToMany(() => PricesShop0005Entity, (shop) => shop.shop_id)
   @JoinColumn({ name: 'shop_id' })
-  PricesShop0005: PricesShop0005Entity[];
+  pricesShop0005: PricesShop0005Entity[];
 
   @OneToMany(() => PricesShop0006Entity, (shop) => shop.shop_id)
   @JoinColumn({ name: 'shop_id' })
-  PricesShop0006: PricesShop0006Entity[];
+  pricesShop0006: PricesShop0006Entity[];
 
   @OneToMany(() => PricesShop0007Entity, (shop) => shop.shop_id)
   @JoinColumn({ name: 'shop_id' })
-  PricesShop0007: PricesShop0007Entity[];
+  pricesShop0007: PricesShop0007Entity[];
 }
