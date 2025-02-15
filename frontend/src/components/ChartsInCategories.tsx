@@ -2,9 +2,9 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import styles from '../styles/components/сharts.module.scss';
+import styles from '../styles/components/chartsInCategories.module.scss';
 import { type IProductDataForChart, type IShop } from '../types/interfaсes';
-import transformDataForChart from '../utils/transformDataForChart';
+import transformDataForChart from '../utils/transformDataInCategories';
 import ChartLine from './ChartLine';
 import PriceChange from './PriceChange';
 
@@ -15,7 +15,7 @@ interface IProps {
 type CombinedArrayItem = IShop | IProductDataForChart;
 type CombinedArray = CombinedArrayItem[];
 
-export default function Charts(props: IProps): JSX.Element {
+export default function ChartsInCategories(props: IProps): JSX.Element {
   // Объединяем данные массивов 1 и 2, 3 и 4 и т.д., если приходит больше одного массива
   let combinedArray: CombinedArray[] = [];
 
@@ -37,9 +37,6 @@ export default function Charts(props: IProps): JSX.Element {
       <div className={styles.charts}>
         {combinedArray.map((productData, index) => {
           const chartData = transformDataForChart(productData as IProductDataForChart[]);
-          const startPrice = chartData.prices[0];
-          const endPrice = chartData.prices[chartData.prices.length - 1];
-
           return (
             <div className={styles.chart} key={index}>
               {props.productData.length > 1 && (
@@ -59,9 +56,7 @@ export default function Charts(props: IProps): JSX.Element {
                   />
                 </div>
               )}
-              {startPrice !== undefined && endPrice !== undefined && (
-                <PriceChange startPrice={startPrice} endPrice={endPrice} />
-              )}
+              <PriceChange data={chartData.prices} />
               {chartData.date.length > 0 ? (
                 <ChartLine date={chartData.date} price={chartData.prices} />
               ) : (

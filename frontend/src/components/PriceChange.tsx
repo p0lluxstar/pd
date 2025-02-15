@@ -3,13 +3,18 @@
 import styles from '../styles/components/priceChange.module.scss';
 
 interface IProps {
-  startPrice: number;
-  endPrice: number;
+  data: number[];
 }
 
-export default function PriceChange({ startPrice, endPrice }: IProps): JSX.Element {
+export default function PriceChange({ data }: IProps): JSX.Element | null {
   let message;
   let percentageChange;
+  const startPrice = data[0];
+  const endPrice = data[data.length - 1];
+
+  if (data.length === 0) {
+    return null;
+  }
 
   if (startPrice > endPrice) {
     percentageChange = ((startPrice - endPrice - 1) / startPrice) * 100;

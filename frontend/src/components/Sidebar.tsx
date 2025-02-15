@@ -10,7 +10,6 @@ import MainNavigation from './MainNavigation';
 
 export default function Sidebar(): JSX.Element {
   const themeContext = useContext(ThemeContext);
-  console.log('side', themeContext.theme);
   const themeStyles = themeContext.theme === 'light' ? lightStyles : darkStyles;
 
   return (

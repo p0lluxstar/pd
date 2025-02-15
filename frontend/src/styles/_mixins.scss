@@ -1,6 +1,6 @@
-@import '../abstracts/colors';
+@import './abstracts/colors';
 
-.charts {
+@mixin charts {
   display: flex;
   flex-direction: column;
 
@@ -10,7 +10,7 @@
     border-radius: 5px;
     border: 1px solid $color-grey;
     margin-bottom: 20px;
-    img{
+    img {
       margin-left: 10px;
     }
 
@@ -19,6 +19,7 @@
       justify-content: space-between;
       align-items: center;
       margin-bottom: 10px;
+
       .chartTitle {
         a {
           color: $color-primary;

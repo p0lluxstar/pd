@@ -2,6 +2,8 @@ export interface IDataFromDB {
   id: string;
   name: string;
   shopName: string;
+  price: string;
+  date: string;
   category_id: {
     id: string;
     name: string;

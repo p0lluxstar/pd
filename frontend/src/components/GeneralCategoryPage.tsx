@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo } from 'react';
+import { useEffect, useState } from 'react';
 import Categories from '@/src/components/Categories';
 import Loading from '@/src/components/Loading';
 import useFetch from '@/src/hooks/useFetch';
@@ -13,13 +13,14 @@ interface IProps {
 const API_HOST = process.env.NEXT_PUBLIC_API_HOST;
 
 export default function GeneralCategoryPage(props: IProps): JSX.Element {
-  const urls = useMemo(
-    () => [
+  const [urls, setUrls] = useState<string[]>([]);
+
+  useEffect(() => {
+    setUrls([
       `${API_HOST}/categories/filter?categoryId=${props.categoryId}`,
       `${API_HOST}/products/filter?categoryId=${props.categoryId}`,
-    ],
-    [API_HOST]
-  );
+    ]);
+  }, []);
 
   const { data, isLoading, isError } = useFetch(urls);
 

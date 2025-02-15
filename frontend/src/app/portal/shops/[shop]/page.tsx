@@ -34,14 +34,19 @@ export default function ShopPage(): JSX.Element {
         <TitleShopPages shopResult={shopResult} />
         <div className={`${styles.products} ${styles.cards}`}>
           {categoriesResult.map((category: IDataFromDB) => (
-            <Link className={styles.cardLink} href={`/portal/shops/${params.shop}/${category.id}`} key={category.id}>
+            <Link
+              className={styles.cardLink}
+              href={`/portal/shops/${params.shop}/${category.id}`}
+              key={category.id}
+            >
               <div className={styles.card}>
-                <Image className={styles.cardImg}
+                {/* <Image
+                  className={styles.cardImg}
                   src={`/img/categories/${category.id}.jpg`}
                   width={150}
                   height={120}
                   alt="shop"
-                />
+                /> */}
                 <div className={styles.cardName}>{category.name}</div>
               </div>
             </Link>

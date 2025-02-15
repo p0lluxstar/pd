@@ -1,15 +1,14 @@
 'use client';
 
-import Image from 'next/image';
-import Link from 'next/link';
 import { useParams } from 'next/navigation';
-import { useMemo } from 'react';
+import { useState, useEffect } from 'react';
+import ChartsInShops from '@/src/components/ChartsInShops';
+import DateInputForm from '@/src/components/DateInputForm';
 import Loading from '@/src/components/Loading';
 import LoadingError from '@/src/components/LoadingError';
 import TitleShopPages from '@/src/components/TitleShopPages';
 import useFetch from '@/src/hooks/useFetch';
-import { type IDataFromDB } from '@/src/types/interfaсes';
-import styles from '../../../../../styles/pages/products.module.scss';
+import getDatesFromLS from '@/src/utils/getDatesFromLS';
 
 interface IParams {
   shop: string;
@@ -20,50 +19,41 @@ const API_HOST = process.env.NEXT_PUBLIC_API_HOST;
 
 export default function CategoryPage(): JSX.Element {
   const params = useParams() as unknown as IParams;
-  const urls = useMemo(
-    () => [
-      `${API_HOST}/shops/filter?shopId=${params.shop}`,
-      `${API_HOST}/categories/filter?categoryId=${params.category}`,
-      `${API_HOST}/prices-${params.shop}/products?categoryId=${params.category}`,
-    ],
-    [API_HOST, params]
-  );
+  const [fetchTrigger, setFetchTrigger] = useState(0);
+  const datesFromLS = getDatesFromLS();
+  const [urls, setUrls] = useState<string[]>([]);
+
+  const handleUpdateData = (): void => {
+    setFetchTrigger((prev) => prev + 1);
+  };
+
+  useEffect(() => {
+    if (API_HOST != null && params.shop.length > 0 && params.category.length > 0) {
+      setUrls([
+        `${API_HOST}/shops/filter?shopId=${params.shop}`,
+        `${API_HOST}/categories/filter?categoryId=${params.category}`,
+      ]);
+    }
+  }, [API_HOST, params, fetchTrigger]);
+
   const { data, isLoading, isError } = useFetch(urls);
 
   // Добавляем проверки наличия данных перед их использованием
-  const [shopResult = [], categoriesResult = [], productsResult = []] = data;
+  const [shopResult = [], categoriesResult = []] = data;
 
-  function showProducts(): JSX.Element {
-    return (
-      <>
-        <TitleShopPages
-          params={params}
-          shopResult={shopResult}
-          categoriesResult={categoriesResult}
-        />
-        <div className={styles.cards}>
-          {productsResult.map((product: IDataFromDB) => (
-            <Link
-              className={styles.cardLink}
-              href={`/portal/shops/${params.shop}/${params.category}/${product.id}`}
-              key={product.id}
-            >
-              <div className={styles.card}>
-                <Image
-                  className={styles.cardImg}
-                  src={`/img/products/${product.id}.jpg`}
-                  width={150}
-                  height={120}
-                  alt="shop"
-                />
-                <div className={styles.cardName}>{product.name}</div>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </>
-    );
-  }
-
-  return isLoading ? <Loading /> : isError ?? false ? <LoadingError /> : <>{showProducts()}</>;
+  return isLoading ? (
+    <Loading />
+  ) : isError ?? false ? (
+    <LoadingError />
+  ) : (
+    <>
+      <TitleShopPages params={params} shopResult={shopResult} categoriesResult={categoriesResult} />
+      <DateInputForm
+        startDateProps={datesFromLS.startDate}
+        endDateProps={datesFromLS.endDate}
+        onUpdateData={handleUpdateData}
+      />
+      <ChartsInShops />
+    </>
+  );
 }

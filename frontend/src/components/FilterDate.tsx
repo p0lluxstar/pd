@@ -6,20 +6,19 @@ import { useSelector } from 'react-redux';
 import useFetch from '../hooks/useFetch';
 import {
   type IStoreReducer,
-  type IDatesFromLS,
   type IProductDataForChart,
   type IShop,
 } from '../types/interfaсes';
-import getCurrentAndLastDateFormatted from '../utils/getCurrentAndLastDateFormatted';
-import Charts from './Charts';
+import getDatesFromLS from '../utils/getDatesFromLS';
+import ChartsInCategories from './ChartsInCategories';
 import DateInputForm from './DateInputForm';
 import Loading from './Loading';
 import LoadingError from './LoadingError';
 
 interface IParams {
-  shop: string;
-  category: string;
-  product: string;
+  shop: string | boolean;
+  category: string | boolean;
+  product: string | boolean;
 }
 
 const API_HOST = process.env.NEXT_PUBLIC_API_HOST;
@@ -29,30 +28,12 @@ export default function FilterDate(): JSX.Element {
   const [fetchTrigger, setFetchTrigger] = useState(0);
   const [urls, setUrls] = useState<string[]>([]);
   const shops = useSelector((state: IStoreReducer) => state.shops) as Record<string, boolean>;
-
-  const dates = getCurrentAndLastDateFormatted();
-  let datesFromLS: IDatesFromLS = {
-    startDate: dates.startDate,
-    endDate: dates.endDate,
-  };
-
-  if (typeof window !== 'undefined') {
-    const getDateFormLS = localStorage.getItem('dateForm');
-    datesFromLS =
-      getDateFormLS != null
-        ? JSON.parse(getDateFormLS)
-        : { startDate: dates.startDate, endDate: dates.endDate };
-  }
+  const datesFromLS = getDatesFromLS();
 
   useEffect(() => {
     const createUrls = (startDate: string, endDate: string): void => {
       let baseUrls: string[] = [];
-
-      if (params.shop !== undefined) {
-        baseUrls = [
-          `${API_HOST}/prices-${params.shop}/filter?productId=${params.product}&startDate=${startDate}&endDate=${endDate}`,
-        ];
-      } else {
+      if (params.product as boolean) {
         Object.keys(shops).forEach((key: string) => {
           if (shops[key]) {
             baseUrls.push(
@@ -61,6 +42,12 @@ export default function FilterDate(): JSX.Element {
             );
           }
         });
+      }
+
+      if (params.category as boolean) {
+        baseUrls = [
+          `${API_HOST}/prices-${params.shop}/filter?shopId=${params.shop}&categoryId=${params.category}&startDate=${startDate}&endDate=${endDate}`,
+        ];
       }
       setUrls(baseUrls);
     };
@@ -87,7 +74,7 @@ export default function FilterDate(): JSX.Element {
         <LoadingError />
       ) : (
         <>
-          <Charts productData={data as unknown as [Array<IShop | IProductDataForChart>]} />
+          <ChartsInCategories productData={data as unknown as [Array<IShop | IProductDataForChart>]} />
         </>
       )}
     </>

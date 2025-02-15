@@ -5,8 +5,6 @@ import styles from '../styles/components/toggleSwitchTheme.module.scss';
 export default function ToggleSwitchTheme(): JSX.Element {
   const themeContext = useContext(ThemeContext);
 
-  console.log('themeContext', themeContext);
-
   return (
     <>
       <div className={styles.toggleSwitchWrapper}>
