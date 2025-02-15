@@ -21,8 +21,14 @@ export const ThemeContext = createContext<ThemeContextType>(defaultThemeContext)
 
 export const ThemeProvider = ({ children }: ThemeProviderProps): JSX.Element => {
   // Инициализация состояния темы с использованием эффекта
-  const savedTheme = getLocalStorage('theme') as unknown as string;
-  const [theme, setTheme] = useState<string>(savedTheme);
+  const [theme, setTheme] = useState<string>('light');
+
+  useEffect(() => {
+    const savedTheme = getLocalStorage('theme') as unknown as string;
+    if (savedTheme.length > 0) {
+      setTheme(savedTheme);
+    }
+  }, []);
 
   // Функция переключения темы
   const toggleTheme = (): void => {

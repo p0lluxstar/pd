@@ -24,7 +24,6 @@ export default function transformDataForCategoryInShop(data: IDataArrayFetch): I
   const result: IDataArray = [];
   const productMap = new Map();
 
-  // eslint-disable-next-line @typescript-eslint/naming-convention
   data.forEach(({ id, name, price, date }) => {
     if (!productMap.has(id)) {
       productMap.set(id, {
