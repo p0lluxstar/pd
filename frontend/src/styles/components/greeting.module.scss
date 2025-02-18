@@ -1,0 +1,57 @@
+@import '../abstracts/colors';
+
+.main {
+  display: flex;
+  background: linear-gradient(180deg, $color-primary, rgb(48 142 189));
+  /* background-color: $color-primary; */
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  .wrapper {
+    max-width: 1280px;
+  }
+
+  .logo {
+    display: flex;
+    color: $color-white;
+    align-items: center;
+    font-size: 30px;
+    font-weight: 700;
+    margin-bottom: 40px;
+    img {
+      margin-right: 20px;
+    }
+  }
+
+  .welcomeMessage {
+    color: $color-white;
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: 40px;
+
+    .trancText {
+      opacity: 0.6;
+    }
+  }
+
+  .btnToApp {
+    display: flex;
+    justify-content: center;
+
+    .btn {
+      background-color: #34479080;
+      border: none;
+      border-radius: 100px;
+      padding: 28px 56px;
+      font-size: 20px;
+      font-weight: 700;
+      color: $color-white;
+      text-decoration: underline;
+      text-transform: uppercase;
+      &:hover {
+        background: $color-btn-blue-hover;
+      }
+    }
+  }
+}

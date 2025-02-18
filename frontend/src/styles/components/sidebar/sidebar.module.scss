@@ -1,0 +1,23 @@
+@import '../../abstracts//colors';
+
+.wrapper {
+  position: fixed;
+  /*  background: linear-gradient(0deg, rgb(26 138 166 / 57%), rgb(4, 114, 145) */
+  height: 100vh;
+  width: 260px;
+  padding: 40px 0px;
+
+  .logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $color-white;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 50px;
+
+    img {
+      margin-right: 10px;
+    }
+  }
+}

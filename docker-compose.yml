@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  db:
+    container_name: db
+    restart: always
+    image: postgres
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - postgres:/data/postgres
+    networks:
+      - postgres
+    ports:
+      - '5432:5432'
+  backend:
+    container_name: backend
+    restart: always
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.app
+    depends_on:
+      - db
+    environment:
+      - API_PORT=4000
+      - API_HOST=http://localhost
+      - DB_CONNECTION=postgres
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=postgres
+      - DB_DATABASE=postgres
+      - DB_PORT=5432
+      - DB_HOST=db
+    networks:
+      - postgres
+    ports:
+      - '4000:4000'  
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.app
+    container_name: frontend
+    restart: always
+    environment:
+      - NODE_ENV=production
+    command: ['npm', 'run', 'start']
+    networks:
+      - postgres
+    ports:
+      - '3000:3000'  
+
+networks:
+  postgres:
+    driver: bridge
+
+volumes:
+  postgres:
