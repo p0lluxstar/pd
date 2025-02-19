@@ -25,8 +25,10 @@ export const ThemeProvider = ({ children }: ThemeProviderProps): JSX.Element => 
 
   useEffect(() => {
     const savedTheme = getLocalStorage('theme') as unknown as string;
-    if (savedTheme.length > 0) {
+    if (savedTheme != null) {
       setTheme(savedTheme);
+    } else {
+      setLocalStorage('theme', theme)
     }
   }, []);
 
