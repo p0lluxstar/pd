@@ -36,7 +36,10 @@ import { ProductModule } from './product/product.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({
+      envFilePath: ['../.env'], // Поднимаемся на уровень выше, чтобы прочитать корневой .env
+      isGlobal: true, // Доступ ко всем модулям
+    }),
     ScheduleModule.forRoot(),
     TypeOrmModule.forFeature([
       ShopEntity,
