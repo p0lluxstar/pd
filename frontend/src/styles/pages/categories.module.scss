@@ -2,4 +2,22 @@
 
 .cards {
   @include cards(150px);
+
+  .categoryIcon {
+    display: flex;
+    justify-content: center;
+    font-size: 62px;
+    color: #3855b3;
+  }
+}
+
+.shopImg {
+  padding: 5px;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+  background: #f1f1f1;
+}
+
+.headerPage {
+  margin-bottom: 20px;
 }

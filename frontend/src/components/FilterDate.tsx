@@ -3,17 +3,9 @@
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import useFetch from '../hooks/useFetch';
-import {
-  type IStoreReducer,
-  type IProductDataForChart,
-  type IShop,
-} from '../types/interfaсes';
+import { type IStoreReducer } from '../types/interfaсes';
 import getDatesFromLS from '../utils/getDatesFromLS';
-import ChartsInCategories from './ChartsInCategories';
 import DateInputForm from './DateInputForm';
-import Loading from './Loading';
-import LoadingError from './LoadingError';
 
 interface IParams {
   shop: string | boolean;
@@ -21,9 +13,13 @@ interface IParams {
   product: string | boolean;
 }
 
+interface FilterDateProps {
+  onUrlsChange?: (urls: string[]) => void;
+}
+
 const API_HOST = process.env.NEXT_PUBLIC_API_HOST;
 
-export default function FilterDate(): JSX.Element {
+export default function FilterDate({ onUrlsChange }: FilterDateProps): JSX.Element {
   const params = useParams() as unknown as IParams;
   const [fetchTrigger, setFetchTrigger] = useState(0);
   const [urls, setUrls] = useState<string[]>([]);
@@ -55,7 +51,11 @@ export default function FilterDate(): JSX.Element {
     createUrls(datesFromLS.startDate, datesFromLS.endDate);
   }, [fetchTrigger, shops]);
 
-  const { data, isLoading, isError } = useFetch(urls);
+  useEffect(() => {
+    if (urls.length > 0) {
+      onUrlsChange?.(urls);
+    }
+  }, [urls, onUrlsChange]);
 
   const handleUpdateData = (): void => {
     setFetchTrigger((prev) => prev + 1);
@@ -68,15 +68,6 @@ export default function FilterDate(): JSX.Element {
         endDateProps={datesFromLS.endDate}
         onUpdateData={handleUpdateData}
       />
-      {isLoading ? (
-        <Loading />
-      ) : isError ?? false ? (
-        <LoadingError />
-      ) : (
-        <>
-          <ChartsInCategories productData={data as unknown as [Array<IShop | IProductDataForChart>]} />
-        </>
-      )}
     </>
   );
 }

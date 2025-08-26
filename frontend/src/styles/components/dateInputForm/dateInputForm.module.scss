@@ -1,4 +1,4 @@
-@import '../abstracts/colors';
+@import '../../abstracts/colors';
 
 .inputDateMain {
   display: flex;
@@ -9,12 +9,12 @@
     position: absolute;
     display: block;
     top: -24px;
-    padding: 5px 10px 0px;
-    background: $color-light-grey;
+    padding: 5px 10px 1px;
+    // background: $color-light-grey;
     border-radius: 5px 5px 0px 0px;
-    border-top: 1px solid $color-grey;
-    border-right: 1px solid $color-grey;
-    border-left: 1px solid $color-grey;
+    // border-top: 1px solid $color-grey;
+    // border-right: 1px solid $color-grey;
+    // border-left: 1px solid $color-grey;
     font-weight: 600;
   }
 
@@ -43,8 +43,8 @@
       gap: 14px;
       padding: 10px 15px 15px 15px;
       border-radius: 0px 5px 5px 5px;
-      background: $color-light-grey;
-      border: 1px solid $color-grey;
+      // background: $color-light-grey;
+      // border: 1px solid $color-grey;
       font-weight: 700;
     }
 

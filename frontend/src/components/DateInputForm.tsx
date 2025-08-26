@@ -1,7 +1,10 @@
 'use client';
 
-import { useRef, useState, useEffect } from 'react';
-import styles from '../styles/components/dateInputForm.module.scss';
+import { useRef, useState, useEffect, useContext } from 'react';
+import { ThemeContext } from '../context/ThemeContextProvider';
+import darkStyles from '../styles/components/dateInputForm/darkDateInputForm.module.scss';
+import styles from '../styles/components/dateInputForm/dateInputForm.module.scss';
+import lightStyles from '../styles/components/dateInputForm/lightDateInputForm.module.scss';
 import getCurrentAndLastDateFormatted from '../utils/getCurrentAndLastDateFormatted';
 
 interface IProps {
@@ -25,6 +28,8 @@ export default function DateInputForm({
   const [endDate, setEndDate] = useState(endDateProps);
   const startDateRef = useRef<HTMLInputElement>(null);
   const endDateRef = useRef<HTMLInputElement>(null);
+  const themeContext = useContext(ThemeContext);
+  const themeStyles = themeContext.theme === 'light' ? lightStyles : darkStyles;
 
   useEffect(() => {
     const savedDate = localStorage.getItem('dateForm');
@@ -37,16 +42,6 @@ export default function DateInputForm({
       localStorage.setItem('dateForm', JSON.stringify(initialDate));
     }
   }, []);
-
-  /*   useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      handleUpdateData();
-    }, 300);
-
-    return () => {
-      clearTimeout(timeoutId);
-    }; // Очистка таймаута при изменении
-  }, [startDate, endDate]); */
 
   const handleUpdateData = (): void => {
     const startDateInput = startDateRef.current?.value;
@@ -63,9 +58,11 @@ export default function DateInputForm({
   return (
     <>
       <div className={styles.inputDateMain}>
-        <span className={styles.inputDateTitle}>Выберите период</span>
+        <span className={`${styles.inputDateTitle} ${themeStyles.inputDateTitle}`}>
+          Выберите период
+        </span>
         <div className={styles.inputDate}>
-          <div className={styles.inputDateWrap}>
+          <div className={`${styles.inputDateWrap} ${themeStyles.inputDateWrap}`}>
             <label className={styles.inputDateItem}>
               с:
               <input

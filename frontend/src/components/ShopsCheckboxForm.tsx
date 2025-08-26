@@ -1,9 +1,12 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { ThemeContext } from '../context/ThemeContextProvider';
 import { shopsActions } from '../redux/slices/shopsSlice';
-import styles from '../styles/components/shopsCheckboxForm.module.scss';
+import darkStyles from '../styles/components/shopsCheckboxForm/darkShopsCheckboxForm.module.scss';
+import lightStyles from '../styles/components/shopsCheckboxForm/lightShopsCheckboxForm.module.scss';
+import styles from '../styles/components/shopsCheckboxForm/shopsCheckboxForm.module.scss';
 
 /* import { type IShop } from '../types/interfaсes'; */
 
@@ -44,6 +47,8 @@ const shops = [
 
 export default function ShopsCheckboxForm(): JSX.Element {
   const dispatch = useDispatch();
+  const themeContext = useContext(ThemeContext);
+  const themeStyles = themeContext.theme === 'light' ? lightStyles : darkStyles;
 
   // закоментирован код когда массив shops получаем из запроса
   /*  const [shops, setShops] = useState<IShop[]>([]);
@@ -106,8 +111,8 @@ export default function ShopsCheckboxForm(): JSX.Element {
   return (
     <>
       <div className={styles.checkboxMain}>
-        <span className={styles.checkboxTitle}>Выберите магазины</span>
-        <div className={styles.checkboxShop}>
+        <span className={`${styles.checkboxTitle} ${themeStyles.checkboxTitle}`}>Выберите магазины</span>
+        <div className={`${styles.checkboxShop} ${themeStyles.checkboxShop}`}>
           {shops.map((shop) => (
             <div key={shop.id} className={styles.checkboxItem}>
               <label>
@@ -118,13 +123,6 @@ export default function ShopsCheckboxForm(): JSX.Element {
                   onChange={handleChange}
                 />
                 {`«${shop.name}»`}
-                {/* <Image
-                  className={styles.cardImg}
-                  src={`/img/shops/${shop.id}.png`}
-                  width={100}
-                  height={50}
-                  alt="shop"
-                /> */}
               </label>
             </div>
           ))}

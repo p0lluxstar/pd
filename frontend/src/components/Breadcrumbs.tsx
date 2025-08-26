@@ -1,7 +1,11 @@
 'use client';
 
 import Link from 'next/link';
-import styles from '../styles/components/titleShopPages.module.scss';
+import { useContext } from 'react';
+import { ThemeContext } from '../context/ThemeContextProvider';
+import styles from '../styles/components/breadcrumbs/breadcrumbs.module.scss';
+import darkStyles from '../styles/components/breadcrumbs/darkBreadcrumbs.module.scss';
+import lightStyles from '../styles/components/breadcrumbs/lightBreadcrumbs.module.scss';
 
 interface IEntity {
   id: string;
@@ -19,16 +23,19 @@ interface IProps {
   productsResult?: IEntity[];
 }
 
-export default function TitleShopPages({
+export default function Breadcrumbs({
   params = { shop: '', category: '', product: '' },
   shopResult = [],
   categoriesResult = [],
   productsResult = [],
 }: IProps): JSX.Element {
-  function titleOnProductPage(): JSX.Element {
+  const themeContext = useContext(ThemeContext);
+  const themeStyles = themeContext.theme === 'light' ? lightStyles : darkStyles;
+
+  function breadcrumbsOnProductPage(): JSX.Element {
     return (
       <>
-        <div className={styles.breadcrumbs}>
+        <div className={`${styles.breadcrumbs} ${themeStyles.breadcrumbs}`}>
           {' '}
           <Link href={'/portal/shops/'}>Магазины</Link>
           {' » '}
@@ -47,10 +54,10 @@ export default function TitleShopPages({
     );
   }
 
-  function titleOnCategoryPage(): JSX.Element {
+  function breadcrumbsOnCategoryPage(): JSX.Element {
     return (
       <>
-        <div className={styles.breadcrumbs}>
+        <div className={`${styles.breadcrumbs} ${themeStyles.breadcrumbs}`}>
           {' '}
           <Link href={'/portal/shops/'}>Магазины</Link>
           {' » '}
@@ -65,26 +72,28 @@ export default function TitleShopPages({
     );
   }
 
-  function titleOnShopPage(): JSX.Element {
+  function breadcrumbsOnShopPage(): JSX.Element {
     return (
       <>
-        <div className={styles.breadcrumbs}>
+        <div className={`${styles.breadcrumbs} ${themeStyles.breadcrumbs}`}>
           <Link href={'/portal/shops/'}>Магазины</Link>
           {' » '}
           <span>{shopResult.length > 0 && shopResult[0].name}</span>
         </div>
 
-        <h1>Категории магазина «{shopResult.length > 0 && shopResult[0].name}»</h1>
+        <h1 className={styles.titleShopPages}>
+          Категории магазина «{shopResult.length > 0 && shopResult[0].name}»
+        </h1>
       </>
     );
   }
 
   if (productsResult.length > 0) {
-    return titleOnProductPage();
+    return breadcrumbsOnProductPage();
   } else if (categoriesResult.length > 0) {
-    return titleOnCategoryPage();
+    return breadcrumbsOnCategoryPage();
   } else if (shopResult.length > 0) {
-    return titleOnShopPage();
+    return breadcrumbsOnShopPage();
   } else {
     return <></>;
   }

@@ -1,0 +1,14 @@
+@use '../../../styles/mixins' as mixins;
+
+.charts {
+  @include mixins.charts;
+
+  .shopImg {
+    padding: 5px;
+    border-radius: 5px;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}

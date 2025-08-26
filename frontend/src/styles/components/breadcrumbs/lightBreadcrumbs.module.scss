@@ -1,0 +1,10 @@
+@import './../../abstracts/colors';
+
+.breadcrumbs {
+  color: $color-black;
+
+  a {
+    background-color: $color-light-grey;
+    color: $color-black;
+  }
+}

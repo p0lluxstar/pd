@@ -2,8 +2,12 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { useContext } from 'react';
 import TitleCategoryPages from '@/src/components/TitleCategoryPages';
-import styles from '../styles/pages/products.module.scss';
+import { ThemeContext } from '../context/ThemeContextProvider';
+import styles from '../styles/components/categories/categories.module.scss';
+import darkStyles from '../styles/components/categories/darkCategories.module.scss';
+import lightStyles from '../styles/components/categories/lightCategories.module.scss';
 
 interface IProps {
   categoriesResult: Array<{ id: string; name: string }>;
@@ -11,6 +15,9 @@ interface IProps {
 }
 
 export default function Categories({ categoriesResult, productsResult }: IProps): JSX.Element {
+  const themeContext = useContext(ThemeContext);
+  const themeStyles = themeContext.theme === 'light' ? lightStyles : darkStyles;
+
   return (
     <>
       {categoriesResult.length > 0 && (
@@ -23,7 +30,7 @@ export default function Categories({ categoriesResult, productsResult }: IProps)
             href={`/portal/${categoriesResult[0].id}/${product.id}`}
             key={product.id}
           >
-            <div className={styles.card}>
+            <div className={`${themeStyles.card} ${styles.card}`}>
               <Image
                 className={styles.cardImg}
                 src={`/img/products/${product.id}.jpg`}

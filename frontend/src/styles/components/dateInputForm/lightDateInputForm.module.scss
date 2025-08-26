@@ -1,0 +1,13 @@
+@import '../../abstracts/colors';
+
+.inputDateTitle,
+.inputDateWrap {
+  background: $color-light-grey;
+  color: #b2b2b2;
+  border: 1px solid $color-grey;
+  color: $color-black;
+}
+
+.inputDateTitle {
+  border-bottom: none;
+}

@@ -31,6 +31,13 @@ export class ScraperUtilsService {
     return this.productRepository.findOne({ where: { id: productId } });
   }
 
+  // настройка для запуска скрапера на windows
+  // const browser = await puppeteer.launch({
+  //     headless: false,
+  //     args: ['--no-sandbox', '--disable-setuid-sandbox'],
+  //     executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe'
+  //   });
+
   async scrape(
     dataForCron: IDataForCron,
     PricesShop,
@@ -38,9 +45,9 @@ export class ScraperUtilsService {
     parsePrice
   ): Promise<void> {
     const browser = await puppeteer.launch({
-      headless: false,
-      args: ['--no-sandbox', '--disable-setuid-sandbox'],
-      executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe'
+      headless: true,
+      args: ['--no-sandbox', '--disable-setuid-sandbox', '--remote-debugging-port=9222'],
+      executablePath: '/usr/bin/chromium-browser',
     });
     const page = await browser.newPage();
 

@@ -1,0 +1,15 @@
+@use '../../../styles/mixins' as mixins;
+
+.charts {
+  @include mixins.charts;
+
+  .cardImg {
+    border: 1px solid #e0e0e0;
+    background-color: #fff;
+    padding: 5px 0px;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}

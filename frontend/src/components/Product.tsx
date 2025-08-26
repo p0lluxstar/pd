@@ -1,9 +1,12 @@
 'use client';
 
 import { useParams } from 'next/navigation';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import useFetch from '../hooks/useFetch';
+import styles from '../styles/components/product.module.scss';
+import ChartsInCategories from './ChartsInCategories';
 import FilterDate from './FilterDate';
+import ImagePreview from './ImagePreview';
 import Loading from './Loading';
 import LoadingError from './LoadingError';
 import ShopsCheckboxForm from './ShopsCheckboxForm';
@@ -18,6 +21,7 @@ const API_HOST = process.env.NEXT_PUBLIC_API_HOST;
 
 export default function Product(): JSX.Element {
   const params = useParams() as unknown as IParams;
+  const [filteredUrls, setFilteredUrls] = useState<string[]>([]);
 
   const urls = useMemo(
     () => [`${API_HOST}/products/filter?productId=${params.product}`],
@@ -36,8 +40,22 @@ export default function Product(): JSX.Element {
             productName={data[0][0].name}
           />
         )}
-        <ShopsCheckboxForm />
-        <FilterDate />
+        <div className={styles.productHeader}>
+          <div>
+            <ImagePreview url={`/img/products/${params.product}.jpg`} width={300} height={255} />
+          </div>
+          <div className={styles.productFilters}>
+            <ShopsCheckboxForm />
+            <FilterDate
+              onUrlsChange={(urls) => {
+                setFilteredUrls(urls);
+              }}
+            />
+          </div>
+        </div>
+        <div>
+          <ChartsInCategories urls={filteredUrls} />
+        </div>
       </>
     );
   }

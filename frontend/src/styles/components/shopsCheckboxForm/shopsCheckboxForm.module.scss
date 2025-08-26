@@ -1,4 +1,4 @@
-@import '../abstracts/colors';
+@import '../../abstracts/colors';
 
 .checkboxMain {
   display: inline-flex;
@@ -11,11 +11,11 @@
     display: block;
     top: -24px;
     padding: 5px 10px 0px;
-    background: $color-light-grey;
+    // background: $color-light-grey;
     border-radius: 5px 5px 0px 0px;
-    border-top: 1px solid $color-grey;
-    border-right: 1px solid $color-grey;
-    border-left: 1px solid $color-grey;
+    // border-top: 1px solid $color-grey;
+    // border-right: 1px solid $color-grey;
+    // border-left: 1px solid $color-grey;
     font-weight: 600;
   }
 
@@ -26,8 +26,8 @@
     margin-bottom: 40px;
     border-radius: 0px 5px 5px 5px;
     padding: 10px 15px 15px 15px;
-    background: $color-light-grey;
-    border: 1px solid $color-grey;
+    // background: $color-light-grey;
+    // border: 1px solid $color-grey;
   }
 
   .checkboxShop .checkboxItem {

@@ -1,0 +1,16 @@
+@import '../../abstracts/colors';
+
+.chart {
+  background-color: #f1f1f1;
+  border: 1px solid #ccc;
+
+  .chartTitle,
+  .noData {
+    color: $color-black;
+  }
+
+  .shopImg {
+    background-color: #f8f8f8;
+    border: 1px solid #e0e0e0;
+  }
+}

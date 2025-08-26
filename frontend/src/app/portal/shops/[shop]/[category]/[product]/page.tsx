@@ -2,10 +2,10 @@
 
 import { useParams } from 'next/navigation';
 import { useMemo } from 'react';
+import Breadcrumbs from '@/src/components/Breadcrumbs';
 import FilterDate from '@/src/components/FilterDate';
 import Loading from '@/src/components/Loading';
 import LoadingError from '@/src/components/LoadingError';
-import TitleShopPages from '@/src/components/TitleShopPages';
 import useFetch from '@/src/hooks/useFetch';
 
 interface IParams {
@@ -49,7 +49,7 @@ export default function ProductPage(): JSX.Element {
   function showProduct(): JSX.Element {
     return (
       <>
-        <TitleShopPages
+        <Breadcrumbs
           params={params}
           shopResult={shopResult}
           categoriesResult={categoriesResult}

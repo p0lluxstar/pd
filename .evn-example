@@ -1,0 +1,8 @@
+DB_DATABASE='db_name'
+DB_CONNECTION='db_connection'
+DB_USERNAME='username'
+DB_PASSWORD='password'
+DB_PORT=0000
+API_PORT=0000
+API_HOST='localhost'
+FRONTEND_PORT=0000

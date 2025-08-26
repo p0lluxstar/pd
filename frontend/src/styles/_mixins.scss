@@ -5,14 +5,12 @@
   flex-direction: column;
 
   .chart {
-    background: $color-light-grey;
+    // background: $color-light-grey;
     padding: 10px;
     border-radius: 5px;
-    border: 1px solid $color-grey;
+    // border: 1px solid $color-grey;
     margin-bottom: 20px;
-    img {
-      margin-left: 10px;
-    }
+
 
     .chartTitleWrapper {
       display: flex;

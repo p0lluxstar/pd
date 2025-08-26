@@ -1,12 +1,19 @@
 'use client';
 
-import styles from '../styles/components/priceChange.module.scss';
+import { useContext } from 'react';
+import { ThemeContext } from '../context/ThemeContextProvider';
+import darkStyles from '../styles/components/priceChange/darkPriceChange.module.scss';
+import lightStyles from '../styles/components/priceChange/lightPriceChange.module.scss';
+import styles from '../styles/components/priceChange/priceChange.module.scss';
 
 interface IProps {
   data: number[];
 }
 
 export default function PriceChange({ data }: IProps): JSX.Element | null {
+  const themeContext = useContext(ThemeContext);
+  const themeStyles = themeContext.theme === 'light' ? lightStyles : darkStyles;
+
   let message;
   let percentageChange;
   const startPrice = data[0];
@@ -36,5 +43,5 @@ export default function PriceChange({ data }: IProps): JSX.Element | null {
     message = `Цена продукта не изменилась, ${startPrice}р.`;
   }
 
-  return <div className={styles.priceMessage}>{message}</div>;
+  return <div className={`${styles.priceMessage} ${themeStyles.priceMessage}`}>{message}</div>;
 }

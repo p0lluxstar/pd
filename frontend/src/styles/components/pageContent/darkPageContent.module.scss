@@ -1,7 +1,7 @@
 @import '../../abstracts/colors';
 
 .wrapper {
-  h1 {
-    color: $color-white;
+  h1, p, a {
+    color: #b2b2b2;
   }
 }

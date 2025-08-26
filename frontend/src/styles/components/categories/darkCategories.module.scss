@@ -1,0 +1,14 @@
+.card {
+  background-color: #131313;
+  border: 1px solid #525252;
+  -webkit-box-shadow: 4px 4px 8px 0px rgba(119, 140, 156, 0.2);
+  -moz-box-shadow: 4px 4px 8px 0px rgba(78, 100, 117, 0.2);
+  box-shadow: 4px 4px 8px 0px rgba(73, 89, 100, 0.2);
+
+  &:hover {
+    -webkit-box-shadow: 4px 4px 8px 0px rgba(174, 190, 202, 0.2);
+    -moz-box-shadow: 4px 4px 8px 0px rgba(147, 167, 183, 0.2);
+    box-shadow: 4px 4px 8px 0px rgba(143, 163, 177, 0.2);
+    transition: box-shadow 0.3s ease;
+  }
+}
