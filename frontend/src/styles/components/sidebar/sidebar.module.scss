@@ -24,3 +24,14 @@
     width: 80px;
   }
 }
+
+@media (max-width: 700px) {
+  .logo {
+    img {
+      margin-right: 0px;
+    }
+    span {
+      display: none;
+    }
+  }
+}
