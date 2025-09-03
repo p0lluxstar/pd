@@ -12,3 +12,9 @@
     padding-top: 15px;
   }
 }
+
+@media (max-width: 1300px) {
+  .productHeader {
+    flex-direction: column;
+  }
+}

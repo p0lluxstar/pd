@@ -2,6 +2,7 @@
 
 .charts {
   @include mixins.charts;
+  min-width: 700px;
 
   .shopImg {
     padding: 5px;

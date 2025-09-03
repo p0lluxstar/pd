@@ -45,7 +45,7 @@ export default function ChartsInShops(): JSX.Element {
             <h2 className={styles.chartTitle}>
               <Link href={`/portal/${params.category}/${el.product.id}`}>«{el.product.name}»</Link>
             </h2>
-            <ImagePreview url={`/img/products/${el.product.id}.jpg`} width={60} height={54} />
+            <ImagePreview url={`/img/products/${el.product.id}.jpg`} width={55} height={55} />
           </div>
           <PriceChange data={el.product.prices} />
           <ChartLine date={el.product.dates} price={el.product.prices} />

@@ -26,42 +26,43 @@ export default function MainNavigation(): JSX.Element {
           <li className={`${styles.navItem} ${isShopsActive ? styles.active : ''}`}>
             <Link className={styles.navItemLink} href="/portal/shops">
               <FaStore className={styles.navIcons} />
-              Магазины
+              <span>Магазины</span>
             </Link>
           </li>
           <li className={`${styles.navItem} ${isCategory0001Active ? styles.active : ''}`}>
             <Link className={styles.navItemLink} href="/portal/category-0001">
               <GiMilkCarton className={styles.navIcons} />
-              Молоко, сыр, яйца
+              <span>Молоко, сыр, яйца</span>
             </Link>
           </li>
           <li className={`${styles.navItem} ${isCategory0002Active ? styles.active : ''}`}>
             <Link className={styles.navItemLink} href="/portal/category-0002">
               <GiManualJuicer className={styles.navIcons} />
-              Соки, воды, напитки
+              <span>Соки, воды, напитки</span>
             </Link>
           </li>
           <li className={`${styles.navItem} ${isCategory0003Active ? styles.active : ''}`}>
             <Link className={styles.navItemLink} href="/portal/category-0003">
               <GiChipsBag className={styles.navIcons} />
-              Макароны, крупы, масло
+              <span>Макароны, крупы, масло</span>
             </Link>
           </li>
           <li className={`${styles.navItem} ${isCategory0004Active ? styles.active : ''}`}>
             <Link className={styles.navItemLink} href="/portal/category-0004">
               <GiKetchup className={styles.navIcons} />
-              Соусы, кетчупы, майонезы
+              <span>Соусы, кетчупы, майонезы</span>
             </Link>
           </li>
           <li className={`${styles.navItem} ${isCategory0005Active ? styles.active : ''}`}>
             <Link className={styles.navItemLink} href="/portal/category-0005">
               <GiFruitBowl className={styles.navIcons} />
-              Овощи, фрукты, ягоды
+              <span>Овощи, фрукты, ягоды</span>
             </Link>
           </li>
           <li className={`${styles.navItem} ${isAbout ? styles.active : ''}`}>
             <Link className={styles.navItemLink} href="/portal/about">
-              <IoPeople className={styles.navIcons} />О нас
+              <IoPeople className={styles.navIcons} />
+              <span>О нас</span>
             </Link>
           </li>
         </ul>

@@ -1,0 +1,28 @@
+.logoWrapper {
+  .link {
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    color: #ffffff;
+    text-decoration: none;
+
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+
+  img {
+    margin-right: 10px;
+  }
+}
+
+@media (max-width: 700px) {
+  .logoWrapper {
+    img {
+      margin-right: 0px;
+    }
+    span {
+      display: none;
+    }
+  }
+}

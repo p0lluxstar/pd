@@ -42,7 +42,7 @@ export default function ImagePreview({ url, width, height }: IProps): JSX.Elemen
               className={styles.previewFull}
               src={url}
               width={600}
-              height={480}
+              height={600}
               alt="full"
               onClick={handleOpen}
             />

@@ -1,5 +1,19 @@
 @import '../../base//mixins';
 
+.headerPage,
+.shopLinkImg {
+  display: flex;
+  justify-content: center;
+  border-radius: 5px;
+  width: 230px;
+  text-align: center;
+}
+
+.headerPage img {
+  border-radius: 5px;
+  padding: 5px;
+}
+
 .cards {
   @include cards(150px);
 
@@ -11,13 +25,8 @@
   }
 }
 
-.shopImg,
 .shopLinkImg {
   padding: 5px;
-  border-radius: 5px;
-}
-
-.shopLinkImg {
   &:hover {
     opacity: 0.8;
   }
@@ -34,4 +43,23 @@
 
 .dateInputForm {
   margin-top: 24px;
+}
+
+@media (max-width: 900px) {
+  .productHeader {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 600px) {
+  .headerPage {
+    width: 100%;
+  }
+
+  .cards {
+    .cardLink,
+    .card {
+      width: 100%;
+    }
+  }
 }

@@ -46,7 +46,7 @@ export default function ShopPage(): JSX.Element {
     return (
       <>
         <Breadcrumbs shopResult={shopResult} />
-        <div className={styles.headerPage}>
+        <div className={`${themeStyles.headerPage} ${styles.headerPage}`}>
           <Image
             className={`${themeStyles.shopImg} ${styles.shopImg}`}
             src={`/img/shops/${shopResult[0].id}.png`}

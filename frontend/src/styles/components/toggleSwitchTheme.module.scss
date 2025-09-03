@@ -1,6 +1,9 @@
 .toggleSwitchWrapper {
+  position: absolute;
   display: flex;
   justify-content: center;
+  bottom: 20px;
+  width: 100%;
 }
 
 .toggleSwitch {

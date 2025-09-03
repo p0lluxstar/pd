@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: 'Main | PD',
   description: 'Description main page',
   icons: {
-    icon: '/favicon.svg',
+    icon: '/favicon.ico',
   },
 };
 

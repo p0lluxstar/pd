@@ -3,3 +3,12 @@
 .cards {
   @include cards(220px);
 }
+
+@media (max-width: 600px) {
+  .cards {
+    .cardLink,
+    .card {
+      width: 100%;
+    }
+  }
+}

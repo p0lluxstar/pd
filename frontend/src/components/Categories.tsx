@@ -34,7 +34,7 @@ export default function Categories({ categoriesResult, productsResult }: IProps)
               <Image
                 className={styles.cardImg}
                 src={`/img/products/${product.id}.jpg`}
-                width={150}
+                width={120}
                 height={120}
                 alt="shop"
               />

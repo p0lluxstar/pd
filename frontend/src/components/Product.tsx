@@ -42,7 +42,7 @@ export default function Product(): JSX.Element {
         )}
         <div className={styles.productHeader}>
           <div>
-            <ImagePreview url={`/img/products/${params.product}.jpg`} width={300} height={255} />
+            <ImagePreview url={`/img/products/${params.product}.jpg`} width={255} height={255} />
           </div>
           <div className={styles.productFilters}>
             <ShopsCheckboxForm />
